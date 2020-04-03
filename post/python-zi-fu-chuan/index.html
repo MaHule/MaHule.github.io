@@ -4,12 +4,21 @@
 <head>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<meta name="description" content="排序算法是《数据结构与算法》中最基本的算法之一。本文介绍10种常见的内部排序算法，及使用Python实现。
+<meta name="description" content="Python字符串处理的一些基本操作
 
-" />
+01.反转字符串
+s = &quot;Python&quot;
+
+#方法1
+rs1 = ''.join(reversed(s))
+print(rs)
+
+#方法2
+rs2 = s[::-1]
+print..." />
 <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
 <script async src="https://cdn.ampproject.org/v0.js"></script>
-<title>Python版十大经典排序算法 | 一小步</title>
+<title>Python字符串 | 一小步</title>
 <style amp-custom>
 body{width:100vw;display:flex;flex-direction:column;font-family:'PT Serif',-apple-system-font,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif,serif;background:#fff}
 :focus{outline:0}
@@ -420,7 +429,7 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
 </style>
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-<link rel="canonical" href="https://MaHule.github.io/post/python-ban-shi-da-jing-dian-pai-xu-suan-fa/" />
+<link rel="canonical" href="https://MaHule.github.io/post/python-zi-fu-chuan/" />
 <link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1585900975096">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
@@ -433,7 +442,7 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
 
 <script async custom-element="amp-gist" src="https://cdn.ampproject.org/v0/amp-gist-0.1.js"></script>
 
-<link rel="alternate" type="application/atom+xml" title="Python版十大经典排序算法 | 一小步 - Atom Feed" href="https://MaHule.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Python字符串 | 一小步 - Atom Feed" href="https://MaHule.github.io/atom.xml">
 
   
 
@@ -493,33 +502,123 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
 
       <div class="article-info">
         
+          <div class="flex-box meta-category">
+            <a class="post-cate" href="https://MaHule.github.io/tag/uQJCDEn4z/">Python</a></div>
+          
         <h2 class="article-title">
-          <a href="https://MaHule.github.io/post/python-ban-shi-da-jing-dian-pai-xu-suan-fa/">Python版十大经典排序算法</a>
+          <a href="https://MaHule.github.io/post/python-zi-fu-chuan/">Python字符串</a>
         </h2>
         <div class="flex-box">
           <div class="flex-box post-meta-box">
             <a class="post-meta" href="https://MaHule.github.io"><span
                 class="iconfont icon-mr-postmeta"></span>MaHule</a>
-            <span class="post-meta"><span class="iconfont icon-mr-postmeta"></span>2020-03-29</span>
+            <span class="post-meta"><span class="iconfont icon-mr-postmeta"></span>2020-04-03</span>
           </div>
         </div>
       </div>
       <div class="content">
-        <p>排序算法是《数据结构与算法》中最基本的算法之一。本文介绍10种常见的内部排序算法，及使用Python实现。</p>
+        <p>Python字符串处理的一些基本操作</p>
 <!-- more -->
+<h3 id="01反转字符串">01.反转字符串</h3>
+<pre><code class="language-python">s = &quot;Python&quot;
+
+#方法1
+rs1 = ''.join(reversed(s))
+print(rs)
+
+#方法2
+rs2 = s[::-1]
+print(rs2)
+</code></pre>
+<pre><code>nohtyP
+nohtyP
+</code></pre>
+<h3 id="02字符串切片操作">02.字符串切片操作</h3>
+<pre><code class="language-python">java,python = &quot;java&quot;,&quot;python&quot;
+jl,pl = len(java),len(python)
+
+[str(java[i%3*jl:] + python[i%5*pl:] or i) for i in range(1,10)]
+</code></pre>
+<pre><code>['1', '2', 'java', '4', 'python', 'java', '7', '8', 'java']
+</code></pre>
+<h3 id="03join连接字符串">03.join连接字符串</h3>
+<pre><code class="language-python">mystr = ['I','love','Python']
+
+res = '_'.join(mystr)
+print(res)
+</code></pre>
+<pre><code>I_love_Python
+</code></pre>
+<h3 id="04分割字符串">04.分割字符串</h3>
+<blockquote>
+<p>根据指定字符或字符串，分割一个字符串时，使用方法split（join和split可以看作做一对互逆操作）</p>
+</blockquote>
+<pre><code class="language-python">res.split('_')
+</code></pre>
+<pre><code>['I', 'love', 'Python']
+</code></pre>
+<h3 id="05替换">05.替换</h3>
+<blockquote>
+<p>字符串替换使用replace方法</p>
+</blockquote>
+<pre><code class="language-python">s = 'i love python'.replace('o','O')
+s
+</code></pre>
+<pre><code>'i lOve pythOn'
+</code></pre>
+<h3 id="06子串判断">06.子串判断</h3>
+<blockquote>
+<p>判断a字符串是否为b字符串的字串</p>
+</blockquote>
+<ul>
+<li>方法1：使用in</li>
+</ul>
+<pre><code class="language-python">a = 'our'
+b = 'flourish'
+
+r = True if a in b else False
+r
+</code></pre>
+<pre><code>True
+</code></pre>
+<ul>
+<li>方法2：使用方法find，返回字符串b中匹配字串a的最小索引：</li>
+</ul>
+<pre><code class="language-python">a = 'our'
+b = 'flourish'
+
+b.find(a)
+</code></pre>
+<pre><code>2
+</code></pre>
+<h3 id="07去空格">07.去空格</h3>
+<p>清洗字符串时，位于字符串开始和结尾的空格，有时需要去掉，strip方法能实现</p>
+<pre><code class="language-python">a = '  \tI love python  \b\n'
+print(a)
+print(a.strip())
+</code></pre>
+<pre><code>  	I love python  
+
+I love python  
+</code></pre>
+<h3 id="08字符串的字节长度">08.字符串的字节长度</h3>
+<p>encode方法对字符串编码后：</p>
+<pre><code class="language-python">def str_byte_len(mystr):
+    mystr_bytes = mystr.encode('utf-8')
+    return (len(mystr_bytes))
+
+
+str_byte_len('i love python')
+</code></pre>
 
       </div>
 
       
       <nav class="post-nav">
         
-        <div class="nav-previous">
-          <a class="post-nav-link-active" title="List和tuple的13个经典实例" href="https://MaHule.github.io/post/list-he-tuple-de-13-ge-jing-dian-shi-li/">上一篇文章</a>
-        </div>
-        
         
         <div class="nav-next">
-          <a class="post-nav-link-active" title="Python常用20实例" href="https://MaHule.github.io/post/python-chang-yong-20-shi-li/">下一篇文章</a>
+          <a class="post-nav-link-active" title="List和tuple的13个经典实例" href="https://MaHule.github.io/post/list-he-tuple-de-13-ge-jing-dian-shi-li/">下一篇文章</a>
           
 
         </div>
@@ -595,6 +694,12 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
   <aside id="categories-2" class="widget widget_categories">
     <h4 class="widget-title">分类目录</h4>
     <ul>
+      
+      <li class="cat-item"><a href="https://MaHule.github.io/tag/uQJCDEn4z/">
+          Python
+          
+        </a>
+      </li>
       
 
     </ul>
