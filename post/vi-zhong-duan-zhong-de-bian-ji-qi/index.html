@@ -4,14 +4,24 @@
 <head>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<meta name="description" content="学习了python中的列表和元组，使用13个例子巩固基础
+<meta name="description" content="vi是linux中最常用的编辑器。是了解使用Linux的必备的知识
 
-1.判断list内有无重复元素
+目标
 
-方法一：使用list封装的count方法，以此判断每个元素的x在list内的出现次数。如果大于1，则立刻返回True，表示有重复值。如果完成遍历后..." />
+vi 简介
+打开和新建文件
+三种工作模式
+常用命令
+分屏命令
+常用命令速查图
+
+01. vi 简介
+1.1 学习 vi 的目的
+
+在工作中，要对 服务器 上的文件..." />
 <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
 <script async src="https://cdn.ampproject.org/v0.js"></script>
-<title>List和tuple的13个经典实例 | 一小步</title>
+<title>Vi （终端中的编辑器） | 一小步</title>
 <style amp-custom>
 body{width:100vw;display:flex;flex-direction:column;font-family:'PT Serif',-apple-system-font,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif,serif;background:#fff}
 :focus{outline:0}
@@ -422,7 +432,7 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
 </style>
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-<link rel="canonical" href="https://MaHule.github.io/post/list-he-tuple-de-13-ge-jing-dian-shi-li/" />
+<link rel="canonical" href="https://MaHule.github.io/post/vi-zhong-duan-zhong-de-bian-ji-qi/" />
 <link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1586844970774">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
@@ -435,7 +445,7 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
 
 <script async custom-element="amp-gist" src="https://cdn.ampproject.org/v0/amp-gist-0.1.js"></script>
 
-<link rel="alternate" type="application/atom+xml" title="List和tuple的13个经典实例 | 一小步 - Atom Feed" href="https://MaHule.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Vi （终端中的编辑器） | 一小步 - Atom Feed" href="https://MaHule.github.io/atom.xml">
 
   
 
@@ -495,296 +505,1053 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
 
       <div class="article-info">
         
-          <div class="flex-box meta-category">
-            <a class="post-cate" href="https://MaHule.github.io/tag/uQJCDEn4z/">Python</a></div>
-          
         <h2 class="article-title">
-          <a href="https://MaHule.github.io/post/list-he-tuple-de-13-ge-jing-dian-shi-li/">List和tuple的13个经典实例</a>
+          <a href="https://MaHule.github.io/post/vi-zhong-duan-zhong-de-bian-ji-qi/">Vi （终端中的编辑器）</a>
         </h2>
         <div class="flex-box">
           <div class="flex-box post-meta-box">
             <a class="post-meta" href="https://MaHule.github.io"><span
                 class="iconfont icon-mr-postmeta"></span>MaHule</a>
-            <span class="post-meta"><span class="iconfont icon-mr-postmeta"></span>2020-04-03</span>
+            <span class="post-meta"><span class="iconfont icon-mr-postmeta"></span>2020-04-14</span>
           </div>
         </div>
       </div>
       <div class="content">
-        <p>学习了python中的列表和元组，使用13个例子巩固基础</p>
+        <p>vi是linux中最常用的编辑器。是了解使用Linux的必备的知识</p>
 <!-- more -->
-<h3 id="1判断list内有无重复元素">1.判断list内有无重复元素</h3>
+<h2 id="目标">目标</h2>
 <ul>
-<li>方法一：使用list封装的count方法，以此判断每个元素的x在list内的出现次数。如果大于1，则立刻返回True，表示有重复值。如果完成遍历后函数没有返回，表明list内没有重复元素返回False。</li>
+<li><code>vi</code> 简介</li>
+<li>打开和新建文件</li>
+<li>三种工作模式</li>
+<li>常用命令</li>
+<li>分屏命令</li>
+<li>常用命令速查图</li>
 </ul>
-<pre><code class="language-python">def is_duplicated(lst):
-    for x in lst:
-        if lst.count(x) &gt; 1:
-            return True
-    return False
+<h2 id="01-vi-简介">01. <code>vi</code> 简介</h2>
+<h3 id="11-学习-vi-的目的">1.1 学习 <code>vi</code> 的目的</h3>
+<ul>
+<li>在工作中，要对 <strong>服务器</strong> 上的文件进行 <strong>简单</strong> 的修改，可以使用 <code>ssh</code> 远程登录到服务器上，并且使用 <code>vi</code> 进行快速的编辑即可</li>
+<li>常见需要修改的文件包括：
+<ul>
+<li><strong>源程序</strong></li>
+<li><strong>配置文件</strong>，例如 <code>ssh</code> 的配置文件 <code>~/.ssh/config</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>在没有图形界面的环境下，要编辑文件，<code>vi</code> 是最佳选择！</li>
+<li>每一个要使用 Linux 的程序员，都应该或多或少的学习一些 <code>vi</code> 的常用命令</li>
+</ul>
+</blockquote>
+<h3 id="12-vi-和-vim">1.2 vi 和 vim</h3>
+<ul>
+<li>在很多 <code>Linux</code> 发行版中，直接把 <code>vi</code> 做成 <code>vim</code> 的软连接</li>
+</ul>
+<h4 id="vi">vi</h4>
+<ul>
+<li><code>vi</code> 是 <code>Visual interface</code> 的简称，是 <code>Linux</code> 中 <strong>最经典</strong> 的文本编辑器</li>
+<li><code>vi</code> 的核心设计思想 —— <strong>让程序员的手指始终保持在键盘的核心区域，就能完成所有的编辑操作</strong></li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="https://MaHule.github.io/post-images/1586844627444.png" alt="001_vi键盘-w551" loading="lazy"></figure>
+<ul>
+<li><code>vi</code> 的特点：
+<ul>
+<li><strong>没有图形界面</strong> 的 <strong>功能强大</strong> 的编辑器</li>
+<li>只能是编辑 <strong>文本内容</strong>，不能对字体、段落进行排版</li>
+<li><strong>不支持鼠标操作</strong></li>
+<li><strong>没有菜单</strong></li>
+<li><strong>只有命令</strong></li>
+</ul>
+</li>
+<li><code>vi</code> 编辑器在 <strong>系统管理</strong>、<strong>服务器管理</strong> 编辑文件时，<strong>其功能永远不是图形界面的编辑器能比拟的</strong></li>
+</ul>
+<h4 id="vim"><code>vim</code></h4>
+<p><strong>vim = vi improved</strong></p>
+<ul>
+<li><code>vim</code> 是从 <code>vi</code> 发展出来的一个文本编辑器，支持 <strong>代码补全</strong>、<strong>编译</strong> 及 <strong>错误跳转</strong> 等方便编程的功能特别丰富，在程序员中被广泛使用，被称为 <strong>编辑器之神</strong></li>
+</ul>
+<h4 id="查询软连接命令知道">查询软连接命令（知道）</h4>
+<ul>
+<li>在很多 <code>Linux</code> 发行版中直接把 <code>vi</code> 做成 <code>vim</code> 的软连接</li>
+</ul>
+<pre><code class="language-bash"># 查找 vi 的运行文件
+
+$ which vi
+$ ls -l /usr/bin/vi
+$ ls -l /etc/alternatives/vi
+$ ls -l /usr/bin/vim.basic
+
+# 查找 vim 的运行文件
+$ which vim
+$ ls -l /usr/bin/vim
+$ ls -l /etc/alternatives/vim
+$ ls -l /usr/bin/vim.basic 
+</code></pre>
+<h2 id="02-打开和新建文件">02. 打开和新建文件</h2>
+<ul>
+<li>在终端中输入 <code>vi</code> <strong>在后面跟上文件名</strong> 即可</li>
+</ul>
+<pre><code class="language-bash">$ vi 文件名
+</code></pre>
+<ul>
+<li>如果文件已经存在，会直接打开该文件</li>
+<li>如果文件不存在，会新建一个文件</li>
+</ul>
+<h3 id="21-打开文件并且定位行">2.1 打开文件并且定位行</h3>
+<ul>
+<li>
+<p>在日常工作中，有可能会遇到 <strong>打开一个文件，并定位到指定行</strong> 的情况</p>
+</li>
+<li>
+<p>例如：在开发时，<strong>知道某一行代码有错误</strong>，可以 <strong>快速定位</strong> 到出错代码的位置</p>
+</li>
+<li>
+<p>这个时候，可以使用以下命令打开文件</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ vi 文件名 +行数
 </code></pre>
 <blockquote>
-<p>调用is_duplicated方法：</p>
+<p>提示：如果只带上 <code>+</code> 而不指定行号，会直接定位到文件末尾</p>
 </blockquote>
-<pre><code class="language-python">a = [1,-2,3,4,1,2]
-print(is_duplicated(a))
-</code></pre>
-<pre><code>True
-</code></pre>
+<h3 id="22-异常处理">2.2 异常处理</h3>
 <ul>
-<li>方法二：借助set判断：</li>
+<li>如果 <code>vi</code> 异常退出，在磁盘上可能会保存有 <strong>交换文件</strong></li>
+<li>下次再使用 <code>vi</code> 编辑该文件时，会看到以下屏幕信息，按下字母 <code>d</code> 可以 <strong>删除交换文件</strong> 即可</li>
 </ul>
-<pre><code class="language-python">def is_duplicated(lst):
-    return len(lst) != len(set(lst))
-</code></pre>
-<h3 id="2列表反转">2.列表反转</h3>
-<ul>
-<li>方法一：使用切片的方法</li>
-</ul>
-<pre><code class="language-python">def reverse(lst):
-    return lst[::-1]
-</code></pre>
 <blockquote>
-<p>调用reverse：</p>
+<p>提示：按下键盘时，注意关闭输入法</p>
 </blockquote>
-<pre><code class="language-python">r = reverse([1,-2,3,4,1,2])
-print(r)
-</code></pre>
-<pre><code>[2, 1, 4, 3, -2, 1]
-</code></pre>
-<h3 id="3找出列表中的所有重复元素">3.找出列表中的所有重复元素</h3>
+<figure data-type="image" tabindex="2"><img src="https://MaHule.github.io/post-images/vi/002_vi_delete.png" alt="002_删除交换文件-w1048" loading="lazy"></figure>
+<h2 id="03-三种工作模式">03. 三种工作模式</h2>
 <ul>
-<li>遍历列表，如果出现次数大于1且不在返回的列表中，则添加到ret中。满足x not in ret ，表明x不在列表中。</li>
-</ul>
-<pre><code class="language-python">def find_duplicate(lst):
-    ret = []
-    for x in lst:
-        if lst.count(x) &gt; 1 and x not in ret:
-            ret.append(x)
-    return ret
-</code></pre>
-<blockquote>
-<p>调用find_duplicate:</p>
-</blockquote>
-<pre><code class="language-python">a = [1,2,3,4,3,2]
-r = find_duplicate(a)
-print(a)
-</code></pre>
-<pre><code>[1, 2, 3, 4, 3, 2]
-</code></pre>
-<h3 id="4斐波那契数列">4.斐波那契数列</h3>
-<ul>
-<li>斐波那契数列第一、二个元素都为 1，第三个元素等于前两个元素和，依次类推。</li>
-</ul>
-<pre><code class="language-python">def fibonacci(n):
-    if n &lt;= 1:
-        return [1]
-    fib = [1,1]
-    while len(fib) &lt; n:
-        fib.append(fib[len(fib)-1]+fib[len(fib)-2])
-    return fib
-</code></pre>
-<blockquote>
-<p>调用fibonacci:</p>
-</blockquote>
-<pre><code class="language-python">r = fibonacci(5)
-print(r)
-</code></pre>
-<pre><code>[1, 1, 2, 3, 5]
-</code></pre>
-<ul>
-<li>生成器版本：</li>
-</ul>
-<p>使用python生成器，保证代码简洁的同时，还能节省内存：</p>
-<pre><code class="language-python">def fibonacci(n):
-    a,b = 1,1
-    for _ in range(n):
-        yield a
-        a,b = b, a+b
-</code></pre>
-<p>遇到yield返回，下次在进入函数体，从yield的下一句开始执行。</p>
-<pre><code class="language-python">list(fibonacci(5))
-</code></pre>
-<pre><code>[1, 1, 2, 3, 5]
-</code></pre>
-<h3 id="5出现最多">5.出现最多</h3>
-<p>max函数python的内置函数，所以无需import<br>
-max有一个key参数，指定如何进行比较</p>
-<ul>
-<li>求出现频次最多的元素</li>
-</ul>
-<pre><code class="language-python">def mode(lst):
-    if lst is None or len(lst) == 0:
-        return None
-    return max(lst,key = lambda v:lst.count(v))
-</code></pre>
-<p>调用mode</p>
-<pre><code class="language-python">lst = [1,3,3,2,1,1,2]
-r = mode(lst)
-print(f'{lst}中出现次数最多的元素为：{r}')
-</code></pre>
-<pre><code>[1, 3, 3, 2, 1, 1, 2]中出现次数最多的元素为：[1]
-</code></pre>
-<p>上面的算法出现最多的元素有多个是时，默认只返回一个。下面算法支持返回多个：</p>
-<pre><code class="language-python">def mode(lst):
-    if lst is None or len(lst) == 0:
-        return None
-    max_freq_elem = max(lst,key = lambda v: lst.count(v))
-    max_freq = lst.count(max_freq_elem)
-    ret = []
-    for i in lst:
-        if i not in ret and lst.count(i) == max_freq:
-            ret.append(i)
-    return ret
-</code></pre>
-<pre><code class="language-python">lst = [1,3,3,2,1,1,2]
-key = lambda v:lst.count(1)
-print(key(lst))
-</code></pre>
-<pre><code>3
-</code></pre>
-<h3 id="6更长列表">6.更长列表</h3>
-<h3 id="7求表头">7.求表头</h3>
-<ul>
-<li>返回列表的第一个元素，列表为空时，返回None（通过这个例子，学习使用if和else的简洁表达）</li>
-</ul>
-<pre><code class="language-python">def head(lst):
-    return lst[0] if len(lst) &gt; 0 else None
-</code></pre>
-<pre><code class="language-python">print(head([]))
-print(head([3,4,1]))
-</code></pre>
-<pre><code>None
-3
-</code></pre>
-<h3 id="8求表尾">8.求表尾</h3>
-<ul>
-<li>求列表的最后一个元素，同样列表为空时，返回None</li>
-</ul>
-<pre><code class="language-python">def tail(lst):
-    return lst[-1] if len(lst) &gt; 0 else None
-</code></pre>
-<pre><code class="language-python">print(tail([]))
-print(tail([3,4,1]))
-</code></pre>
-<pre><code>None
-1
-</code></pre>
-<h3 id="9打印乘法表">9.打印乘法表</h3>
-<ul>
-<li>外层循环一次，print()打印一个换行；内层循环一次，打印一个等式</li>
-</ul>
-<pre><code class="language-python">def mul_table():
-    for i in range(1,10):
-        for j in range(1,i+1):
-            print(str(j) + str(&quot;*&quot;) + str(i) + &quot;=&quot; + str(i*j), end=&quot;\t&quot;)
-        print()
-mul_table()
-</code></pre>
-<pre><code>1*1=1	
-1*2=2	2*2=4	
-1*3=3	2*3=6	3*3=9	
-1*4=4	2*4=8	3*4=12	4*4=16	
-1*5=5	2*5=10	3*5=15	4*5=20	5*5=25	
-1*6=6	2*6=12	3*6=18	4*6=24	5*6=30	6*6=36	
-1*7=7	2*7=14	3*7=21	4*7=28	5*7=35	6*7=42	7*7=49	
-1*8=8	2*8=16	3*8=24	4*8=32	5*8=40	6*8=48	7*8=56	8*8=64	
-1*9=9	2*9=18	3*9=27	4*9=36	5*9=45	6*9=54	7*9=63	8*9=72	9*9=81	
-</code></pre>
-<h3 id="10元素对">10.元素对</h3>
-<ul>
-<li>t[:-1]:原列表切掉最后一个元素；</li>
-<li>t[1:]:原列表切掉第一个元素；</li>
-<li>zip(iter1,iter2):实现iter1和iter2的对应索引处的元素拼接</li>
-</ul>
-<pre><code class="language-python">list(zip([1,2],[2,3]))
-</code></pre>
-<pre><code>[(1, 2), (2, 3)]
-</code></pre>
-<pre><code class="language-python">def pair(t):
-    return list(zip(t[:-1],t[1:]))
-</code></pre>
-<pre><code class="language-python">pair([1,2,3])
-</code></pre>
-<pre><code>[(1, 2), (2, 3)]
-</code></pre>
-<pre><code class="language-python">pair(range(10))
-</code></pre>
-<pre><code>[(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9)]
-</code></pre>
-<h3 id="11样本抽样">11.样本抽样</h3>
-<ul>
-<li>内置模块中，有一个sample函数，实现“抽样”功能</li>
-</ul>
-<p>下面从100个例子中，随机抽取10个</p>
+<li>
+<p><code>vi</code> 有三种基本工作模式：</p>
 <ol>
-<li>首先，使用列表生成式，创建长度为100的列表lst;</li>
-<li>然后，sample抽取10个样本</li>
+<li><strong>命令模式</strong>
+<ul>
+<li><strong>打开文件首先进入命令模式</strong>，是使用 <code>vi</code> 的 <strong>入口</strong></li>
+<li>通过 <strong>命令</strong> 对文件进行常规的编辑操作，例如：<strong>定位</strong>、<strong>翻页</strong>、<strong>复制</strong>、<strong>粘贴</strong>、<strong>删除</strong>……</li>
+<li>在其他图形编辑器下，通过 <strong>快捷键</strong> 或者 <strong>鼠标</strong> 实现的操作，都在 <strong>命令模式</strong> 下实现</li>
+</ul>
+</li>
+<li><strong>末行模式</strong> —— 执行 <strong>保存</strong>、<strong>退出</strong> 等操作
+<ul>
+<li>要退出 <code>vi</code> 返回到控制台，需要在末行模式下输入命令</li>
+<li><strong>末行模式</strong> 是 <code>vi</code> 的 <strong>出口</strong></li>
+</ul>
+</li>
+<li><strong>编辑模式</strong> —— 正常的编辑文字</li>
 </ol>
-<pre><code class="language-python">from random import randint,sample
-
-lst = [randint(0,50) for _ in range(100)]
-print(lst[:5])
-lst_sample = sample(lst,10)
-print(lst_sample)
+</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="https://MaHule.github.io/post-images/vi/003_vi_model.png" alt="003_vi的模式-w500" loading="lazy"></figure>
+<blockquote>
+<p>提示：在 <code>Touch Bar</code> 的 Mac 电脑上 ，按 <code>ESC</code> 不方便，可以使用 <code>CTRL + [</code> 替代</p>
+</blockquote>
+<h3 id="末行模式命令">末行模式命令</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">w</td>
+<td style="text-align:center">write</td>
+<td>保存</td>
+</tr>
+<tr>
+<td style="text-align:center">q</td>
+<td style="text-align:center">quit</td>
+<td>退出，如果没有保存，不允许退出</td>
+</tr>
+<tr>
+<td style="text-align:center">q!</td>
+<td style="text-align:center">quit</td>
+<td>强行退出，不保存退出</td>
+</tr>
+<tr>
+<td style="text-align:center">wq</td>
+<td style="text-align:center">write &amp; quit</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center"></td>
+<td>保存并退出</td>
+</tr>
+</tbody>
+</table>
+<h2 id="04-常用命令">04. 常用命令</h2>
+<h3 id="命令线路图">命令线路图</h3>
+<ol start="0">
+<li>重复次数
+<ul>
+<li>在命令模式下，<strong>先输入一个数字</strong>，<strong>再跟上一个命令</strong>，可以让该命令 <strong>重复执行指定次数</strong></li>
+</ul>
+</li>
+<li>移动和选择（<strong>多练</strong>）
+<ul>
+<li><code>vi</code> 之所以快，关键在于 <strong>能够快速定位到要编辑的代码行</strong></li>
+<li><strong>移动命令</strong> 能够 和 <strong>编辑操作</strong> 命令 <strong>组合使用</strong></li>
+</ul>
+</li>
+<li>编辑操作
+<ul>
+<li><strong>删除</strong>、<strong>复制</strong>、<strong>粘贴</strong>、<strong>替换</strong>、<strong>缩排</strong></li>
+</ul>
+</li>
+<li>撤销和重复</li>
+<li>查找替换</li>
+<li>编辑</li>
+</ol>
+<h4 id="学习提示">学习提示</h4>
+<ol>
+<li><code>vi</code> 的命令较多，<strong>不要期望一下子全部记住</strong>，个别命令忘记了，只是会影响编辑速度而已</li>
+<li>在使用 <code>vi</code> 命令时，注意 <strong>关闭中文输入法</strong></li>
+</ol>
+<h3 id="41-移动基本">4.1 移动（基本）</h3>
+<ul>
+<li>要熟练使用 <code>vi</code>，首先应该学会怎么在 <strong>命令模式</strong> 下样快速移动光标</li>
+<li><strong>编辑操作命令</strong>，能够和 <strong>移动命令</strong> 结合在一起使用</li>
+</ul>
+<h4 id="1-上-下-左-右">1) 上、下、左、右</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+<th style="text-align:center">手指</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">h</td>
+<td>向左</td>
+<td style="text-align:center">食指</td>
+</tr>
+<tr>
+<td style="text-align:center">j</td>
+<td>向下</td>
+<td style="text-align:center">食指</td>
+</tr>
+<tr>
+<td style="text-align:center">k</td>
+<td>向上</td>
+<td style="text-align:center">中指</td>
+</tr>
+<tr>
+<td style="text-align:center">l</td>
+<td>向右</td>
+<td style="text-align:center">无名指</td>
+</tr>
+</tbody>
+</table>
+<figure data-type="image" tabindex="4"><img src="https://MaHule.github.io/post-images/vi/005_vi_move.png" alt="005_移动光标-w551" loading="lazy"></figure>
+<h4 id="2-行内移动">2) 行内移动</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">w</td>
+<td style="text-align:center">word</td>
+<td>向后移动一个单词</td>
+</tr>
+<tr>
+<td style="text-align:center">b</td>
+<td style="text-align:center">back</td>
+<td>向前移动一个单词</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center"></td>
+<td>行首</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center"></td>
+<td>行首，第一个不是空白字符的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center"></td>
+<td>行尾</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-行数移动">3) 行数移动</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">gg</td>
+<td style="text-align:center">go</td>
+<td>文件顶部</td>
+</tr>
+<tr>
+<td style="text-align:center">G</td>
+<td style="text-align:center">go</td>
+<td>文件末尾</td>
+</tr>
+<tr>
+<td style="text-align:center">数字gg</td>
+<td style="text-align:center">go</td>
+<td>移动到 数字 对应行数</td>
+</tr>
+<tr>
+<td style="text-align:center">数字G</td>
+<td style="text-align:center">go</td>
+<td>移动到 数字 对应行数</td>
+</tr>
+<tr>
+<td style="text-align:center">:数字</td>
+<td style="text-align:center"></td>
+<td>移动到 数字 对应行数</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4-屏幕移动">4) 屏幕移动</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Ctrl + b</td>
+<td style="text-align:center">back</td>
+<td>向上翻页</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl + f</td>
+<td style="text-align:center">forward</td>
+<td>向下翻页</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">Head</td>
+<td>屏幕顶部</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">Middle</td>
+<td>屏幕中间</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">Low</td>
+<td>屏幕底部</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-移动程序">4.2 移动（程序）</h3>
+<h4 id="1-段落移动">1) 段落移动</h4>
+<ul>
+<li><code>vi</code> 中使用 空行 来区分段落</li>
+<li>在程序开发时，通常 <strong>一段功能相关的代码会写在一起</strong> —— 之间没有空行</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">{</td>
+<td>上一段</td>
+</tr>
+<tr>
+<td style="text-align:center">}</td>
+<td>下一段</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-括号切换">2) 括号切换</h4>
+<ul>
+<li>在程序世界中，<code>()</code>、<code>[]</code>、<code>{}</code> 使用频率很高，而且 <strong>都是成对出现的</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%</td>
+<td>括号匹配及切换</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-标记">3) 标记</h4>
+<ul>
+<li>在开发时，某一块代码可能<strong>需要稍后处理</strong>，例如：编辑、查看</li>
+<li>此时先使用 <code>m</code> 增加一个标记，这样可以 <strong>在需要时快速地跳转回来</strong> 或者 <strong>执行其他编辑操作</strong></li>
+<li><strong>标记名称</strong> 可以是 <code>a~z</code> 或者 <code>A~Z</code> 之间的任意 <strong>一个</strong> 字母</li>
+<li>添加了标记的 <strong>行如果被删除</strong>，<strong>标记同时被删除</strong></li>
+<li>如果 <strong>在其他行添加了相同名称的标记</strong>，<strong>之前添加的标记也会被替换掉</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">mx</td>
+<td style="text-align:center">mark</td>
+<td>添加标记 x，x 是 a~z 或者 A~Z 之间的任意一个字母</td>
+</tr>
+<tr>
+<td style="text-align:center">'x</td>
+<td style="text-align:center"></td>
+<td>直接定位到标记 x 所在位置</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-选中文本可视模式">4.3 选中文本（可视模式）</h3>
+<ul>
+<li>学习 <code>复制</code> 命令前，应该先学会 <strong>怎么样选中 要复制的代码</strong></li>
+<li>在 <code>vi</code> 中要选择文本，需要先使用 <code>Visual</code> 命令切换到 <strong>可视模式</strong></li>
+<li><code>vi</code> 中提供了 <strong>三种</strong> 可视模式，可以方便程序员选择 <strong>选中文本的方式</strong></li>
+<li>按 <code>ESC</code> 可以放弃选中，返回到 <strong>命令模式</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>模式</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">v</td>
+<td>可视模式</td>
+<td>从光标位置开始按照正常模式选择文本</td>
+</tr>
+<tr>
+<td style="text-align:center">V</td>
+<td>可视行模式</td>
+<td>选中光标经过的完整行</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl + v</td>
+<td>可视块模式</td>
+<td>垂直方向选中文本</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>可视模式</strong>下，可以和 <strong>移动命令</strong> 连用，例如：<code>ggVG</code> 能够选中所有内容</li>
+</ul>
+<h3 id="44-撤销和恢复撤销">4.4 撤销和恢复撤销</h3>
+<ul>
+<li>在学习编辑命令之前，先要知道怎样撤销之前一次 <strong>错误的</strong> 编辑动作！</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u</td>
+<td style="text-align:center">undo</td>
+<td>撤销上次命令</td>
+</tr>
+<tr>
+<td style="text-align:center">CTRL + r</td>
+<td style="text-align:center">redo</td>
+<td>恢复撤销的命令</td>
+</tr>
+</tbody>
+</table>
+<h3 id="45-删除文本">4.5 删除文本</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">cut</td>
+<td>删除光标所在字符，或者选中文字</td>
+</tr>
+<tr>
+<td style="text-align:center">d(移动命令)</td>
+<td style="text-align:center">delete</td>
+<td>删除移动命令对应的内容</td>
+</tr>
+<tr>
+<td style="text-align:center">dd</td>
+<td style="text-align:center">delete</td>
+<td>删除光标所在行，可以 ndd 复制多行</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">delete</td>
+<td>删除至行尾</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>提示：如果使用 <strong>可视模式</strong> 已经选中了一段文本，那么无论使用 <code>d</code> 还是 <code>x</code>，都可以删除选中文本</p>
+</blockquote>
+<ul>
+<li>删除命令可以和 <strong>移动命令</strong> 连用，以下是常见的组合命令：</li>
+</ul>
+<pre><code>* dw        # 从光标位置删除到单词末尾
+* d0        # 从光标位置删除到一行的起始位置
+* d}        # 从光标位置删除到段落结尾
+* ndd       # 从光标位置向下连续删除 n 行
+* d代码行G   # 从光标所在行 删除到 指定代码行 之间的所有代码
+* d'a       # 从光标所在行 删除到 标记a 之间的所有代码
 </code></pre>
-<pre><code>[3, 24, 44, 2, 13]
-[40, 40, 21, 46, 1, 4, 29, 39, 41, 13]
+<h3 id="46-复制-粘贴">4.6 复制、粘贴</h3>
+<ul>
+<li><code>vi</code> 中提供有一个 <strong>被复制文本的缓冲区</strong>
+<ul>
+<li><strong>复制</strong> 命令会将选中的文字保存在缓冲区</li>
+<li><strong>删除</strong> 命令删除的文字会被保存在缓冲区</li>
+<li>在需要的位置，使用 <strong>粘贴</strong> 命令可以将缓冲区的文字插入到光标所在位置</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">y(移动命令)</td>
+<td style="text-align:center">copy</td>
+<td>复制</td>
+</tr>
+<tr>
+<td style="text-align:center">yy</td>
+<td style="text-align:center">copy</td>
+<td>复制一行，可以 nyy 复制多行</td>
+</tr>
+<tr>
+<td style="text-align:center">p</td>
+<td style="text-align:center">paste</td>
+<td>粘贴</td>
+</tr>
+</tbody>
+</table>
+<p><strong>提示</strong></p>
+<ul>
+<li>命令 <code>d</code>、<code>x</code> 类似于图形界面的 <strong>剪切操作</strong> —— <code>CTRL + X</code></li>
+<li>命令 <code>y</code> 类似于图形界面的 <strong>复制操作</strong> —— <code>CTRL + C</code></li>
+<li>命令 <code>p</code> 类似于图形界面的 <strong>粘贴操作</strong> —— <code>CTRL + V</code></li>
+<li><code>vi</code> 中的 <strong>文本缓冲区同样只有一个</strong>，如果后续做过 <strong>复制、剪切</strong> 操作，之前缓冲区中的内容会被替换</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li><code>vi</code> 中的 <strong>文本缓冲区</strong> 和系统的 <strong>剪贴板</strong> 不是同一个</li>
+<li>所以在其他软件中使用 <code>CTRL + C</code> 复制的内容，不能在 <code>vi</code> 中通过 <code>P</code> 命令粘贴</li>
+<li>可以在 <strong>编辑模式</strong> 下使用 <strong>鼠标右键粘贴</strong></li>
+</ul>
+<h3 id="47-替换">4.7 替换</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+<th>工作模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">r</td>
+<td style="text-align:center">replace</td>
+<td>替换当前字符</td>
+<td>命令模式</td>
+</tr>
+<tr>
+<td style="text-align:center">R</td>
+<td style="text-align:center">replace</td>
+<td>替换当前行光标后的字符</td>
+<td>替换模式</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>R</code> 命令可以进入 <strong>替换模式</strong>，替换完成后，按下 <code>ESC</code> 可以回到 <strong>命令模式</strong></li>
+<li><strong>替换命令</strong> 的作用就是不用进入 <strong>编辑模式</strong>，对文件进行 <strong>轻量级的修改</strong></li>
+</ul>
+<h3 id="48-缩排和重复执行">4.8 缩排和重复执行</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&gt;&gt;</td>
+<td>向右增加缩进</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;&lt;</td>
+<td>向左减少缩进</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td>重复上次命令</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>缩排命令</strong> 在开发程序时，<strong>统一增加代码的缩进</strong> 比较有用！
+<ul>
+<li>一次性 <strong>在选中代码前增加 4 个空格</strong>，就叫做 <strong>增加缩进</strong></li>
+<li>一次性 <strong>在选中代码前删除 4 个空格</strong>，就叫做 <strong>减少缩进</strong></li>
+</ul>
+</li>
+<li>在 <strong>可视模式</strong> 下，缩排命令只需要使用 <strong>一个</strong> <code>&gt;</code> 或者 <code>&lt;</code></li>
+</ul>
+<blockquote>
+<p>在程序中，<strong>缩进</strong> 通常用来表示代码的归属关系</p>
+<ul>
+<li>前面空格越少，代码的级别越高</li>
+<li>前面空格越多，代码的级别越低</li>
+</ul>
+</blockquote>
+<h3 id="49-查找">4.9 查找</h3>
+<h4 id="常规查找">常规查找</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">/str</td>
+<td>查找 str</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>查找到指定内容之后，使用 <code>Next</code> 查找下一个出现的位置：
+<ul>
+<li><code>n</code>: 查找下一个</li>
+<li><code>N</code>: 查找上一个</li>
+</ul>
+</li>
+<li>如果不想看到高亮显示，可以随便查找一个文件中不存在的内容即可</li>
+</ul>
+<h4 id="单词快速匹配">单词快速匹配</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td>向后查找当前光标所在单词</td>
+</tr>
+<tr>
+<td style="text-align:center">#</td>
+<td>向前查找当前光标所在单词</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>在开发中，通过单词快速匹配，可以快速看到这个单词在其他什么位置使用过</li>
+</ul>
+<h3 id="410-查找并替换">4.10 查找并替换</h3>
+<ul>
+<li>在 <code>vi</code> 中查找和替换命令需要在 <strong>末行模式</strong> 下执行</li>
+<li>记忆命令格式：</li>
+</ul>
+<pre><code>:%s///g
 </code></pre>
-<h3 id="12重洗数据集">12.重洗数据集</h3>
-<p>内置 random 中的 shuffle 函数，能重洗数据。</p>
-<p>值得注意，shuffle 是对输入列表就地（in place）洗牌，节省存储空间。</p>
-<pre><code class="language-python">from random import shuffle
-lst = [randint(0,50) for _ in range(100)]
-shuffle(lst)
-print(lst[:5])
+<h4 id="1-全局替换">1) 全局替换</h4>
+<ul>
+<li><strong>一次性</strong>替换文件中的 <strong>所有出现的旧文本</strong></li>
+<li>命令格式如下：</li>
+</ul>
+<pre><code>:%s/旧文本/新文本/g
 </code></pre>
-<pre><code>[13, 7, 40, 35, 29]
+<h4 id="2-可视区域替换">2) 可视区域替换</h4>
+<ul>
+<li><strong>先选中</strong> 要替换文字的 <strong>范围</strong></li>
+<li>命令格式如下：</li>
+</ul>
+<pre><code>:s/旧文本/新文本/g
 </code></pre>
-<h3 id="13生成满足均匀分布的坐标点">13.生成满足均匀分布的坐标点</h3>
-<p>random模块，uniform(a,b)生成[a,b]内的一个随机数。<br>
-借助列表生成式，生成100个均匀分布的坐标点。</p>
-<pre><code class="language-python">from random import uniform
-x, y = [i for i in range(100)],[round(uniform(0, 10), 2) for _ in range(100)]
-print(y)
+<h4 id="3-确认替换">3) 确认替换</h4>
+<ul>
+<li>如果把末尾的 <code>g</code> 改成 <code>gc</code> 在替换的时候，会有提示！<strong>推荐使用！</strong></li>
+</ul>
+<pre><code>:%s/旧文本/新文本/gc
 </code></pre>
-<pre><code>[6.97, 7.96, 9.35, 3.76, 5.92, 1.74, 0.78, 2.02, 1.72, 4.63, 2.53, 1.46, 4.87, 1.24, 6.01, 1.14, 8.04, 0.17, 3.46, 8.95, 4.63, 3.28, 5.25, 5.37, 1.47, 9.47, 5.19, 6.21, 4.62, 9.54, 8.45, 7.24, 4.65, 9.54, 8.76, 1.0, 8.09, 1.61, 6.11, 7.21, 1.55, 3.52, 5.71, 5.02, 8.8, 5.38, 7.98, 4.54, 0.95, 4.32, 6.79, 6.42, 0.73, 1.17, 3.78, 7.62, 5.32, 0.3, 4.32, 4.72, 7.21, 2.33, 7.21, 7.07, 3.16, 3.14, 4.34, 7.61, 4.81, 3.28, 3.94, 9.42, 0.78, 6.38, 4.61, 4.88, 2.5, 4.57, 7.4, 5.85, 4.62, 7.07, 9.66, 1.64, 1.88, 5.48, 4.55, 7.46, 6.52, 7.03, 9.49, 4.64, 0.63, 0.04, 8.08, 3.63, 1.16, 7.45, 9.46, 4.2]
+<ol>
+<li><code>y</code> - <code>yes</code> 替换</li>
+<li><code>n</code> - <code>no</code> 不替换</li>
+<li><code>a</code> - <code>all</code> 替换所有</li>
+<li><code>q</code> - <code>quit</code> 退出替换</li>
+<li><code>l</code> - <code>last</code> 最后一个，并把光标移动到行首</li>
+<li><code>^E</code> 向下滚屏</li>
+<li><code>^Y</code> 向上滚屏</li>
+</ol>
+<h3 id="411-插入命令">4.11 插入命令</h3>
+<ul>
+<li>在 <code>vi</code> 中除了常用的 <code>i</code> 进入 <strong>编辑模式</strong> 外，还提供了以下命令同样可以进入编辑模式：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+<th style="text-align:center">常用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">i</td>
+<td style="text-align:center">insert</td>
+<td>在当前字符前插入文本</td>
+<td style="text-align:center">常用</td>
+</tr>
+<tr>
+<td style="text-align:center">I</td>
+<td style="text-align:center">insert</td>
+<td>在行首插入文本</td>
+<td style="text-align:center">较常用</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">append</td>
+<td>在当前字符后添加文本</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">A</td>
+<td style="text-align:center">append</td>
+<td>在行末添加文本</td>
+<td style="text-align:center">较常用</td>
+</tr>
+<tr>
+<td style="text-align:center">o</td>
+<td style="text-align:center"></td>
+<td>在当前行后面插入一空行</td>
+<td style="text-align:center">常用</td>
+</tr>
+<tr>
+<td style="text-align:center">O</td>
+<td style="text-align:center"></td>
+<td>在当前行前面插入一空行</td>
+<td style="text-align:center">常用</td>
+</tr>
+</tbody>
+</table>
+<figure data-type="image" tabindex="5"><img src="https://MaHule.github.io/post-images/vi/004_vi_insert.png" alt="004_插入命令-w400" loading="lazy"></figure>
+<h4 id="演练-1-编辑命令和数字连用">演练 1 —— 编辑命令和数字连用</h4>
+<ul>
+<li>在开发中，可能会遇到连续输入 <code>N</code> 个同样的字符</li>
+</ul>
+<blockquote>
+<p>在 <code>Python</code> 中有简单的方法，但是其他语言中通常需要自己输入</p>
+</blockquote>
+<ul>
+<li>例如：<code>**********</code> 连续 10 个星号</li>
+</ul>
+<p>要实现这个效果可以在 <strong>命令模式</strong> 下</p>
+<ol>
+<li>输入 <code>10</code>，表示要重复 10 次</li>
+<li>输入 <code>i</code> 进入 <strong>编辑模式</strong></li>
+<li>输入 <code>*</code> 也就是重复的文字</li>
+<li>按下 <code>ESC</code> 返回到 <strong>命令模式</strong>，返回之后 <code>vi</code> 就会把第 <code>2、3</code> 两步的操作重复 <code>10</code> 次</li>
+</ol>
+<blockquote>
+<p>提示：正常开发时，在 <strong>进入编辑模式之前，不要按数字</strong></p>
+</blockquote>
+<h4 id="演练-2-利用-可视块-给多行代码增加注释">演练 2 —— 利用 可视块 给多行代码增加注释</h4>
+<ul>
+<li>在开发中，可能会遇到一次性给多行代码 <strong>增加注释</strong> 的情况</li>
+</ul>
+<blockquote>
+<p>在 <code>Python</code> 中，要给代码增加注释，可以在代码前增加一个 <code>#</code></p>
+</blockquote>
+<p>要实现这个效果可以在 <strong>命令模式</strong> 下</p>
+<ol>
+<li>移动到要添加注释的 <strong>第 1 行代码</strong>，按 <code>^</code> 来到行首</li>
+<li>按 <code>CTRL + v</code> 进入 <strong>可视块</strong> 模式</li>
+<li>使用 <code>j</code> 向下连续选中要添加的代码行</li>
+<li>输入 <code>I</code> 进入 <strong>编辑模式</strong>，并在 <strong>行首插入</strong>，注意：一定要使用 <strong>I</strong></li>
+<li>输入 <code>#</code> 也就是注释符号</li>
+<li>按下 <code>ESC</code> 返回到 <strong>命令模式</strong>，返回之后 <code>vi</code> 会在之前选中的每一行代码 <strong>前</strong> 插入 <code>#</code></li>
+</ol>
+<h2 id="05-分屏命令">05. 分屏命令</h2>
+<ul>
+<li>属于 <code>vi</code> 的高级命令 —— 可以 <strong>同时编辑和查看多个文件</strong></li>
+</ul>
+<h3 id="51-末行命令扩展">5.1 末行命令扩展</h3>
+<p><strong>末行命令</strong> 主要是针对文件进行操作的：<strong>保存</strong>、<strong>退出</strong>、<strong>保存&amp;退出</strong>、<strong>搜索&amp;替换</strong>、<strong>另存</strong>、<strong>新建</strong>、<strong>浏览文件</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:e .</td>
+<td style="text-align:center">edit</td>
+<td>会打开内置的文件浏览器，浏览要当前目录下的文件</td>
+</tr>
+<tr>
+<td style="text-align:center">:n 文件名</td>
+<td style="text-align:center">new</td>
+<td>新建文件</td>
+</tr>
+<tr>
+<td style="text-align:center">:w 文件名</td>
+<td style="text-align:center">write</td>
+<td>另存为，但是仍然编辑当前文件，并不会切换文件</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>提示：切换文件之前，必须保证当前这个文件已经被保存！</p>
+</blockquote>
+<ul>
+<li>已经学习过的 <strong>末行命令</strong>：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:w</td>
+<td style="text-align:center">write</td>
+<td>保存</td>
+</tr>
+<tr>
+<td style="text-align:center">:q</td>
+<td style="text-align:center">quit</td>
+<td>退出，如果没有保存，不允许退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:q!</td>
+<td style="text-align:center">quit</td>
+<td>强行退出，不保存退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:wq</td>
+<td style="text-align:center">write &amp; quit</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:x</td>
+<td style="text-align:center"></td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:%s///gc</td>
+<td style="text-align:center"></td>
+<td>确认搜索并替换</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>在实际开发中，可以使用 <code>w</code> 命令 <strong>阶段性的备份代码</strong></p>
+</blockquote>
+<h3 id="52-分屏命令">5.2 分屏命令</h3>
+<ul>
+<li>使用 <strong>分屏命令</strong>，可以 <strong>同时编辑和查看多个文件</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:sp [文件名]</td>
+<td style="text-align:center">split</td>
+<td>横向增加分屏</td>
+</tr>
+<tr>
+<td style="text-align:center">:vsp [文件名]</td>
+<td style="text-align:center">vertical split</td>
+<td>纵向增加分屏</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-切换分屏窗口">1) 切换分屏窗口</h4>
+<blockquote>
+<p>分屏窗口都是基于 <code>CTRL + W</code> 这个快捷键的，<code>w</code> 对应的英文单词是 <code>window</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">w</td>
+<td style="text-align:center">window</td>
+<td>切换到下一个窗口</td>
+</tr>
+<tr>
+<td style="text-align:center">r</td>
+<td style="text-align:center">reverse</td>
+<td>互换窗口</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:center">close</td>
+<td>关闭当前窗口，但是不能关闭最后一个窗口</td>
+</tr>
+<tr>
+<td style="text-align:center">q</td>
+<td style="text-align:center">quit</td>
+<td>退出当前窗口，如果是最后一个窗口，则关闭 vi</td>
+</tr>
+<tr>
+<td style="text-align:center">o</td>
+<td style="text-align:center">other</td>
+<td>关闭其他窗口</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-调整窗口大小">2) 调整窗口大小</h4>
+<blockquote>
+<p>分屏窗口都是基于 <code>CTRL + W</code> 这个快捷键的，<code>w</code> 对应的英文单词是 <code>window</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center"></td>
+<td>增加窗口高度</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center"></td>
+<td>减少窗口高度</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:center"></td>
+<td>增加窗口宽度</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:center"></td>
+<td>减少窗口宽度</td>
+</tr>
+<tr>
+<td style="text-align:center">=</td>
+<td style="text-align:center"></td>
+<td>等分窗口大小</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>调整窗口宽高的命令可以和数字连用，例如：<code>5 CTRL + W +</code> 连续 5 次增加高度</p>
+</blockquote>
+<h2 id="06-常用命令速查图">06. 常用命令速查图</h2>
+<figure data-type="image" tabindex="6"><img src="https://MaHule.github.io/post-images/vi/vim.png" alt="vi" loading="lazy"></figure>
+<h3 id="vimrc">vimrc</h3>
+<ul>
+<li><code>vimrc</code> 是 <code>vim</code> 的配置文件，可以设置 vim 的配置，包括：<strong>热键</strong>、<strong>配色</strong>、<strong>语法高亮</strong>、<strong>插件</strong> 等</li>
+<li><code>Linux</code> 中 <code>vimrc</code> 有两个位置，<strong>家目录下的配置文件优先级更高</strong></li>
+</ul>
+<pre><code>/etc/vim/vimrc
+~/.vimrc
 </code></pre>
-<pre><code class="language-python">from pyecharts.charts import Scatter
-import pyecharts.options as opts
-from random import uniform
-
-def draw_uniform_points():
-    x, y = [i for i in range(100)], [
-        round(uniform(0, 10), 2) for _ in range(100)]
-    print(y)
-    c = (
-        Scatter()
-        .add_xaxis(x)
-        .add_yaxis('y', y)
-    )
-    c.render()
-
-
-draw_uniform_points()
-</code></pre>
-<pre><code>[3.61, 8.16, 3.4, 9.49, 0.78, 4.37, 7.16, 8.53, 6.79, 2.24, 1.57, 2.44, 5.93, 8.6, 5.88, 0.42, 4.07, 6.26, 0.17, 9.65, 5.9, 5.85, 7.57, 8.78, 1.29, 3.46, 8.62, 0.39, 2.48, 6.41, 5.96, 8.86, 6.18, 1.81, 1.17, 7.59, 1.54, 5.56, 7.27, 7.75, 3.81, 3.9, 4.81, 9.09, 8.34, 0.57, 1.77, 6.03, 9.09, 2.54, 4.23, 0.97, 1.66, 5.55, 1.5, 5.3, 9.21, 1.59, 7.13, 4.49, 4.6, 0.6, 2.66, 7.6, 2.1, 8.78, 0.8, 7.85, 2.39, 1.75, 6.47, 2.03, 6.84, 3.42, 1.47, 8.68, 2.32, 5.79, 7.73, 5.41, 4.37, 7.03, 0.93, 1.28, 3.18, 7.75, 8.18, 4.08, 4.81, 3.18, 6.83, 5.52, 8.14, 1.66, 8.49, 1.54, 9.54, 2.75, 7.81, 6.66]
-</code></pre>
-<pre><code class="language-python">
-</code></pre>
-<!-- more -->
+<ul>
+<li>常用的插件有：
+<ul>
+<li>代码补全</li>
+<li>代码折叠</li>
+<li>搜索</li>
+<li>Git 集成</li>
+<li>……</li>
+</ul>
+</li>
+<li>网上有很多高手已经配置好的针对 <code>python</code> 开发的 <code>vimrc</code> 文件，可以下载过来直接使用，或者等大家多 <code>Linux</code> 比较熟悉后，再行学习！</li>
+</ul>
 
       </div>
 
       
       <nav class="post-nav">
         
-        <div class="nav-previous">
-          <a class="post-nav-link-active" title="Python字符串" href="https://MaHule.github.io/post/python-zi-fu-chuan/">上一篇文章</a>
-        </div>
-        
         
         <div class="nav-next">
-          <a class="post-nav-link-active" title="Python版十大经典排序算法" href="https://MaHule.github.io/post/python-ban-shi-da-jing-dian-pai-xu-suan-fa/">下一篇文章</a>
+          <a class="post-nav-link-active" title="网络安全测评" href="https://MaHule.github.io/post/wang-luo-an-quan-ce-ping/">下一篇文章</a>
           
 
         </div>
@@ -860,12 +1627,6 @@ draw_uniform_points()
   <aside id="categories-2" class="widget widget_categories">
     <h4 class="widget-title">分类目录</h4>
     <ul>
-      
-      <li class="cat-item"><a href="https://MaHule.github.io/tag/uQJCDEn4z/">
-          Python
-          
-        </a>
-      </li>
       
 
     </ul>
