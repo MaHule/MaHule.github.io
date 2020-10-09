@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaHule.github.io</id>
     <title>一小步</title>
-    <updated>2020-04-15T00:44:37.720Z</updated>
+    <updated>2020-10-09T02:23:52.744Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaHule.github.io"/>
     <link rel="self" href="https://MaHule.github.io/atom.xml"/>
@@ -10,6 +10,84 @@
     <logo>https://MaHule.github.io/images/avatar.png</logo>
     <icon>https://MaHule.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 一小步</rights>
+    <entry>
+        <title type="html"><![CDATA[Docker基本知识]]></title>
+        <id>https://MaHule.github.io/post/docker-ji-ben-zhi-shi/</id>
+        <link href="https://MaHule.github.io/post/docker-ji-ben-zhi-shi/">
+        </link>
+        <updated>2020-10-09T02:22:34.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="1-安装docker">1. 安装Docker</h2>
+<h4 id="windows安装docker">Windows安装Docker</h4>
+<ul>
+<li>使用dockertoolbox安装，需要依赖virtualbox</li>
+</ul>
+<ol>
+<li>第一次安装初始化需要下载<code>boot2docker.iso</code>镜像，直接下载比较慢，可以直接使用网盘下载后移动到相应的文件夹</li>
+<li></li>
+</ol>
+<ul>
+<li>使用Docker for windows安装</li>
+</ul>
+<ol>
+<li>需要依赖Windows开启Hyper-V</li>
+<li>可以添加镜像加速器，使下载镜像时的速度更快</li>
+</ol>
+<h2 id="2-dcoker的基本使用">2. Dcoker的基本使用</h2>
+<p>以拉取与运行Sqli-Lab为例来对Docker的使用进行介绍</p>
+<ul>
+<li>寻找镜像：<code>docker search sqli-lab</code></li>
+<li>拉取镜像：<code>docker pull acgpiano/sqli-labs</code></li>
+<li>查看本地已经存在的镜像：<code>docker images</code></li>
+<li>为镜像添加标签：<code>docker tag acgpiano/sqli-labs mysqli</code></li>
+<li>运行docker下的sqli-labs: <code>docker run -dt --name sqli -p 80:80 --rm acgpiano/sqli-labs</code></li>
+</ul>
+<blockquote>
+<p><code>--dt</code> ：让其在后台运行</p>
+<p><code>--name</code> ：给运行的镜像命名</p>
+<p><code>-p</code>： 将运行镜像的端口映射到本地主机的端口上，前面的是本地主机端口，后面是镜像端口</p>
+</blockquote>
+<ul>
+<li>显示容器的<code>id</code>,<code>image</code>命令，端口等信息：<code>docker ps -a</code></li>
+<li>进入id号的shell： <code>docker exec -it 0976afc45249 /bin/bash</code></li>
+</ul>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="1-安装docker">1. 安装Docker</h2>
+<h4 id="windows安装docker">Windows安装Docker</h4>
+<ul>
+<li>使用dockertoolbox安装，需要依赖virtualbox</li>
+</ul>
+<ol>
+<li>第一次安装初始化需要下载<code>boot2docker.iso</code>镜像，直接下载比较慢，可以直接使用网盘下载后移动到相应的文件夹</li>
+<li></li>
+</ol>
+<ul>
+<li>使用Docker for windows安装</li>
+</ul>
+<ol>
+<li>需要依赖Windows开启Hyper-V</li>
+<li>可以添加镜像加速器，使下载镜像时的速度更快</li>
+</ol>
+<h2 id="2-dcoker的基本使用">2. Dcoker的基本使用</h2>
+<p>以拉取与运行Sqli-Lab为例来对Docker的使用进行介绍</p>
+<ul>
+<li>寻找镜像：<code>docker search sqli-lab</code></li>
+<li>拉取镜像：<code>docker pull acgpiano/sqli-labs</code></li>
+<li>查看本地已经存在的镜像：<code>docker images</code></li>
+<li>为镜像添加标签：<code>docker tag acgpiano/sqli-labs mysqli</code></li>
+<li>运行docker下的sqli-labs: <code>docker run -dt --name sqli -p 80:80 --rm acgpiano/sqli-labs</code></li>
+</ul>
+<blockquote>
+<p><code>--dt</code> ：让其在后台运行</p>
+<p><code>--name</code> ：给运行的镜像命名</p>
+<p><code>-p</code>： 将运行镜像的端口映射到本地主机的端口上，前面的是本地主机端口，后面是镜像端口</p>
+</blockquote>
+<ul>
+<li>显示容器的<code>id</code>,<code>image</code>命令，端口等信息：<code>docker ps -a</code></li>
+<li>进入id号的shell： <code>docker exec -it 0976afc45249 /bin/bash</code></li>
+</ul>
+<!-- more -->
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[NetCat使用指南]]></title>
         <id>https://MaHule.github.io/post/netcat-shi-yong-zhi-nan/</id>

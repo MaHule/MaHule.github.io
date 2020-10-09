@@ -250,7 +250,7 @@ footer{width:100vw;background:#222;display:flex;justify-content:center}
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 <link rel="canonical" href="https://MaHule.github.io" />
-<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1586911451008">
+<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1602210200979">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
 <script async custom-element="amp-audio" src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"></script>
@@ -310,6 +310,76 @@ footer{width:100vw;background:#222;display:flex;justify-content:center}
 
     <div class="main-container">
   <div class="post-list">
+    
+    <article class="list-box post type-post status-publish format-standard has-post-thumbnail hentry category-xiaoqiao">
+      
+
+      <div class="post-info">
+        
+        <div class="flex-box meta-category">
+          <a class="post-cate" href="https://MaHule.github.io/tag/h-BB-uc6E/">docker</a></div>
+        
+        <h2 class="post-title">
+          <a href="https://MaHule.github.io/post/docker-ji-ben-zhi-shi/">Docker基本知识</a>
+        </h2>
+        <div class="post-excerpt">
+          <h2 id="1-安装docker">1. 安装Docker</h2>
+<h4 id="windows安装docker">Windows安装Docker</h4>
+<ul>
+<li>使用dockertoolbox安装，需要依赖virtualbox</li>
+</ul>
+<ol>
+<li>第一次安装初始化需要下载<code>boot2docker.iso</code>镜像，直接下载比较慢，可以直接使用网盘下载后移动到相应的文件夹</li>
+<li></li>
+</ol>
+<ul>
+<li>使用Docker for windows安装</li>
+</ul>
+<ol>
+<li>需要依赖Windows开启Hyper-V</li>
+<li>可以添加镜像加速器，使下载镜像时的速度更快</li>
+</ol>
+<h2 id="2-dcoker的基本使用">2. Dcoker的基本使用</h2>
+<p>以拉取与运行Sqli-Lab为例来对Docker的使用进行介绍</p>
+<ul>
+<li>寻找镜像：<code>docker search sqli-lab</code></li>
+<li>拉取镜像：<code>docker pull acgpiano/sqli-labs</code></li>
+<li>查看本地已经存在的镜像：<code>docker images</code></li>
+<li>为镜像添加标签：<code>docker tag acgpiano/sqli-labs mysqli</code></li>
+<li>运行docker下的sqli-labs: <code>docker run -dt --name sqli -p 80:80 --rm acgpiano/sqli-labs</code></li>
+</ul>
+<blockquote>
+<p><code>--dt</code> ：让其在后台运行</p>
+<p><code>--name</code> ：给运行的镜像命名</p>
+<p><code>-p</code>： 将运行镜像的端口映射到本地主机的端口上，前面的是本地主机端口，后面是镜像端口</p>
+</blockquote>
+<ul>
+<li>显示容器的<code>id</code>,<code>image</code>命令，端口等信息：<code>docker ps -a</code></li>
+<li>进入id号的shell： <code>docker exec -it 0976afc45249 /bin/bash</code></li>
+</ul>
+
+        </div>
+        <div class="flex-box justify-between">
+          <a href="https://MaHule.github.io/post/docker-ji-ben-zhi-shi/" class="read-more">阅读更多<span class="iconfont icon-ml-readmore"></span></a>
+          <div class="flex-box post-meta-box">
+            <a class="post-meta" href="https://MaHule.github.io/post/docker-ji-ben-zhi-shi/#comments"><span class="iconfont icon-mr-postmeta"></span></a>
+            <a class="post-meta" href="https://MaHule.github.io/post/docker-ji-ben-zhi-shi/"><span class="iconfont icon-mr-postmeta"></span></a>
+            <a class="post-meta" href="https://MaHule.github.io/post/docker-ji-ben-zhi-shi/"><span
+                class="iconfont icon-mr-postmeta icon-like-sp"></span></a>
+          </div>
+          
+
+          <div class="flex-box post-publish-date">
+            
+            <div class="post-date">
+              2020</div>
+            
+          </div>
+
+        </div>
+
+      </div>
+    </article>
     
     <article class="list-box post type-post status-publish format-standard has-post-thumbnail hentry category-xiaoqiao">
       
@@ -619,7 +689,7 @@ footer{width:100vw;background:#222;display:flex;justify-content:center}
   <aside id="profile-2" class="widget widget_profile">
     <div class="profile-box">
       <div class="profile-avatar">
-        <amp-img src="https://MaHule.github.io/images/avatar.png?v=1586911451008" alt="avatar"
+        <amp-img src="https://MaHule.github.io/images/avatar.png?v=1602210200979" alt="avatar"
           layout="fill"></amp-img>
       </div>
       <div class="profile-content">
@@ -645,6 +715,14 @@ footer{width:100vw;background:#222;display:flex;justify-content:center}
   <aside id="categories-2" class="widget widget_categories">
     <h4 class="widget-title">分类目录</h4>
     <ul>
+      
+      
+      <li class="cat-item"><a href="https://MaHule.github.io/tag/h-BB-uc6E/">
+          docker
+          
+        </a>
+      </li>
+      
       
       
       <li class="cat-item"><a href="https://MaHule.github.io/tag/PmmDJSBWv/">
