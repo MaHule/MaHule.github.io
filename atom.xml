@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MaHule.github.io</id>
     <title>一小步</title>
-    <updated>2020-10-09T02:25:11.201Z</updated>
+    <updated>2020-10-11T08:41:30.844Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MaHule.github.io"/>
     <link rel="self" href="https://MaHule.github.io/atom.xml"/>
@@ -10,6 +10,45 @@
     <logo>https://MaHule.github.io/images/avatar.png</logo>
     <icon>https://MaHule.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 一小步</rights>
+    <entry>
+        <title type="html"><![CDATA[Jupyter基本使用]]></title>
+        <id>https://MaHule.github.io/post/jupyter-ji-ben-shi-yong/</id>
+        <link href="https://MaHule.github.io/post/jupyter-ji-ben-shi-yong/">
+        </link>
+        <updated>2020-10-11T08:37:39.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="一-更改默认目录">一. 更改默认目录</h2>
+<ol>
+<li>启动<code>cmd</code>，执行<code>jupyter notebook --generate-config</code>，查看jupyter配置文件路径</li>
+<li>找到配置文件<code>jupyter_notebook_config.py</code></li>
+<li>修改配置文件</li>
+</ol>
+<p>找到一下语句：</p>
+<pre><code>## The directory to use for notebooks and kernels. 
+# c.NotebookApp.notebook_dir = '' 
+将其改为 
+## The directory to use for notebooks and kernels. 
+c.NotebookApp.notebook_dir = '需要更改的路径'
+</code></pre>
+<p><strong>注：</strong> 路径 中不能出现中文</p>
+<ol start="4">
+<li>找到Jupyter的快捷方式，右键属性，将<code>%USERPROFILE%</code>删除保持。</li>
+</ol>
+<h2 id="二更改jupyter的主题">二.更改jupyter的主题</h2>
+<ol>
+<li>安装Jupyter主题<code>pip install jupyterthemes</code>。</li>
+<li>更新Jupyter主题<code>pip install --upgrade jupyterthemes</code></li>
+<li>查看可用的Jupyter主题 <code>jt -l</code></li>
+<li>更换Jupyter主题</li>
+</ol>
+<p><code>jt -t onedork -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T -T</code></p>
+<p>​        -t 主题 -f(字体) -fs(字体大小) -cellw(占屏比或宽度) -ofs(输出段的字号) -T(显示工具栏) -T(显示自己主机名)</p>
+<ol start="5">
+<li>恢复Jupyter默认风格</li>
+</ol>
+<pre><code>jt -r
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Docker基本知识]]></title>
         <id>https://MaHule.github.io/post/docker-ji-ben-zhi-shi/</id>

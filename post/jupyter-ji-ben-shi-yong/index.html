@@ -4,42 +4,17 @@
 <head>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<meta name="description" content="介绍等级保护2.0中在网络层面上的安全测评需要从哪些方面着手。
+<meta name="description" content="一. 更改默认目录
 
-01.标准概述
+启动cmd，执行jupyter notebook --generate-config，查看jupyter配置文件路径
+找到配置文件jupyter_notebook_config.py
+修改配置文件
 
-基本要求中网络安全的控制点与要求项各级分布
-
-
-
-
-级别
-控制点
-要求项
-
-
-
-
-第一级
-3
-9
-
-
-第二级
-6
-18
-
-
-第三级
-7
-33
-
-
-第四级
-7..." />
+找到一下语句：
+#..." />
 <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
 <script async src="https://cdn.ampproject.org/v0.js"></script>
-<title>网络安全测评 | 一小步</title>
+<title>Jupyter基本使用 | 一小步</title>
 <style amp-custom>
 body{width:100vw;display:flex;flex-direction:column;font-family:'PT Serif',-apple-system-font,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif,serif;background:#fff}
 :focus{outline:0}
@@ -450,7 +425,7 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
 </style>
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-<link rel="canonical" href="https://MaHule.github.io/post/wang-luo-an-quan-ce-ping/" />
+<link rel="canonical" href="https://MaHule.github.io/post/jupyter-ji-ben-shi-yong/" />
 <link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1602405663594">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
@@ -463,7 +438,7 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
 
 <script async custom-element="amp-gist" src="https://cdn.ampproject.org/v0/amp-gist-0.1.js"></script>
 
-<link rel="alternate" type="application/atom+xml" title="网络安全测评 | 一小步 - Atom Feed" href="https://MaHule.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Jupyter基本使用 | 一小步 - Atom Feed" href="https://MaHule.github.io/atom.xml">
 
   
 
@@ -524,280 +499,60 @@ hr{height:.1333vw;margin-top:5.3333vw;margin-bottom:5.3333vw}
       <div class="article-info">
         
           <div class="flex-box meta-category">
-            <a class="post-cate" href="https://MaHule.github.io/tag/5fJd6Zhs-/">等级保护</a></div>
+            <a class="post-cate" href="https://MaHule.github.io/tag/uQJCDEn4z/">Python</a></div>
           
         <h2 class="article-title">
-          <a href="https://MaHule.github.io/post/wang-luo-an-quan-ce-ping/">网络安全测评</a>
+          <a href="https://MaHule.github.io/post/jupyter-ji-ben-shi-yong/">Jupyter基本使用</a>
         </h2>
         <div class="flex-box">
           <div class="flex-box post-meta-box">
             <a class="post-meta" href="https://MaHule.github.io"><span
                 class="iconfont icon-mr-postmeta"></span>MaHule</a>
-            <span class="post-meta"><span class="iconfont icon-mr-postmeta"></span>2020-04-10</span>
+            <span class="post-meta"><span class="iconfont icon-mr-postmeta"></span>2020-10-11</span>
           </div>
         </div>
       </div>
       <div class="content">
-        <p>介绍等级保护2.0中在网络层面上的安全测评需要从哪些方面着手。</p>
-<!-- more -->
-<h3 id="01标准概述">01.标准概述</h3>
-<blockquote>
-<p>基本要求中网络安全的控制点与要求项各级分布</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>级别</th>
-<th>控制点</th>
-<th>要求项</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>第一级</td>
-<td>3</td>
-<td>9</td>
-</tr>
-<tr>
-<td>第二级</td>
-<td>6</td>
-<td>18</td>
-</tr>
-<tr>
-<td>第三级</td>
-<td>7</td>
-<td>33</td>
-</tr>
-<tr>
-<td>第四级</td>
-<td>7</td>
-<td>32</td>
-</tr>
-</tbody>
-</table>
-<p>等级保护基本要求三级网络安全方面涵盖哪些内容？</p>
-<p>涉及<strong>结构安全，安全审计，边界完整性检查，入侵防范，恶意代码防范，访问控制，网络设备</strong>等方面</p>
-<h3 id="02-检查范围">02. 检查范围</h3>
-<ul>
-<li>**理解标准：**理解标准中涉及网络部分的每项基本要求</li>
-<li>**明确目的：**检查的最终目的是判断该信息系统的网络安全综合防护能力，如抗攻击能力，防病毒能力等等，不是单一的设备检查</li>
-<li>**分阶段进行：**共划分为4个阶段，测评准备，方案编制，现场测评，分析及报告编制</li>
-<li><strong>确定检查范围，细化检查项：</strong> 1.通过前期的调研获取被测系统的<strong>网络结构拓扑</strong>，外连线路，网络设备，安全设备等信息   2.根据调研结果，进行初步分析判断   3.明确边界设备，核心设备及其他重要设备，确定检查范围</li>
-<li><strong>注意事项：</strong> 1. 考虑设备的重要程度可以采用抽样的方式   2.不能出现漏洞，避免出现脆弱点。 3.最终需要在测评方案中与用户明确检查范围 -- 网络设备，安全设备列表</li>
-</ul>
-<h3 id="03-检查内容">03. 检查内容</h3>
-<ul>
-<li>以三级为例，按照基本要求7个控制点33个要求项进行检查</li>
-</ul>
+        <h2 id="一-更改默认目录">一. 更改默认目录</h2>
 <ol>
-<li>结构安全              （7项）</li>
-<li>访问控制              （8项）</li>
-<li>安全审计              （4项）</li>
-<li>边界完整性检查   （2项）</li>
-<li>入侵防范               （2项）</li>
-<li>恶意代码防范       （2项）</li>
-<li>网络设备防护       （8项）</li>
+<li>启动<code>cmd</code>，执行<code>jupyter notebook --generate-config</code>，查看jupyter配置文件路径</li>
+<li>找到配置文件<code>jupyter_notebook_config.py</code></li>
+<li>修改配置文件</li>
 </ol>
-<h4 id="1结构安全">1.结构安全</h4>
-<blockquote>
-<p>结构安全是网络安全测评检查的重点，网络结构是否合理直接关系到信息系统的整体安全</p>
-</blockquote>
-<h5 id="a应该保证主要网络设备的业务处理能力具备冗余空间满足业务高峰期需要">a）应该保证主要网络设备的业务处理能力具备冗余空间，满足业务高峰期需要</h5>
-<ol>
-<li>为保证信息系统的可用性，主要网络设备的业务处理能力应该具备冗余空间</li>
-<li>检查方法</li>
-</ol>
-<ul>
-<li>访谈网络管理员，询问主要网络设备的性能及业务高峰流量</li>
-<li>访问网络管理员，询问采用何种手段对网络设备进行监控</li>
-</ul>
-<h5 id="b-应保证网络各个部分的带宽满足业务高峰期需要">b) 应保证网络各个部分的带宽满足业务高峰期需要</h5>
-<ol>
-<li>对网络各个部分进行分配带宽，从而保证在业务高峰期业务服务的连续性</li>
-<li>检查方法</li>
-</ol>
-<ul>
-<li>询问当前网络各部分的带宽是否满足业务高峰期需要</li>
-<li>如无法满足，则需要进行带宽分配。检查主要网络设备是否进行带宽分配</li>
-</ul>
-<h5 id="c应在业务终端与业务服务器之间进行路由控制建立安全的访问路径">c）应在业务终端与业务服务器之间进行路由控制建立安全的访问路径</h5>
-<ol>
-<li>静态路由是指网络管理员手工配置的路由信息。动态路由是指路由器能够自动建立自己的路由表</li>
-<li>路由器之间的路由信息交换是基于路由协议实现的</li>
-<li>使用动态路由协议应配置使用路由协议认证功能，保证网络路由安全</li>
-<li>检查方法：</li>
-</ol>
-<ul>
-<li>检查边界设备和主要网络设备，查看是否进行了路由控制建立安全的访问控制</li>
-<li>以Cisco ios为例，输入命令：show running-config 检查配置文件中应当存在类似如下配置项</li>
-</ul>
-<pre><code>ip route 192.168.1.0  255.255.255.0  192.168.1.193
-route ospf 100 (动态)
-ip ospf message-digest-key 1 md5 7  XXXXX(认证码)
+<p>找到一下语句：</p>
+<pre><code>## The directory to use for notebooks and kernels. 
+# c.NotebookApp.notebook_dir = '' 
+将其改为 
+## The directory to use for notebooks and kernels. 
+c.NotebookApp.notebook_dir = '需要更改的路径'
 </code></pre>
-<h5 id="d应绘制与当前运行情况相符的网络拓扑结构图">d）应绘制与当前运行情况相符的网络拓扑结构图</h5>
-<ol>
-<li>为了方便网络管理，应绘制与当前运行情况相符的网络拓扑结构图。当网络拓扑结构发生改变，及时更新</li>
-<li>检查方法：</li>
+<p><strong>注：</strong> 路径 中不能出现中文</p>
+<ol start="4">
+<li>找到Jupyter的快捷方式，右键属性，将<code>%USERPROFILE%</code>删除保持。</li>
 </ol>
-<ul>
-<li>检查网络拓扑，查看其与当前运行情况</li>
-</ul>
-<h5 id="e-应根据各部门-的工作职能重要性和所涉及信息的重要程度等因素划分不同的子网或网段并按照方便管理和控制的原则为各子网网段分配地址段">e) 应根据各部门 的工作职能，重要性和所涉及信息的重要程度等因素，划分不同的子网或网段，并按照方便管理和控制的原则为各子网，网段分配地址段；</h5>
+<h2 id="二更改jupyter的主题">二.更改jupyter的主题</h2>
 <ol>
-<li>根据实际情况和区域安全防护要求，应在主要网络设备上进行VLAN划分或子网划分</li>
-<li>不同VLAN内的报文在传输时是相互隔离的。如果不同VLAN要进行通信，则需要通过路由器或三层交换机等三层设备实现</li>
+<li>安装Jupyter主题<code>pip install jupyterthemes</code>。</li>
+<li>更新Jupyter主题<code>pip install --upgrade jupyterthemes</code></li>
+<li>查看可用的Jupyter主题 <code>jt -l</code></li>
+<li>更换Jupyter主题</li>
 </ol>
-<h5 id="f应避免将重要网段部署在网络边界处且直接连接外部信息系统重要网段与其它网段之间采取可靠的技术隔离手段">f）应避免将重要网段部署在网络边界处且直接连接外部信息系统，重要网段与其它网段之间采取可靠的技术隔离手段；</h5>
-<ol>
-<li>
-<p>为保证信息系统的安全，应避免将重要网段部署在网络边界处且直接连接外部信息系统，防止来自外部信息系统的攻击。</p>
-</li>
-<li>
-<p>在重要网段和其它网段之间配置安全策略进行访问控制</p>
-</li>
-<li>
-<p>检查方法：</p>
-</li>
+<p><code>jt -t onedork -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T -T</code></p>
+<p>​        -t 主题 -f(字体) -fs(字体大小) -cellw(占屏比或宽度) -ofs(输出段的字号) -T(显示工具栏) -T(显示自己主机名)</p>
+<ol start="5">
+<li>恢复Jupyter默认风格</li>
 </ol>
-<ul>
-<li>检查网络拓扑结构，查看是否将重要网段部署在网络边界处，重要网段和其它网段之间是否配置安全策略进行访问控制</li>
-</ul>
-<h5 id="g应按照对业务服务的重要次序来指定带宽分配优先级别保证在网络发生拥堵的时候优先保护重要主机">g）应按照对业务服务的重要次序来指定带宽分配优先级别，保证在网络发生拥堵的时候优先保护重要主机</h5>
-<ol>
-<li>为了保证重要业务服务的连续性，应按照对业务服务的重要次序来指定带宽分配优先级别，从而保证在网络发生拥堵的时候优先保护重要主机</li>
-<li>检查方法：</li>
-</ol>
-<ul>
-<li>访谈网络管理员，依据实际应用系统状况，是否进行了带宽优先级分配</li>
-</ul>
-<h4 id="2访问控制">2.访问控制</h4>
-<blockquote>
-<p>访问控制是网络测评检查中的核心部分，涉及到大部分网络设备，安全设备</p>
-</blockquote>
-<h5 id="a-应在网络边界部署访问控制设备启用访问控制功能">a) 应在网络边界部署访问控制设备，启用访问控制功能</h5>
-<ol>
-<li>在网络边界部署访问控制设备，防御来自其它网络的攻击，保护内部网络的安全。</li>
-<li>检查方法：</li>
-</ol>
-<ul>
-<li>检查网络拓扑结构，查看是否在网络边界处部署了访问控制设备，是否启用了访问控制功能</li>
-</ul>
-<h5 id="b-应能根据会话状态信息为数据流提供明确的允许拒绝访问的能力控制粒度为端口级">b) 应能根据会话状态信息为数据流提供明确的允许/拒绝访问的能力，控制粒度为端口级</h5>
-<ol>
-<li>在网络边界部署访问控制设备，配置的访问控制列表应有明确的源/目的地址，源/目的，协议及服务等。</li>
-</ol>
-<h5 id="c应对进出网络的信息内容进行过滤实现对应用层httpftptelnetsmtppop3等协议命令级的控制">c）应对进出网络的信息内容进行过滤，实现对应用层http，ftp，telnet，smtp，pop3等协议命令级的控制</h5>
-<ol>
-<li>对于一些常用的应用层协议，能够在访问控制设备上实现应用层协议命令级的控制和内容检查，从而增强访问控制力度</li>
-<li>检查方法：</li>
-</ol>
-<ul>
-<li>该测评项在防火墙，入侵防御系统上检查</li>
-<li>首先查看防火墙，入侵防御系统是否具有该功能，然后登录设备查看是否启用了相应的功能</li>
-</ul>
-<h5 id="d-应在会话处于非活跃一定时间或会话结束后终止网络连接">d) 应在会话处于非活跃一定时间或会话结束后终止网络连接</h5>
-<ol>
-<li>应在会话终止或长时间无响应的情况下终止网络连接，释放被占用网络资源，保证业务可以被正常访问</li>
-<li>检查方法：</li>
-</ol>
-<ul>
-<li>一般在防火墙检查</li>
-<li>登录防火墙，查看是否设置了会话连接超时，设置的超时时间是多少，判断是否合理</li>
-</ul>
-<h5 id="e应限制网络最大流量数及网络连接数">e）应限制网络最大流量数及网络连接数；</h5>
-<ol>
-<li>根据IP，端口，协议来限制应用数据流的最大流量，还可以根据IP地址来限制网络连接数，从而保证业务带宽不被占用，业务系统可以对外正常提供业务</li>
-<li>检查方法：</li>
-</ol>
-<ul>
-<li>一般在防火墙检查。访谈系统管理员，依据网络状况是否需要限制网络最大流量数及网络连接数</li>
-<li>登录设备查看是否设置了最大流量数和连接数，并做好记录</li>
-</ul>
-<h5 id="f重要网段应采取技术手段防止地址欺骗">f）重要网段应采取技术手段防止地址欺骗</h5>
-<ol>
-<li>地址欺骗在网络安全中比较重要的一个问题，这里的地址，可以是mac地址，也可以是IP地址。在关键设备上，采用IP/Mac地址绑定方式防止地址欺骗</li>
-<li>检查方法</li>
-</ol>
-<ul>
-<li>以CISCO IOS为例，输入show ip arp；检查配置文件中应当存在类似如下配置项：<code>arp 10.10.10.1 0000.e268.9980</code>  arpa</li>
-</ul>
-<h5 id="g-应按用户和系统之间的允许访问控制规则决定允许或拒绝用户对受控系统进行资源访问控制力度为单个用户">g) 应按用户和系统之间的允许访问控制规则，决定允许或拒绝用户对受控系统进行资源访问，控制力度为单个用户；</h5>
-<ol>
-<li>对于远程拨号用户，应在相关设备上提供用户认证功能。</li>
-<li>通过配置用户，用户组，并结合访问控制规则可以实现对认证成功的用户允许访问受控资源</li>
-<li>检查方法：</li>
-</ol>
-<ul>
-<li>登录相关设备查看是否对拨号用户进行身份认证，是否配置访问控制规则对认证成功的用户允许访问受控资源</li>
-</ul>
-<h5 id="h应限制具有拨号访问权限的用户数量">h）应限制具有拨号访问权限的用户数量</h5>
-<ol>
-<li>应限制通过远程采用拨号方式或通过其它方式连入系统内部的用户数量。</li>
-<li>检查方法：</li>
-</ol>
-<ul>
-<li>询问系统管理员，是否有远程拨号用户，采用什么方式接入系统，采用何种方式进行身份认证，具体用户数量有多少</li>
-</ul>
-<h4 id="3安全审计">3.安全审计</h4>
-<blockquote>
-<p>安全审计要对相关时间进行日志记录，还要求对形成的记录能够分析，形成报表</p>
-</blockquote>
-<h5 id="a对网络系统中的网络设备运行状况网络流量用户行为等进行日志记录">a）对网络系统中的网络设备运行状况，网络流量，用户行为等进行日志记录</h5>
-<h5 id="b审计记录应包括事件的日期和时间用户时间类型事件是否成功及其他与审计相关的信息">b）审计记录应包括：事件的日期和时间，用户，时间类型，事件是否成功及其他与审计相关的信息</h5>
-<h5 id="c应能够根据记录数据进行分析并生成审计报表">c）应能够根据记录数据进行分析，并生成审计报表</h5>
-<h5 id="d应对审计记录进行保护避免受到未预期的删除修改或覆盖">d）应对审计记录进行保护，避免受到未预期的删除，修改或覆盖</h5>
-<h4 id="4边界完整性检查">4.边界完整性检查</h4>
-<blockquote>
-<p>边界完整性检查主要检查在全网中对网络的连接状况进行监控，发现非法接入，非法外联是能够准确定位并能及时报警和阻断</p>
-</blockquote>
-<h5 id="a应能够对非授权设备私自联到内部网络的行为进行检查准确定出位置并对其进行有效阻隔">a）应能够对非授权设备私自联到内部网络的行为进行检查，准确定出位置，并对其进行有效阻隔</h5>
-<h5 id="b应能够对内部网络用户私自联到外部网络的行为进行检查准确定出位置并对其进行有效阻隔">b）应能够对内部网络用户私自联到外部网络的行为进行检查，准确定出位置，并对其进行有效阻隔</h5>
-<h4 id="5-入侵防范">5. 入侵防范</h4>
-<blockquote>
-<p>对入侵事件不仅能够检测，并能发出报警，对于入侵防御系统要求定期更新特征库，发现入侵后能够报警并阻断</p>
-</blockquote>
-<h5 id="a在网络边界处监视以下行为端口扫描强力攻击木马后门攻击拒绝服务攻击缓冲区溢出攻击ip碎片攻击和网络攻击">a）在网络边界处监视以下行为：端口扫描，强力攻击，木马后门攻击，拒绝服务攻击，缓冲区溢出攻击，IP碎片攻击和网络攻击</h5>
-<h5 id="b当检测到攻击行为时记录攻击源ip攻击类型攻击目的攻击时间在发生严重入侵事件时应提供报警">b）当检测到攻击行为时，记录攻击源IP，攻击类型，攻击目的，攻击时间，在发生严重入侵事件时应提供报警</h5>
-<h4 id="6恶意代码防范">6.恶意代码防范</h4>
-<blockquote>
-<p>恶意代码防范是综合性的多层次的，在网络边界处需要对恶意代码进行防范</p>
-</blockquote>
-<h5 id="a在网络边界处对恶意代码进行检测和清除">a）在网络边界处对恶意代码进行检测和清除</h5>
-<h5 id="b应维护恶意代码库的升级和检测系统的更新">b）应维护恶意代码库的升级和检测系统的更新</h5>
-<h4 id="7网络设备防护">7.网络设备防护</h4>
-<blockquote>
-<p>网络设备防护主要是对用户登录前后的行为进行控制，对网络设备的权限进行管理</p>
-</blockquote>
-<h5 id="a应对登录网络设备的用户进行身份级别">a）应对登录网络设备的用户进行身份级别</h5>
-<h5 id="b对网络设备的管理员登录地址进行限制">b）对网络设备的管理员登录地址进行限制</h5>
-<h5 id="c网络设备用户的标识应唯一">c）网络设备用户的标识应唯一</h5>
-<h5 id="d主要网络设备应对同一用户选择两种或两种以上组合的鉴别技术来进行身份鉴别">d）主要网络设备应对同一用户选择两种或两种以上组合的鉴别技术来进行身份鉴别</h5>
-<h5 id="e身份鉴别信息应具有不易被冒用的特点口令应有复杂度要求并定期更换">e）身份鉴别信息应具有不易被冒用的特点，口令应有复杂度要求并定期更换</h5>
-<h5 id="f应具有登录失败处理功能可采取结束会话限制非法登录次数和当网络登录连接超时时自动退出等措施">f）应具有登录失败处理功能，可采取结束会话，限制非法登录次数和当网络登录连接超时时自动退出等措施</h5>
-<h5 id="g当对网络设备进行远程管理时应采取必要措施防止鉴别信息在网络传输过程中被窃取">g）当对网络设备进行远程管理时，应采取必要措施防止鉴别信息在网络传输过程中被窃取</h5>
-<h5 id="h实现设备特权用户的权限分离">h）实现设备特权用户的权限分离</h5>
-<h4 id="8检查内容备份和回复">8.检查内容（备份和回复）</h4>
-<blockquote>
-<p>备份和恢复关注的是网络设备，安全设备的配置数据的安全保护</p>
-</blockquote>
-<h5 id="a应提供本地数据库备份与恢复功能完全数据备份至少每天一次备份介质场外存放">a）应提供本地数据库备份与恢复功能，完全数据备份至少每天一次，备份介质场外存放</h5>
-<h5 id="b提供异地数据备份功能利用通信网络将关键数据定时批量传送至备用场地">b）提供异地数据备份功能，利用通信网络将关键数据定时批量传送至备用场地</h5>
-<h5 id="c采用冗余技术设计网络拓扑结构避免关键节点存在单点故障">c）采用冗余技术设计网络拓扑结构，避免关键节点存在单点故障</h5>
-<h5 id="d应提供主要网络设备通信线路和数据处理系统的硬件冗余保证系统的高可用性">d）应提供主要网络设备，通信线路和数据处理系统的硬件冗余，保证系统的高可用性</h5>
+<pre><code>jt -r
+</code></pre>
 
       </div>
 
       
       <nav class="post-nav">
         
-        <div class="nav-previous">
-          <a class="post-nav-link-active" title="Vi （终端中的编辑器）" href="https://MaHule.github.io/post/vi-zhong-duan-zhong-de-bian-ji-qi/">上一篇文章</a>
-        </div>
-        
         
         <div class="nav-next">
-          <a class="post-nav-link-active" title="Python列表生成式高效使用" href="https://MaHule.github.io/post/python-lie-biao-sheng-cheng-shi-gao-xiao-shi-yong/">下一篇文章</a>
+          <a class="post-nav-link-active" title="Docker基本知识" href="https://MaHule.github.io/post/docker-ji-ben-zhi-shi/">下一篇文章</a>
           
 
         </div>
@@ -874,8 +629,8 @@ ip ospf message-digest-key 1 md5 7  XXXXX(认证码)
     <h4 class="widget-title">分类目录</h4>
     <ul>
       
-      <li class="cat-item"><a href="https://MaHule.github.io/tag/5fJd6Zhs-/">
-          等级保护
+      <li class="cat-item"><a href="https://MaHule.github.io/tag/uQJCDEn4z/">
+          Python
           
         </a>
       </li>
