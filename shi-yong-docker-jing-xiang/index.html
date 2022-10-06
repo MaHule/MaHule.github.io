@@ -1,0 +1,347 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>使用Docker镜像 | 一小步</title>
+<!-- description在post页面应有不同 -->
+
+	<meta name="description" content="每天进步一点点" />
+	
+<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1665048734325">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://MaHule.github.io/styles/main.css">
+
+
+</head>
+
+<body>
+	<div id="app" class="main px-4 flex flex-col lg:flex-row">
+		<div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+	<div class="lg:sticky top-0">
+		<div class="sidebar-content">
+			<div
+				class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+				<i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+				<a href="https://MaHule.github.io">
+					<img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12"
+						src="https://MaHule.github.io/images/avatar.png?v=1665048734325" alt="">
+				</a>
+				<h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl"
+					style="animation-delay: 0.2s">一小步</h1>
+			</div>
+			
+			<div class="animated fadeInLeft" style="animation-delay: 0.4s">
+				<p class="my-4 text-gray-600 font-light hidden lg:block">
+					文章目录
+				</p>
+				<div class="toc-container hidden lg:block">
+					<ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#31-%E8%8E%B7%E5%8F%96%E9%95%9C%E5%83%8F">3.1 获取镜像</a></li>
+<li><a href="#32-%E6%9F%A5%E7%9C%8B%E9%95%9C%E5%83%8F%E4%BF%A1%E6%81%AF">3.2 查看镜像信息</a></li>
+<li><a href="#33-%E6%90%9C%E5%AF%BB%E9%95%9C%E5%83%8F">3.3 搜寻镜像</a></li>
+<li><a href="#34-%E5%88%A0%E9%99%A4%E5%92%8C%E6%B8%85%E7%90%86%E9%95%9C%E5%83%8F">3.4 删除和清理镜像</a></li>
+</ul>
+</li>
+</ul>
+
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="menu-container">
+	<i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+	<div>
+		
+		
+		<a href="/" class="menu" style="animation-delay: 0s">
+			首页
+		</a>
+		
+		
+		
+		<a href="/archives" class="menu" style="animation-delay: 0.2s">
+			归档
+		</a>
+		
+		
+		
+		<a href="/tags" class="menu" style="animation-delay: 0.4s">
+			标签
+		</a>
+		
+		
+		
+		<a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+			关于
+		</a>
+		
+		
+	</div>
+	<!-- 萌备 https://icp.gov.moe -->
+	<div class="site-footer">
+		<p class="py-4 text-gray-700">
+			© 2022 hope140  <br>
+			<span id="runtime_span"></span> <br>
+			<a href="https://icp.gov.moe/?keyword=20221443" target="_blank">萌ICP备20221443号</a> <br>
+			Powered by MaHule
+		</p>
+		<a class="rss" href="https://MaHule.github.io/atom.xml" target="_blank">RSS</a>
+	</div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+		<div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+			<h1 class="text-3xl font-bold lg:mt-16">
+				使用Docker镜像
+			</h1>
+			<!-- 由于"/"字符只好做postPath的判断，不设定postPath时是一个长度为0的字符串 -->
+			
+			<div class="text-sm text-gray-700 lg:my-8">
+				2020-10-11 / 4 min read / <span id="/shi-yong-docker-jing-xiang/"
+					class="waline-pageview-count"> </span> 阅读 / <span id="/shi-yong-docker-jing-xiang/"
+					class="waline-comment-count"></span>评论
+			</div>
+			
+			<!-- 如果有更好办法再做修改 -->
+			
+			<div class="post-content yue">
+				<h2 id="31-获取镜像">3.1 获取镜像</h2>
+<pre><code class="language-docker">#使用docker pull 直接从Docker Hub下载镜像。格式为docker pull NAME:[tag](名称：标签)
+$ docker pull ubuntu:18.04
+#如果后面没有带有标签，默认下载最新版本
+$docker pull ubuntu  默认下载ubuntu的最新版本
+
+#名称前面可以带仓库地址作为，没有带默认为Docker Hub服务，前面没有带默认是 registry.hub.docker.com/ubuntu:18.04。可以带有仓库地址。
+$docker pull hub.c.163.com/public/ubuntu:18.04  从网易蜂巢镜像源下载镜像
+</code></pre>
+<pre><code>#使用镜像，打印“Hello World”
+$docker run -it ubuntu:18.04 bash
+</code></pre>
+<h2 id="32-查看镜像信息">3.2 查看镜像信息</h2>
+<pre><code>#1. 使用images命令列出镜像
+$ docker images / docker image ls
+</code></pre>
+<p><strong>注：</strong> 镜像ID唯一标识镜像</p>
+<pre><code class="language-docker">#2. 使用tag命令添加镜像标签
+$docker tag mysqli acgpiano/sqli-labs
+</code></pre>
+<p><strong>注：</strong> 实际上指向了同一个镜像文件，只是别名不同而已。docker tag命令添加的标签实际上起到了类似链接的作用。</p>
+<pre><code>#3. inspect命令查看详细信息
+$docker inspect Ubuntu:18.04     返回的是一个json格式的消息
+
+#可以使用-f命令来指定显示部分信息
+$docker inspect -f {{&quot;.Architecture&quot;}} ubuntu:18.04
+
+</code></pre>
+<pre><code>#4.使用history命令查看镜像历史
+$docker history ubuntu:18.04
+
+</code></pre>
+<p>**注：**过长的命令会被自动截断，可以使用<code>--no-trunc</code>选项来输出完整命令</p>
+<h2 id="33-搜寻镜像">3.3 搜寻镜像</h2>
+<p>Docker镜像的search子命令。使用dockersearch命令可以搜索Docker Hub官方仓库中的镜像。语法为docker search keyword。支持的命令选项主要包括：</p>
+<ul>
+<li>-f, --filter filter：过滤输出内容；</li>
+<li>--format string：格式化输出内容；</li>
+<li>--limit int：限制输出结果个数，默认为25个；</li>
+<li>--no-trunc：不截断输出结果。</li>
+</ul>
+<pre><code>#1.直接搜寻
+$docker search ubuntu
+
+#2.查找官方提供的带nginx关键字的镜像
+$docker search --filter=is-official=true nginx
+
+#3.搜索收藏数超过4的关键字包括tensorflow的镜像
+$docker search --filter=stars=4 tensorflow
+</code></pre>
+<h2 id="34-删除和清理镜像">3.4 删除和清理镜像</h2>
+<blockquote>
+<p>docker镜像的rm和prune子命令</p>
+</blockquote>
+<ol>
+<li>使用标签删除镜像</li>
+</ol>
+<p>使用<code>docker rmi</code>或者<code>docker image rm</code>删除镜像。可以使用镜像名称或者ID删除。</p>
+<ul>
+<li>-f,-force：强制删除镜像，即使有容器依赖它</li>
+<li>-no-prune：不要清理未带标签的副镜像</li>
+</ul>
+<pre><code>#删除标签为mysqli镜像
+$docker rmi mysqli
+</code></pre>
+<p><strong>注：</strong> 当同一个镜像拥有多个标签的时候，docker rmi命令只是删除了该镜像多个标签中的指定标签而已，并不影响镜像文件。</p>
+<ol start="2">
+<li>使用镜像ID来删除镜像</li>
+</ol>
+<p>使用镜像ID来删除镜像时，会先尝试删除所有指向该镜像的标签，然后删除该镜像本身。<strong>当有该镜像创建的容器存在时，镜像文件默认是无法被删除的。</strong>（即运行中的镜像是无法删除的）</p>
+<ol start="3">
+<li>清理镜像</li>
+</ol>
+<p>使用Docker一段时间后，系统中可能会遗留一些临时的镜像文件，以及一些没有被使用的镜像，可以通过docker imageprune命令来进行清理。</p>
+<ul>
+<li>-a,-all：删除所有无用镜像，不光是临时镜像</li>
+<li>-filter filter：只清理符合给定过滤器的镜像</li>
+<li>-f,-force：强制删除镜像，而不提示确认</li>
+</ul>
+<pre><code>#自动清理临时的遗留镜像文件层，最后会提示释放存储空间
+$docker image prune -f
+</code></pre>
+
+			</div>
+
+			
+
+			<div class="post-Copyright py-12">
+				<span class="flex-auto"> 本文来源于 一小步</span>
+				<div class="prev-post">
+					<a href="https://MaHule.github.io">
+						<h3 class="post-Copyright-link">
+							博客地址： https://MaHule.github.io
+						</h3>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex justify-between py-8">
+				
+				<div class="prev-post">
+					<a href="https://MaHule.github.io/si-ke-hua-wei-h3c-chang-yong-ming-ling-dui-bi/">
+						<h3 class="post-title">
+							<i class="ri-arrow-left-line"></i>
+							思科，华为，H3C常用命令对比
+						</h3>
+					</a>
+				</div>
+				
+
+				
+				<div class="next-post">
+					<a href="https://MaHule.github.io/jupyter-ji-ben-shi-yong/">
+						<h3 class="post-title">
+							Jupyter基本使用
+							<i class="ri-arrow-right-line"></i>
+						</h3>
+					</a>
+				</div>
+				
+			</div>
+
+			
+			
+			
+
+		</div>
+	</div>
+
+	<script src="https://MaHule.github.io/media/prism.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/show_runtime.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/clipboard.js"></script>
+<script>
+	Prism.highlightAll()
+	let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+	// This should probably be throttled.
+	// Especially because it triggers during smooth scrolling.
+	// https://lodash.com/docs/4.17.10#throttle
+	// You could do like...
+	// window.addEventListener("scroll", () => {
+	//    _.throttle(doThatStuff, 100);
+	// });
+	// Only not doing it here to keep this Pen dependency-free.
+
+	window.addEventListener("scroll", event => {
+		let fromTop = window.scrollY;
+
+		mainNavLinks.forEach((link, index) => {
+			let section = document.getElementById(decodeURI(link.hash).substring(1));
+			let nextSection = null
+			if (mainNavLinks[index + 1]) {
+				nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(
+				1));
+			}
+			if (section.offsetTop <= fromTop) {
+				if (nextSection) {
+					if (nextSection.offsetTop > fromTop) {
+						link.classList.add("current");
+					} else {
+						link.classList.remove("current");
+					}
+				} else {
+					link.classList.add("current");
+				}
+			} else {
+				link.classList.remove("current");
+			}
+		});
+	});
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+		var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+		if ("IntersectionObserver" in window) {
+			let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						let lazyImage = entry.target
+						lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+						lazyImage.classList.remove("lazy")
+						lazyImageObserver.unobserve(lazyImage)
+					}
+				});
+			});
+
+			lazyImages.forEach(function (lazyImage) {
+				lazyImageObserver.observe(lazyImage)
+			})
+		} else {
+			// Possibly fall back to a more compatible method here
+		}
+	});
+
+	const menuContainer = document.querySelector('.menu-container')
+	const menus = document.querySelectorAll('.menu-container .menu')
+	const mask = document.querySelector('.mask')
+	const contentWrapper = document.querySelector('.content-wrapper')
+	const latestArticle = document.querySelector('.latest-article')
+	const readMore = document.querySelector('.read-more')
+	const indexPage = document.querySelector('.index-page')
+
+	const isHome = location.pathname === '/'
+	if (latestArticle) {
+		latestArticle.style.display = isHome ? 'block' : 'none'
+		readMore.style.display = isHome ? 'block' : 'none'
+		indexPage.style.display = isHome ? 'none' : 'block'
+	}
+
+	const openMenu = () => {
+		menuContainer.classList.add('open')
+		menus.forEach(menu => {
+			menu.classList.add('animated', 'fadeInLeft')
+		})
+		mask.classList.add('open')
+		contentWrapper.classList.add('is-second')
+	}
+
+	const closeMenu = () => {
+		menuContainer.classList.remove('open')
+		menus.forEach(menu => {
+			menu.classList.remove('animated', 'fadeInLeft')
+		})
+		mask.classList.remove('open')
+		contentWrapper.classList.remove('is-second')
+	}
+</script>
+</body>
+
+</html>

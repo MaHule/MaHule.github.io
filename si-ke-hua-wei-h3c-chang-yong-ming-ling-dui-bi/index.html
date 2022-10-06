@@ -1,0 +1,538 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>思科，华为，H3C常用命令对比 | 一小步</title>
+<!-- description在post页面应有不同 -->
+
+	<meta name="description" content="每天进步一点点" />
+	
+<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1665048734325">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://MaHule.github.io/styles/main.css">
+
+
+</head>
+
+<body>
+	<div id="app" class="main px-4 flex flex-col lg:flex-row">
+		<div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+	<div class="lg:sticky top-0">
+		<div class="sidebar-content">
+			<div
+				class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+				<i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+				<a href="https://MaHule.github.io">
+					<img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12"
+						src="https://MaHule.github.io/images/avatar.png?v=1665048734325" alt="">
+				</a>
+				<h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl"
+					style="animation-delay: 0.2s">一小步</h1>
+			</div>
+			
+			<div class="animated fadeInLeft" style="animation-delay: 0.4s">
+				<p class="my-4 text-gray-600 font-light hidden lg:block">
+					文章目录
+				</p>
+				<div class="toc-container hidden lg:block">
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="menu-container">
+	<i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+	<div>
+		
+		
+		<a href="/" class="menu" style="animation-delay: 0s">
+			首页
+		</a>
+		
+		
+		
+		<a href="/archives" class="menu" style="animation-delay: 0.2s">
+			归档
+		</a>
+		
+		
+		
+		<a href="/tags" class="menu" style="animation-delay: 0.4s">
+			标签
+		</a>
+		
+		
+		
+		<a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+			关于
+		</a>
+		
+		
+	</div>
+	<!-- 萌备 https://icp.gov.moe -->
+	<div class="site-footer">
+		<p class="py-4 text-gray-700">
+			© 2022 hope140  <br>
+			<span id="runtime_span"></span> <br>
+			<a href="https://icp.gov.moe/?keyword=20221443" target="_blank">萌ICP备20221443号</a> <br>
+			Powered by MaHule
+		</p>
+		<a class="rss" href="https://MaHule.github.io/atom.xml" target="_blank">RSS</a>
+	</div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+		<div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+			<h1 class="text-3xl font-bold lg:mt-16">
+				思科，华为，H3C常用命令对比
+			</h1>
+			<!-- 由于"/"字符只好做postPath的判断，不设定postPath时是一个长度为0的字符串 -->
+			
+			<div class="text-sm text-gray-700 lg:my-8">
+				2022-09-02 / 23 min read / <span id="/si-ke-hua-wei-h3c-chang-yong-ming-ling-dui-bi/"
+					class="waline-pageview-count"> </span> 阅读 / <span id="/si-ke-hua-wei-h3c-chang-yong-ming-ling-dui-bi/"
+					class="waline-comment-count"></span>评论
+			</div>
+			
+			<!-- 如果有更好办法再做修改 -->
+			
+			<div class="post-content yue">
+				<p><strong>思科、华为、H3C 这些网络设备的命令还是挺多的，不过我们一般用的路由交换机设备都是最简单的了，先学基本命令，再学其他功能命令。路由命令是最基本的命令了。思科、华为、H3C 常用命令对比大全：</strong></p>
+<table cellspacing="0" cellpadding="0"><tbody><tr><td valign="center" align="middle"><p><strong>CISCO</strong></p></td><td valign="center" align="middle"><p><strong>H3C</strong></p></td><td valign="center" align="middle" width="111"><p><strong>HUAWEI</strong></p></td><td valign="center" align="middle" width="78"><p>描述</p></td></tr><tr><td valign="center" align="middle"><p>no</p></td><td valign="center" align="middle"><p>undo</p></td><td valign="center" align="middle" width="111"><p>undo</p></td><td valign="center" align="middle" width="78"><p>取消、关闭当前设置</p></td></tr><tr><td valign="center" align="middle"><p>show</p></td><td valign="center" align="middle"><p>display</p></td><td valign="center" align="middle" width="111"><p>display</p></td><td valign="center" align="middle" width="78"><p>显示查看</p></td></tr><tr><td valign="center" align="middle"><p>exit</p></td><td valign="center" align="middle"><p>quit</p></td><td valign="center" align="middle" width="111"><p>quit</p></td><td valign="center" align="middle" width="78"><p>退回上级</p></td></tr><tr><td valign="center" align="middle"><p>hostname</p></td><td valign="center" align="middle"><p>sysname</p></td><td valign="center" align="middle" width="111"><p>sysname</p></td><td valign="center" align="middle" width="78"><p>设置主机名</p></td></tr><tr><td valign="center" align="middle"><p>en, config terminal</p></td><td valign="center" align="middle"><p>system-view</p></td><td valign="center" align="middle" width="111"><p>system-view</p></td><td valign="center" align="middle" width="78"><p>进入全局模式</p></td></tr><tr><td valign="center" align="middle"><p>delete</p></td><td valign="center" align="middle"><p>delete</p></td><td valign="center" align="middle" width="111"><p>delete</p></td><td valign="center" align="middle" width="78"><p>删除文件</p></td></tr><tr><td valign="center" align="middle"><p>reload</p></td><td valign="center" align="middle"><p>reboot</p></td><td valign="center" align="middle" width="111"><p>reboot</p></td><td valign="center" align="middle" width="78"><p>重启</p></td></tr><tr><td valign="center" align="middle"><p>write</p></td><td valign="center" align="middle"><p>save</p></td><td valign="center" align="middle" width="111"><p>save</p></td><td valign="center" align="middle" width="78"><p>保存当前配置</p></td></tr><tr><td valign="center" align="middle"><p>username</p></td><td valign="center" align="middle"><p>local-user</p></td><td valign="center" align="middle" width="111"><p>local-user</p></td><td valign="center" align="middle" width="78"><p>创建用户</p></td></tr><tr><td valign="center" align="middle"><p>shutdown</p></td><td valign="center" align="middle"><p>shutdown</p></td><td valign="center" align="middle" width="111"><p>shutdown</p></td><td valign="center" align="middle" width="78"><p>禁止、关闭 端口</p></td></tr><tr><td valign="center" align="middle"><p>show version</p></td><td valign="center" align="middle"><p>display version</p></td><td valign="center" align="middle" width="111"><p>display version</p></td><td valign="center" align="middle" width="78"><p>显示当前系统版本</p></td></tr><tr><td valign="center" align="middle"><p>show startup-config</p></td><td valign="center" align="middle"><p>display saved-configuration</p></td><td valign="center" align="middle" width="111"><p>display saved-configuration</p></td><td valign="center" align="middle" width="78"><p>查看已保存过的配置</p></td></tr><tr><td valign="center" align="middle"><p>show running-config</p></td><td valign="center" align="middle"><p>display current-configuration</p></td><td valign="center" align="middle" width="111"><p>display current-configuration</p></td><td valign="center" align="middle" width="78"><p>显示当前配置</p></td></tr><tr><td valign="center" align="middle"><p>no debug all</p></td><td valign="center" align="middle"><p>ctrl+d</p></td><td valign="center" align="middle" width="111"><p>ctrl+d</p></td><td valign="center" align="middle" width="78"><p>取消所有 debug 命令</p></td></tr><tr><td valign="center" align="middle"><p>erase startup-config</p></td><td valign="center" align="middle"><p>reset saved-configuration</p></td><td valign="center" align="middle" width="111"><p>reset saved-configuration</p></td><td valign="center" align="middle" width="78"><p>删除配置</p></td></tr><tr><td valign="center" align="middle"><p>end</p></td><td valign="center" align="middle"><p>return</p></td><td valign="center" align="middle" width="111"><p>return</p></td><td valign="center" align="middle" width="78"><p>退到用户视图</p></td></tr><tr><td valign="center" align="middle"><p>exit</p></td><td valign="center" align="middle"><p>logout</p></td><td valign="center" align="middle" width="111"><p>logout</p></td><td valign="center" align="middle" width="78"><p>登出</p></td></tr><tr><td valign="center" align="middle"><p>logging</p></td><td valign="center" align="middle"><p>info-center</p></td><td valign="center" align="middle" width="111"><p>info-center</p></td><td valign="center" align="middle" width="78"><p>指定信息中心配置信息</p></td></tr><tr><td valign="center" align="middle"><p>line</p></td><td valign="center" align="middle"><p>user-interface</p></td><td valign="center" align="middle" width="111"><p>user-interface</p></td><td valign="center" align="middle" width="78"><p>进入线路配置（用户接口）模式</p></td></tr><tr><td valign="center" align="middle"><p>start-config</p></td><td valign="center" align="middle"><p>saved-configuration</p></td><td valign="center" align="middle" width="111"><p>saved-configuration</p></td><td valign="center" align="middle" width="78"><p>启动配置</p></td></tr><tr><td valign="center" align="middle"><p>running-config</p></td><td valign="center" align="middle"><p>current-configuration</p></td><td valign="center" align="middle" width="111"><p>current-configuration</p></td><td valign="center" align="middle" width="78"><p>当前配置</p></td></tr><tr><td valign="center" align="middle"><p>host</p></td><td valign="center" align="middle"><p>ip host</p></td><td valign="center" align="middle" width="111"><p>ip host</p></td><td valign="center" align="middle" width="78"><p>host 名字和 ip 地址对应</p></td></tr><tr><td valign="center" colspan="4" align="middle" width="67"><p><strong>交换部分</strong></p></td></tr><tr><td valign="center" align="middle"><p>enable password</p></td><td valign="center" align="middle"><p>set authentication password simple</p></td><td valign="center" align="middle" width="111"><p>set authentication password simple</p></td><td valign="center" align="middle" width="78"><p>配置明文密码</p></td></tr><tr><td valign="center" align="middle"><p>interface type/number</p></td><td valign="center" align="middle"><p>interface type/number</p></td><td valign="center" align="middle" width="111"><p>interface type/number</p></td><td valign="center" align="middle" width="78"><p>进入接口</p></td></tr><tr><td valign="center" align="middle"><p>interface vlan 1</p></td><td valign="center" align="middle"><p>interface vlan 1</p></td><td valign="center" align="middle" width="111"><p>interface vlan 1</p></td><td valign="center" align="middle" width="78"><p>进入 vlan 配置 vlan 管理地址</p></td></tr><tr><td valign="center" align="middle"><p>interface rang</p></td><td valign="center" align="middle"><p>interface ethID to ID</p></td><td valign="center" align="middle" width="111"><p>interface ethID to ID</p></td><td valign="center" align="middle" width="78"><p>定议多个端口的组</p></td></tr><tr><td valign="center" align="middle"><p>enabl esecret</p></td><td valign="center" align="middle"><p>super password</p></td><td valign="center" align="middle" width="111"><p>super password</p></td><td valign="center" align="middle" width="78"><p>设置特权口令</p></td></tr><tr><td valign="center" align="middle"><p>duplex (half|full|auto)</p></td><td valign="center" align="middle"><p>duplex (half|full|auto)</p></td><td valign="center" align="middle" width="111"><p>duplex (half|full|auto)</p></td><td valign="center" align="middle" width="78"><p>配置接口状态</p></td></tr><tr><td valign="center" align="middle"><p>speed (10/100/1000)</p></td><td valign="center" align="middle"><p>speed (10/100/1000)</p></td><td valign="center" align="middle" width="111"><p>speed (10/100/1000)</p></td><td valign="center" align="middle" width="78"><p>配置端口速率</p></td></tr><tr><td valign="center" align="middle"><p>switchport mode trunk</p></td><td valign="center" align="middle"><p>port link-type trunk</p></td><td valign="center" align="middle" width="111"><p>port link-type trunk</p></td><td valign="center" align="middle" width="78"><p>配置 trunk</p></td></tr><tr><td valign="center" align="middle"><p>vlan ID /no vlan ID</p></td><td valign="center" align="middle"><p>vlan batch ID /undo vlan batch ID</p></td><td valign="center" align="middle" width="111"><p>vlan batch ID /undo vlan batch ID</p></td><td valign="center" align="middle" width="78"><p>添加、删除 vlan</p></td></tr><tr><td valign="center" align="middle"><p>switchport access vlan</p></td><td valign="center" align="middle"><p>port default vlan ID</p></td><td valign="center" align="middle" width="111"><p>port acces vlan ID</p></td><td valign="center" align="middle" width="78"><p>将端口接入 vlan</p></td></tr><tr><td valign="center" align="middle"><p>show interface</p></td><td valign="center" align="middle"><p>display interface</p></td><td valign="center" align="middle" width="111"><p>display interface</p></td><td valign="center" align="middle" width="78"><p>查看接口</p></td></tr><tr><td valign="center" align="middle"><p>show vlan ID</p></td><td valign="center" align="middle"><p>display vlan ID</p></td><td valign="center" align="middle" width="111"><p>display vlan ID</p></td><td valign="center" align="middle" width="78"><p>查看 vlan</p></td></tr><tr><td valign="center" align="middle"><p>encapsulation</p></td><td valign="center" align="middle"><p>link-protocol</p></td><td valign="center" align="middle" width="111"><p>link-protocol</p></td><td valign="center" align="middle" width="78"><p>封装协议</p></td></tr><tr><td valign="center" align="middle"><p>channel-group 1 mode on</p></td><td valign="center" align="middle"><p>port link-aggregation group 1</p></td><td valign="center" align="middle" width="111"><p>port link-aggregation group 1</p></td><td valign="center" align="middle" width="78"><p>链路聚合</p></td></tr><tr><td valign="center" align="middle"><p>ip routing</p></td><td valign="center" align="middle"><p>默认开启</p></td><td valign="center" align="middle" width="111"><p>默认开启</p></td><td valign="center" align="middle" width="78"><p>开启三层交换的路由功能</p></td></tr><tr><td valign="center" align="middle"><p>no switchport</p></td><td valign="center" align="middle"><p>不支持</p></td><td valign="center" align="middle" width="111"><p>不支持</p></td><td valign="center" align="middle" width="78"><p>开启接口三层功能</p></td></tr><tr><td valign="center" align="middle"><p>vtp domain</p></td><td valign="center" align="middle"><p>GVRP</p></td><td valign="center" align="middle" width="111"><p>GVRP</p></td><td valign="center" align="middle" width="131"><p>对跨以太网交换机的 VLAN 进行动态注册和删除</p></td></tr><tr><td valign="center" align="middle"><p>spanning-tree vlan ID root primary</p></td><td valign="center" align="middle"><p>stp instance id root primary</p></td><td valign="center" align="middle" width="111"><p>stp instance id root primary</p></td><td valign="center" align="middle" width="78"><p>stp 配置根网桥</p></td></tr><tr><td valign="center" align="middle"><p>spanning-tree vlan ID priority</p></td><td valign="center" align="middle"><p>stp primary vlaue</p></td><td valign="center" align="middle" width="111"><p>stp primary vlaue</p></td><td valign="center" align="middle" width="78"><p>配置网桥优先级</p></td></tr><tr><td valign="center" align="middle"><p>show spanning-tree</p></td><td valign="center" align="middle"><p>dis stp brief</p></td><td valign="center" align="middle" width="111"><p>dis stp brief</p></td><td valign="center" align="middle" width="78"><p>查看 STP 配置</p></td></tr><tr><td valign="center" colspan="4" align="middle" width="67"><p><strong>路由部分</strong></p></td></tr><tr><td valign="center" align="middle"><p>ip route 0.0.0.0 0.0.0.0</p></td><td valign="center" align="middle"><p>ip route-static 0.0.0.0 0.0.0.0</p></td><td valign="center" align="middle" width="111"><p>ip route-static 0.0.0.0 0.0.0.0</p></td><td valign="center" align="middle" width="78"><p>配置默认路由</p></td></tr><tr><td valign="center" align="middle"><p>ip route 目标网段 + 掩码 下一跳</p></td><td valign="center" align="middle"><p>ip route-static 目标网段 + 掩码 下一跳</p></td><td valign="center" align="middle" width="111"><p>ip route-static 目标网段 + 掩码 下一跳</p></td><td valign="center" align="middle" width="78"><p>配置静态路由</p></td></tr><tr><td valign="center" align="middle"><p>show ip route</p></td><td valign="center" align="middle"><p>display ip routing-table</p></td><td valign="center" align="middle" width="111"><p>display ip routing-table</p></td><td valign="center" align="middle" width="78"><p>查看路由表</p></td></tr><tr><td valign="center" align="middle"><p>router rip /network 网段</p></td><td valign="center" align="middle"><p>rip /network 网段</p></td><td valign="center" align="middle" width="111"><p>rip /network 网段</p></td><td valign="center" align="middle" width="78"><p>启用 rip、并宣告网段</p></td></tr><tr><td valign="center" align="middle"><p>router ospf</p></td><td valign="center" align="middle"><p>ospf</p></td><td valign="center" align="middle" width="111"><p>ospf</p></td><td valign="center" align="middle" width="78"><p>启用 ospf</p></td></tr><tr><td valign="center" align="middle"><p>network ip 反码 area &lt;area-id&gt;</p></td><td valign="center" align="middle"><p>area &lt;area-id&gt;</p></td><td valign="center" align="middle" width="111"><p>area &lt;area-id&gt;</p></td><td valign="center" align="middle" width="78"><p>配置 OSPF 区域</p></td></tr><tr><td valign="center" align="middle"><p>no auto-summary</p></td><td valign="center" align="middle"><p>rip split-horizon</p></td><td valign="center" align="middle" width="111"><p>rip split-horizon</p></td><td valign="center" align="middle" width="78"><p>配置 RIP V2 水平分割</p></td></tr><tr><td valign="center" align="middle"><p>show ip protocol</p></td><td valign="center" align="middle"><p>display ip protocol</p></td><td valign="center" align="middle" width="111"><p>display ip protocol</p></td><td valign="center" align="middle" width="78"><p>查看路由协议</p></td></tr><tr><td valign="center" align="middle"><p>access-list 1-99 permit/deny IP</p></td><td valign="center" align="middle"><p>rule id permit source IP</p></td><td valign="center" align="middle" width="111"><p>rule id permit source IP</p></td><td valign="center" align="middle" width="78"><p>标准访问控制列表</p></td></tr><tr><td valign="center" align="middle"><p>access-list 100-199 permit/deny protocol source IP + 反码 destination IP + 反码 operator operan</p></td><td valign="center" align="middle"><p>rule {normal|special}{permit|deny}{tcp|udp}source {&lt;ip wild&gt;|any}destination &lt;ip wild&gt;|any}[operate]</p></td><td valign="center" align="middle" width="111"><p>rule {normal|special}{permit|deny}{tcp|udp}source {&lt;ip wild&gt;|any}destination &lt;ip wild&gt;|any}[operate]</p></td><td valign="center" align="middle" width="78"><p>扩展访问控制列表</p></td></tr><tr><td valign="center" align="middle"><p>standby group-number ip virtual-ip</p></td><td valign="center" align="middle"><p>vrrp vrid number virtual-ip</p></td><td valign="center" align="middle" width="111"><p>vrrp vrid number virtual-ip</p></td><td valign="center" align="middle" width="78"><p>配置 HSRP 组</p></td></tr><tr><td valign="center" align="middle"><p>standby group-number priority</p></td><td valign="center" align="middle"><p>vrrp vrid number priority</p></td><td valign="center" align="middle" width="111"><p>vrrp vrid number priority</p></td><td valign="center" align="middle" width="78"><p>配置 HSRP 优先级</p></td></tr><tr><td valign="center" align="middle"><p>standby group-number preempt</p></td><td valign="center" align="middle"><p>vrrp vrid number preempt-mode</p></td><td valign="center" align="middle" width="111"><p>vrrp vrid number preempt-mode</p></td><td valign="center" align="middle" width="78"><p>配置 HSRP 占先权</p></td></tr><tr><td valign="center" align="middle"><p>standby group-number track</p></td><td valign="center" align="middle"><br></td><td valign="center" align="middle" width="111"><br></td><td valign="center" align="middle" width="78"><p>配置端口跟踪</p></td></tr><tr><td valign="center" align="middle"><p>ip nat inside source static</p></td><td valign="center" align="middle"><p>nat server global &lt;ip&gt; [port] inside &lt;ip&gt; port [protocol]</p></td><td valign="center" align="middle" width="111"><p>nat server global &lt;ip&gt; [port] inside &lt;ip&gt; port [protocol]</p></td><td valign="center" align="middle" width="78"><p>配置静态地址转换</p></td></tr><tr><td valign="center" align="middle"><br></td><td valign="center" align="middle"><br></td><td valign="center" align="middle" width="111"><br></td><td valign="center" align="middle" width="78"><br></td></tr></tbody></table>
+<p><strong>cisco 常用命令解释</strong></p>
+<p><strong>视图模式介绍：</strong></p>
+<p>普通视图 router&gt;</p>
+<p>特权视图 router# / 在普通模式下输入 enable</p>
+<p>全局视图 router(config)# / 在特权模式下输入 config t</p>
+<p>接口视图 router(config-if)# / 在全局模式下输入 int 接口名称 例如 int s0 或 int e0</p>
+<p>路由协议视图 router（config-route）# / 在全局模式下输入 router 动态路由协议名称</p>
+<p><strong>1、基本配置：</strong></p>
+<p>router&gt;enable / 进入特权模式</p>
+<p>router#conf t / 进入全局配置模式</p>
+<p>router(config)#hostname xxx / 设置设备名称就好像给我们的计算机起个名字</p>
+<p>router(config)#enable password / 设置特权口令</p>
+<p>router(config)#no ip domain-lookup / 不允许路由器缺省使用 DNS 解析命令</p>
+<p>router(config)#line console 0 / 进入控制口的服务模式</p>
+<p>router(config-line)#password xxx / 要设置 console 的密码</p>
+<p>router(config-line)#login / 使能可以登陆</p>
+<p>router(config-line)#logging synchronous / 日志同步</p>
+<p>router(config-line)#exec-timeout 0 0 / 设置时间溢出为 0</p>
+<p>router(config-line)#line vty 0 4 / 进入设置 telnet 服务模式</p>
+<p>router(config-line)#password xxx / 设置 telnet 的密码</p>
+<p>router(config-line)#login / 使能可以登陆</p>
+<p>router(config-line)#exit / 保存退出到特权模式</p>
+<p>router(config)# Service password-encrypt / 对所有在路由器上输入的口令进行暗文加密</p>
+<p><strong>2、接口配置：</strong></p>
+<p>router(config)#interface serial0 / 进入接口配置模式 serial 0 端口配置（如果是模块化的路由器前面加上槽位编号，例如 serial0/0 代表这个路由器的 0 槽位上的第一个接口）</p>
+<p>router(config-if)#ip address xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx / 添加 ip 地址和掩码</p>
+<p>router(config-if)#enca hdl/ppp 捆绑链路协议 hdlc 或者 ppp 思科缺省串口封装的链路层协议是 HDLC 所以在 show run 配置的时候接口上的配置没有，如果要封装为别的链路层协议例如 PPP/FR/X25 就是看到接口下的 enca ppp 或者 enca fr</p>
+<p>router(config)#int loopback / 建立环回口 (逻辑接口) 模拟不同的本机网段</p>
+<p>router(config-if)#ip add xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx / 添加 ip 地址和掩码给环回口</p>
+<p>router(config-if)#no shutdown / 在物理接口上配置了 ip 地址后用 no shut 启用这个物理接口反之可以用 shutdown 管理性的关闭接口</p>
+<p><strong>3、路由配置：</strong></p>
+<p>(1) 静态路由</p>
+<p>router(config)#ip route xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx 下一条或自己的接口</p>
+<p>router(config)#ip route 0.0.0.0 0.0.0.0 s 0 添加缺省路由</p>
+<p>(2) 动态路由</p>
+<p>rip 协议</p>
+<p>router(config)#router rip / 启动 rip 协议</p>
+<p>router(config-router)#network xxx.xxx.xxx.xxx / 宣告自己的网段</p>
+<p>router(config-router)#version 2 转换为 rip 2 版本</p>
+<p>router(config-router)#no auto-summary / 关闭自动汇总功能，rip V2 才有作用</p>
+<p>router(config-router)# passive-int 接口名 / 启动本路由器的那个接口为被动接口</p>
+<p>router(config-router)# nei xxx.xxx.xxx.xxx / 广播转单播报文，指定邻居的接 ip</p>
+<p><strong>igrp 协议</strong></p>
+<p>router(config)#router igrp xxx / 启动 igrp 协议</p>
+<p>router(config-router)#network xxx.xxx.xxx.xxx / 宣告自己的网段</p>
+<p>router(config-router)#variance xxx / 调整倍数因子，使用不等价的负载均衡</p>
+<p><strong>eigrp 协议</strong></p>
+<p>router(config)router eigrp xxx / 启动协议</p>
+<p>router(config-router)#network xxx.xxx.xxx.xxx / 宣告自己的网段</p>
+<p>router(config-router)#variance xxx / 调整倍数因子，使用不等价的负载均衡</p>
+<p>router(config-router)#no auto-summary / 关闭自动汇总功能</p>
+<p><strong>ospf 协议</strong></p>
+<p>router(config)router ospf xxx / 启动协议启动一个 OSPF 协议进程</p>
+<p>router(config-router)network xxx.xxx.xxx.xxx area xxx / 宣告自己的接口或网段在 ospf 的区域中可以把不同接口宣告在不同区域中</p>
+<p>router(config-router)router-id xxx.xxx.xxx.xxx / 配置路由的 id</p>
+<p>router(config-router)aera xxx stub / 配置 xxx 区域为末梢区域 加入这个区域的路由器全部要配置这个条命令</p>
+<p>router(config-router)aera xxx stub no-summary / 配置 xxx 区域为完全末梢区域 只在 ABR 上配置</p>
+<p>router(config-router)aera xxx nssa / 配置 xxx 区域为非纯末梢区域加入这个区域的路由器全部要配置这个条命令</p>
+<p>router(config-router)aera xxx nssa no-summary / 配置 xxx 区域为完全非纯末梢区域 只在 ABR 上配置, 并发布缺省路由信息进入这个区域内的路由器</p>
+<p><strong>4、保存当前修改 / 运行的配置：</strong></p>
+<p>router#write / 将 RAM 中的当前配置存储到 NVRAM 中，下次路由器启动就是</p>
+<p>执行保存的配置</p>
+<p>router#Copy running-config startup-config / 命令与 write 效果一样</p>
+<p><strong>5、一般的常用命令</strong></p>
+<p>router(config-if)#exit</p>
+<p>router(config)#</p>
+<p>router(config-router)#exit</p>
+<p>router(config)#</p>
+<p>router(config-line)#exit</p>
+<p>router(config)#</p>
+<p>router(config)#exit</p>
+<p>router#</p>
+<p>exit 命令 / 从接口、协议、line 等视图模式下退回到全局配置模式，或从全局配置模式退回到特权模式</p>
+<p>router(config-if)#end</p>
+<p>router(config-router)#end</p>
+<p>router(config-line)#end</p>
+<p>router#</p>
+<p>end 命令 / 从任何视图直接回到特权模式</p>
+<p>router#Logout / 退出当前路由器登陆模式相对与 windows 的注销</p>
+<p>router#reload / 重新启动路由器（热启动）冷启动就是关闭路由器再打开电源开关</p>
+<p><strong>特权模式下：</strong></p>
+<p>router#show ip route / 查看当前的路由表</p>
+<p>router#clear ip route * / 清楚当前的路由表</p>
+<p>router#show ip protocol / 查看当前路由器运行的动态路由协议情况</p>
+<p>router#show ip int brief / 查看当前的路由器的接口 ip 地址启用情况</p>
+<p>router#show running-config / 查看当前运行配置</p>
+<p>router#show startup-config / 查看启动配置</p>
+<p>router#debug ip pack / 打开 ip 报文的调试</p>
+<p>router#terminal monitor / 输出到终端上显示调试信息</p>
+<p>router#show ip eigrp neighbors / 查看 eigrp 协议的邻居表</p>
+<p>router#show ip eigrp top / 查看 eigrp 协议的拓朴表</p>
+<p>router#show ip eigrp interface / 查看当前路由器运行 eigrp 协议的接口情况</p>
+<p>router#show ip ospf neighbor / 查看当前路由器的 ospf 协议的邻居表</p>
+<p>router#show ip ospf interface / 查看当前路由器运行 ospf 协议的接口情况</p>
+<p>router#clear ip ospf process / 清楚当前路由器 ospf 协议的进程</p>
+<p>router#Show interfaces / 显示设置在路由器和访问服务器上所有接口的统计信息. 显示路由器上配置的所有接口的状态</p>
+<p>router#Show interfaces serial / 显示关于一个串口的信息</p>
+<p>router#Show ip interface / 列出一个接口的 IP 信息和状态的小结, 列出接口的状态和全局参数</p>
+<p>――――――――――――――――――――――――</p>
+<p><strong>CISCO 命令全集　－　思科命令汇总</strong></p>
+<p>Access-enable 允许路由器在动态访问列表中创建临时访问列表入口</p>
+<p>Access-group 把访问控制列表 (ACL) 应用到接口上</p>
+<p>Access-list 定义一个标准的 IP ACL</p>
+<p>Access-template 在连接的路由器上手动替换临时访问列表入口</p>
+<p>Appn 向 APPN 子系统发送命令</p>
+<p>Atmsig 执行 ATM 信令命令</p>
+<p>B 手动引导操作系统</p>
+<p>Bandwidth 设置接口的带宽</p>
+<p>Banner motd 指定日期信息标语</p>
+<p>Bfe 设置突发事件手册模式</p>
+<p>Boot system 指定路由器启动时加载的系统映像</p>
+<p>Calendar 设置硬件日历</p>
+<p>Cd 更改路径</p>
+<p>Cdp enable 允许接口运行 CDP 协议</p>
+<p>Clear 复位功能</p>
+<p>Clear counters 清除接口计数器</p>
+<p>Clear interface 重新启动接口上的硬件逻辑</p>
+<p>Clockrate 设置串口硬件连接的时钟速率，如网络接口模块和接口处理器能接受的速率</p>
+<p>Cmt 开启 / 关闭 FDDI 连接管理功能</p>
+<p>Config-register 修改配置寄存器设置</p>
+<p>Configure 允许进入存在的配置模式，在中心站点上维护并保存<strong>配置信息</strong></p>
+<p>Configure memory 从 NVRAM 加载配置信息</p>
+<p>Configure terminal 从终端进行手动配置</p>
+<p>Connect 打开一个终端连接</p>
+<p>Copy 复制配置或映像数据</p>
+<p>Copy flash tftp 备份系统映像文件到 TFTP 服务器</p>
+<p>Copy running-config startup-config 将 RAM 中的当前配置存储到 NVRAM</p>
+<p>Copy running-config tftp 将 RAM 中的当前配置存储到网络 TFTP 服务器上</p>
+<p>Copy tftp flash 从 TFTP 服务器上下载新映像到 Flash</p>
+<p>Copy tftp running-config 从 TFTP 服务器上下载配置文件</p>
+<p><strong>Debug 使用调试功能</strong></p>
+<p>Debug dialer 显示接口在拨什么号及诸如此类的信息</p>
+<p>Debug ip rip 显示 RIP 路由选择更新数据</p>
+<p>Debug ipx routing activity 显示关于路由选择协议 (RIP) 更新数据包的信息</p>
+<p>Debug ipx sap 显示关于 SAP（业务通告协议）更新数据包信息</p>
+<p>Debug isdn q921 显示在路由器 D 通道 ISDN 接口上发生的数据链路层（第 2 层）的访问过程</p>
+<p>Debug ppp 显示在实施 PPP 中发生的业务和交换信息</p>
+<p>Delete 删除文件</p>
+<p>Deny 为一个已命名的 IP ACL 设置条件</p>
+<p>Dialer idle-timeout 规定线路断开前的空闲时间的长度</p>
+<p>Dialer map 设置一个串行接口来呼叫一个或多个地点</p>
+<p>Dialer wait-for-carrier-time 规定花多长时间等待一个载体</p>
+<p>Dialer-group 通过对属于一个特定拨号组的接口进行配置来访问控制</p>
+<p>Dialer-list protocol 定义一个数字数据接受器（DDR）拨号表以通过协议或 ACL 与协议的组合来控制控制拨号</p>
+<p>Dir 显示给定设备上的文件</p>
+<p>Disable 关闭特许模式</p>
+<p>Disconnect 断开已建立的连接</p>
+<p>Enable 打开特许模式</p>
+<p>Enable password 确定一个密码以防止对路由器非授权的访问</p>
+<p>Enable password 设置本地口令控制不同特权级别的访问</p>
+<p>Enable secret 为 enable password 命令定义额外一层安全性</p>
+<p>Encapsulation frame-relay 启动帧中继封装</p>
+<p>Encapsulation novell-ether 规定在网络段上使用的 Novell 独一无二的格式</p>
+<p>Encapsulation PPP 把 PPP 设置为由串口或 ISDN 接口使用的封装方法</p>
+<p>Encapsulation sap 规定在网络段上使用的以太网 802.2 格式 Cisco 的密码是 sap</p>
+<p>End 退出配置模式</p>
+<p>Erase 删除闪存或配置缓存</p>
+<p>Erase startup-config 删除 NVRAM 中的内容</p>
+<p>Exec-timeout 配置 EXEC 命令解释器在检测到用户输入前所等待的时间</p>
+<p>Exit 退出所有配置模式或者关闭一个激活的终端会话和终止一个 EXEC</p>
+<p>Exit 终止任何配置模式或关闭一个活动的对话和结束 EXEC</p>
+<p>format 格式化设备</p>
+<p>Frame-relay local-dlci 为使用帧中继封装的串行线路启动本地管理接口（LMI）</p>
+<p>Help 获得交互式帮助系统</p>
+<p>History 查看历史记录</p>
+<p>Hostname 使用一个主机名来配置路由器，该主机名以提示符或者缺省文件名的方式使用</p>
+<p>Interface 设置接口类型并且输入接口配置模式</p>
+<p>Interface 配置接口类型和进入接口配置模式</p>
+<p>Interface serial 选择接口并且输入接口配置模式</p>
+<p>Ip access-group 控制对一个接口的访问</p>
+<p>Ip address 设定接口的网络逻辑地址</p>
+<p>Ip address 设置一个接口地址和子网掩码并开始 IP 处理</p>
+<p>Ip default-network 建立一条缺省路由</p>
+<p>Ip domain-lookup 允许路由器缺省使用 DNS</p>
+<p>Ip host 定义静态主机名到 IP 地址映射</p>
+<p>Ip name-server 指定至多 6 个进行名字 - 地址解析的服务器地址</p>
+<p>Ip route 建立一条静态路由</p>
+<p>Ip unnumbered 在为给一个接口分配一个明确的 IP 地址情况下，在串口上启动互联网协议（IP）的处理过程</p>
+<p>Ipx delay 设置点计数</p>
+<p>Ipx ipxwan 在串口上启动 IPXWAN 协议</p>
+<p>Ipx maximum-paths 当转发数据包时设置 Cisco IOS 软件使用的等价路径数量</p>
+<p>Ipx network 在一个特定接口上启动互联网数据包交换（IPX）的路由选择并且选择封装的类型（用帧封装）</p>
+<p>Ipx router 规定使用的路由选择协议</p>
+<p>Ipx routing 启动 IPX 路由选择</p>
+<p>Ipx sap-interval 在较慢的链路上设置较不频繁的 SAP（业务广告协议）更新</p>
+<p>Ipx type-20-input-checks 限制对 IPX20 类数据包广播的传播的接受</p>
+<p>Isdn spid1 在路由器上规定已经由 ISDN 业务供应商为 B1 信道分配的业务简介号（SPID）</p>
+<p>Isdn spid2 在路由器上规定已经由 ISDN 业务供应商为 B2 信道分配的业务简介号（SPID）</p>
+<p>Isdn switch-type 规定了在 ISDN 接口上的中央办公区的交换机的类型</p>
+<p>Keeplive 为使用帧中继封装的串行线路 LMI（本地管理接口）机制</p>
+<p>Lat 打开 LAT 连接</p>
+<p>Line 确定一个特定的线路和开始线路配置</p>
+<p>Line concole 设置控制台端口线路</p>
+<p>Line vty 为远程控制台访问规定了一个虚拟终端</p>
+<p>Lock 锁住终端控制台</p>
+<p>Login 在终端会话登录过程中启动了密码检查</p>
+<p>Login 以某用户身份登录，登录时允许口令验证</p>
+<p>Mbranch 向下跟踪组播地址路由至终端</p>
+<p><strong>Media-type 定义介质类型</strong></p>
+<p>Metric holddown 把新的 IGRP 路由选择信息与正在使用的 IGRP 路由选择信息隔离一段时间</p>
+<p>Mrbranch 向上解析组播地址路由至枝端</p>
+<p>Mrinfo 从组播路由器上获取邻居和版本信息</p>
+<p>Mstat 对组播地址多次路由跟踪后显示统计数字</p>
+<p>Mtrace 由源向目标跟踪解析组播地址路径</p>
+<p>Name-connection 命名已存在的网络连接</p>
+<p>Ncia 开启 / 关闭 NCIA 服务器</p>
+<p>Network 把一个基于 NIC 的地址分配给一个与它直接相连的路由器把网络与一个 IGRP 的路由选择的过程联系起来在 IPX 路由器配置模式下，在网络上启动加强的 IGRP</p>
+<p>Network 指定一个和路由器直接相连的网络地址段</p>
+<p>Network-number 对一个直接连接的网络进行规定</p>
+<p>No shutdown 打开一个关闭的接口</p>
+<p>Pad 开启一个 X.29 PAD 连接</p>
+<p>Permit 为一个已命名的 IP ACL 设置条件</p>
+<p>Ping 把 ICMP 响应请求的数据包发送网络上的另一个节点检查主机的可达性和网络的连通性对网络的基本连通性进行诊断</p>
+<p>Ping 发送回声请求，诊断基本的网络连通性</p>
+<p>Ppp 开始 IETF 点到点协议</p>
+<p>Ppp authentication 启动 Challenge 握手鉴权协议（CHAP）或者密码验证协议（PAP）或者将两者都启动，并且对在接口上选择的 CHAP 和 PAP 验证的顺序进行规定</p>
+<p>Ppp chap hostname 当用 CHAP 进行身份验证时，创建一批好像是同一台主机的拨号路由器</p>
+<p>Ppp chap password 设置一个密码，该密码被发送到对路由器进行身份验证的主机命令对进入路由器的用户名 / 密码的数量进行了限制</p>
+<p>Ppp pap sent-username 对一个接口启动远程 PAP 支持，并且在 PAP 对同等层请求数据包验证过程中使用 sent-username 和 password</p>
+<p>Protocol 对一个 IP 路由选择协议进行定义，该协议可以是 RIP，内部网关路由选择协议（IGRP），开放最短路径优先（OSPF），还可以是加强的 IGRP</p>
+<p>Pwd 显示当前设备名</p>
+<p>Reload 关闭并执行冷启动；重启操作系统</p>
+<p>Rlogin 打开一个活动的网络连接</p>
+<p>Router 由第一项定义的 IP 路由协议作为路由进程，例如：router rip 选择 RIP 作为路由协议</p>
+<p>Router igrp 启动一个 IGRP 的路由选择过程</p>
+<p>Router rip 选择 RIP 作为路由选择协议</p>
+<p>Rsh 执行一个远程命令</p>
+<p>Sdlc 发送 SDLC 测试帧</p>
+<p>Send 在 tty 线路上发送消息</p>
+<p>Service password-encryption 对口令进行加密</p>
+<p>Setup 运行 Setup 命令</p>
+<p>Show 显示运行系统信息</p>
+<p>Show access-lists 显示当前所有 ACL 的内容</p>
+<p>Show buffers 显示缓存器统计信息</p>
+<p>Show cdp entry 显示 CDP 表中所列相邻设备的信息</p>
+<p>Show cdp interface 显示打开的 CDP 接口信息</p>
+<p>Show cdp neighbors 显示 CDP 查找进程的结果</p>
+<p>Show dialer 显示为 DDR（数字数据接受器）设置的串行接口的一般诊断信息</p>
+<p>Show flash 显示闪存的布局和内容信息</p>
+<p>Show frame-relay lmi 显示关于本地管理接口（LMI）的统计信息</p>
+<p>Show frame-relay map 显示关于连接的当前映射入口和信息</p>
+<p>Show frame-relay pvc 显示关于帧中继接口的永久虚电路（pvc）的统计信息</p>
+<p>Show hosts 显示主机名和地址的缓存列表</p>
+<p>Show ip protocols 显示活动路由协议进程的参数和当前状态</p>
+<p>Show ip route 显示路由选择表的当前状态</p>
+<p>Show ip router 显示 IP 路由表信息</p>
+<p>Show ipx interface 显示 Cisco IOS 软件设置的 IPX 接口的状态以及每个接口中的参数</p>
+<p>Show ipx route 显示 IPX 路由选择表的内容</p>
+<p>Show ipx servers 显示 IPX 服务器列表</p>
+<p>Show ipx traffic 显示数据包的数量和类型</p>
+<p>Show isdn active 显示当前呼叫的信息，包括被叫号码、建立连接前所花费的时间、在呼叫期间使用的自动化操作控制（AOC）收费单元以及是否在呼叫期间和呼叫结束时提供 AOC 信息</p>
+<p>Show isdn ststus 显示所有 isdn 接口的状态、或者一个特定的数字信号链路（DSL）的状态或者一个特定 isdn 接口的状态</p>
+<p>Show memory 显示路由器内存的大小，包括空闲内存的大小</p>
+<p>Show processes 显示路由器的进程</p>
+<p>Show protocols 显示设置的协议</p>
+<p>Show protocols 显示配置的协议。这条命令显示任何配置了的第 3 层协议的状态</p>
+<p>Show running-config 显示 RAM 中的当前配置信息</p>
+<p>Show spantree 显示关于虚拟局域网（VLAN）的生成树信息</p>
+<p>Show stacks 监控和中断程序对堆栈的使用，并显示系统上一次重启的原因</p>
+<p>Show startup-config 显示 NVRAM 中的启动配置文件</p>
+<p>Show ststus 显示 ISDN 线路和两个 B 信道的当前状态</p>
+<p>Show version 显示系统硬件的配置，软件的版本，配置文件的名称和来源及引导映像</p>
+<p>Shutdown 关闭一个接口</p>
+<p>Telnet 开启一个 telect 连接</p>
+<p>Term ip 指定当前会话的网络掩码的格式</p>
+<p>Term ip netmask-format 规定了在 show 命令输出中网络掩码显示的格式</p>
+<p>Timers basic 控制着 IGRP 以多少时间间隔发送更新信息</p>
+<p>Trace 跟踪 IP 路由</p>
+<p>Username password 规定了在 CHAP 和 PAP 呼叫者身份验证过程中使用的密码</p>
+<p>Verify 检验 flash 文件</p>
+<p>Where 显示活动连接</p>
+<p>Which-route OSI 路由表查找和显示结果</p>
+<p>Write 运行的配置信息写入内存，网络或终端</p>
+<p>Write erase 现在由 copy startup-config 命令替换</p>
+
+			</div>
+
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/BL8POiHLt/">
+				<span class="flex-auto">
+					网络
+				</span>
+			</a>
+			
+
+			<div class="post-Copyright py-12">
+				<span class="flex-auto"> 本文来源于 一小步</span>
+				<div class="prev-post">
+					<a href="https://MaHule.github.io">
+						<h3 class="post-Copyright-link">
+							博客地址： https://MaHule.github.io
+						</h3>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex justify-between py-8">
+				
+				<div class="prev-post">
+					<a href="https://MaHule.github.io/4.1 Socket模块/">
+						<h3 class="post-title">
+							<i class="ri-arrow-left-line"></i>
+							Socket模块
+						</h3>
+					</a>
+				</div>
+				
+
+				
+				<div class="next-post">
+					<a href="https://MaHule.github.io/shi-yong-docker-jing-xiang/">
+						<h3 class="post-title">
+							使用Docker镜像
+							<i class="ri-arrow-right-line"></i>
+						</h3>
+					</a>
+				</div>
+				
+			</div>
+
+			
+			
+			
+
+		</div>
+	</div>
+
+	<script src="https://MaHule.github.io/media/prism.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/show_runtime.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/clipboard.js"></script>
+<script>
+	Prism.highlightAll()
+	let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+	// This should probably be throttled.
+	// Especially because it triggers during smooth scrolling.
+	// https://lodash.com/docs/4.17.10#throttle
+	// You could do like...
+	// window.addEventListener("scroll", () => {
+	//    _.throttle(doThatStuff, 100);
+	// });
+	// Only not doing it here to keep this Pen dependency-free.
+
+	window.addEventListener("scroll", event => {
+		let fromTop = window.scrollY;
+
+		mainNavLinks.forEach((link, index) => {
+			let section = document.getElementById(decodeURI(link.hash).substring(1));
+			let nextSection = null
+			if (mainNavLinks[index + 1]) {
+				nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(
+				1));
+			}
+			if (section.offsetTop <= fromTop) {
+				if (nextSection) {
+					if (nextSection.offsetTop > fromTop) {
+						link.classList.add("current");
+					} else {
+						link.classList.remove("current");
+					}
+				} else {
+					link.classList.add("current");
+				}
+			} else {
+				link.classList.remove("current");
+			}
+		});
+	});
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+		var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+		if ("IntersectionObserver" in window) {
+			let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						let lazyImage = entry.target
+						lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+						lazyImage.classList.remove("lazy")
+						lazyImageObserver.unobserve(lazyImage)
+					}
+				});
+			});
+
+			lazyImages.forEach(function (lazyImage) {
+				lazyImageObserver.observe(lazyImage)
+			})
+		} else {
+			// Possibly fall back to a more compatible method here
+		}
+	});
+
+	const menuContainer = document.querySelector('.menu-container')
+	const menus = document.querySelectorAll('.menu-container .menu')
+	const mask = document.querySelector('.mask')
+	const contentWrapper = document.querySelector('.content-wrapper')
+	const latestArticle = document.querySelector('.latest-article')
+	const readMore = document.querySelector('.read-more')
+	const indexPage = document.querySelector('.index-page')
+
+	const isHome = location.pathname === '/'
+	if (latestArticle) {
+		latestArticle.style.display = isHome ? 'block' : 'none'
+		readMore.style.display = isHome ? 'block' : 'none'
+		indexPage.style.display = isHome ? 'none' : 'block'
+	}
+
+	const openMenu = () => {
+		menuContainer.classList.add('open')
+		menus.forEach(menu => {
+			menu.classList.add('animated', 'fadeInLeft')
+		})
+		mask.classList.add('open')
+		contentWrapper.classList.add('is-second')
+	}
+
+	const closeMenu = () => {
+		menuContainer.classList.remove('open')
+		menus.forEach(menu => {
+			menu.classList.remove('animated', 'fadeInLeft')
+		})
+		mask.classList.remove('open')
+		contentWrapper.classList.remove('is-second')
+	}
+</script>
+</body>
+
+</html>

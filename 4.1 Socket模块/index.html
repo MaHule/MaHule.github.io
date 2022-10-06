@@ -1,0 +1,390 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Socket模块 | 一小步</title>
+<!-- description在post页面应有不同 -->
+
+	<meta name="description" content="每天进步一点点" />
+	
+<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1665048734325">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://MaHule.github.io/styles/main.css">
+
+
+</head>
+
+<body>
+	<div id="app" class="main px-4 flex flex-col lg:flex-row">
+		<div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+	<div class="lg:sticky top-0">
+		<div class="sidebar-content">
+			<div
+				class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+				<i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+				<a href="https://MaHule.github.io">
+					<img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12"
+						src="https://MaHule.github.io/images/avatar.png?v=1665048734325" alt="">
+				</a>
+				<h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl"
+					style="animation-delay: 0.2s">一小步</h1>
+			</div>
+			
+			<div class="animated fadeInLeft" style="animation-delay: 0.4s">
+				<p class="my-4 text-gray-600 font-light hidden lg:block">
+					文章目录
+				</p>
+				<div class="toc-container hidden lg:block">
+					<ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#python%E5%AE%89%E5%85%A8socket%E6%A8%A1%E5%9D%97">Python安全|Socket模块</a>
+<ul>
+<li><a href="#1-socket%E5%AE%9E%E4%BE%8B%E5%8C%96">1. Socket实例化</a></li>
+<li><a href="#2socket%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0">2.Socket常用函数</a>
+<ul>
+<li><a href="#1%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%87%BD%E6%95%B0">（1）服务端函数</a></li>
+<li><a href="#2%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%87%BD%E6%95%B0">（2）客户端函数</a></li>
+<li><a href="#3%E9%80%9A%E7%94%A8%E5%87%BD%E6%95%B0">（3）通用函数</a></li>
+</ul>
+</li>
+<li><a href="#3socket%E7%AE%80%E5%8D%95%E9%80%9A%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%AE%A2%E6%88%B7%E7%AB%AF">3.Socket简单通信服务器和客户端</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="menu-container">
+	<i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+	<div>
+		
+		
+		<a href="/" class="menu" style="animation-delay: 0s">
+			首页
+		</a>
+		
+		
+		
+		<a href="/archives" class="menu" style="animation-delay: 0.2s">
+			归档
+		</a>
+		
+		
+		
+		<a href="/tags" class="menu" style="animation-delay: 0.4s">
+			标签
+		</a>
+		
+		
+		
+		<a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+			关于
+		</a>
+		
+		
+	</div>
+	<!-- 萌备 https://icp.gov.moe -->
+	<div class="site-footer">
+		<p class="py-4 text-gray-700">
+			© 2022 hope140  <br>
+			<span id="runtime_span"></span> <br>
+			<a href="https://icp.gov.moe/?keyword=20221443" target="_blank">萌ICP备20221443号</a> <br>
+			Powered by MaHule
+		</p>
+		<a class="rss" href="https://MaHule.github.io/atom.xml" target="_blank">RSS</a>
+	</div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+		<div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+			<h1 class="text-3xl font-bold lg:mt-16">
+				Socket模块
+			</h1>
+			<!-- 由于"/"字符只好做postPath的判断，不设定postPath时是一个长度为0的字符串 -->
+			
+			<div class="text-sm text-gray-700 lg:my-8">
+				2022-10-01 / 5 min read / <span id="/4.1 Socket模块/"
+					class="waline-pageview-count"> </span> 阅读 / <span id="/4.1 Socket模块/"
+					class="waline-comment-count"></span>评论
+			</div>
+			
+			<!-- 如果有更好办法再做修改 -->
+			
+			<div class="post-content yue">
+				<h2 id="python安全socket模块">Python安全|Socket模块</h2>
+<blockquote>
+<p>提供两个基本的socket模块：服务端Socket和客户端Socket。当创建一个服务器端Socket之后，这个Socket会在本机的一个端口上等待连接，客户端Socket访问这个端口后，两者完成连接就可以进行交互。</p>
+</blockquote>
+<p><strong>Socket服务端建立：</strong>  首先实例化一个Socket类，然后开始循环监听，一直等待接收来自客户端的连接。成功建立连接之后，接收客户端发来的数据，并向客户端发送数据，传输完毕之后，关闭这次连接。</p>
+<p><strong>Socket客户端建立：</strong> 实例化一个Socket类之后连接一个远程的地址，这个地址由IP和端口组成。成功建立连接之后，开始发送和接收数据，传输完毕之后，关闭这次连接。</p>
+<h3 id="1-socket实例化">1. Socket实例化</h3>
+<pre><code class="language-python">s=socket.socket(family,type[,protocal])
+</code></pre>
+<ul>
+<li>
+<p>family : 使用的地址族。常用的地址族有：AF_INET、AF_INET6、AF_LOCAL（或称AF_UNIX   UNIX域Socket）、AF_ROUTE等。默认值为socket.AF_INET。</p>
+</li>
+<li>
+<p>type ： 指明Socket类型。使用值有三个（默认为sock_STREAM）：</p>
+</li>
+<li>
+<ul>
+<li>sock_STREAM，TCP类型，保证数据顺序及可靠性。</li>
+<li>sock_DGRAM，UCP类型，不保证数据接收的顺序，非可靠连接。</li>
+<li>sock_RAM，原始类型，允许对底层协议如IP和ICMP进行直接访问，基本不会用到</li>
+</ul>
+</li>
+<li>
+<p>protocal：指使用的协议，参数可选，通常赋值为“ 0 ”，由系统自动选择</p>
+</li>
+</ul>
+<pre><code class="language-python">#常用实例
+s = socket.socket()   #使用默认值，为TCP连接
+s = socket.socket(socket.AF_INET,socket.sock_DGRAM)   #建立一个UDP类型socket
+</code></pre>
+<h3 id="2socket常用函数">2.Socket常用函数</h3>
+<h4 id="1服务端函数">（1）服务端函数</h4>
+<ol>
+<li>bind()：由服务器端Socket调用，会将之前创建的Socket与指定的IP地址和端口绑定。如果之前使用AF_INET初始化Socket，那么这里可以使用元组（host，port）的形式表示地址。</li>
+</ol>
+<pre><code class="language-python">s.bind(('127.0.0.1',2345))
+</code></pre>
+<ol start="2">
+<li>listen()：用于在使用TCP的服务器端开启监听模式，可以使用一个参数来指定挂起的最大连接数量。这个参数的值最小为1，一般设置为5。</li>
+</ol>
+<pre><code class="language-python">s.listen(5)
+</code></pre>
+<ol start="3">
+<li>accept():用于在使用TCP的服务器端接收连接，一般是阻塞态。接收TCP连接并返回（conn，address），其中，conn是新的套接字对象，可以用来接收和发送数据；address是连接客户端的地址。</li>
+</ol>
+<h4 id="2客户端函数">（2）客户端函数</h4>
+<ol>
+<li>connect()：这个函数用在使用TCP的客户端去连接服务器端时，使用的参数是一个元组，形式为（hostname，port）。</li>
+</ol>
+<pre><code class="language-python">s.connect((&quot;127.0.0.1&quot;,2345))   #连接本机2345端口
+</code></pre>
+<h4 id="3通用函数">（3）通用函数</h4>
+<ol>
+<li>
+<p>send()：这个函数在使用TCP时用于发送数据，完整的形式为send(string[,flag])，利用这个函数可以将string代表的数据发送到已经连接的Socket，返回值是发送字节的数量，但是可能未全部发送指定的内容。</p>
+</li>
+<li>
+<p>sendall()：这个函数与send()相似，也在使用TCP时用于发送数据，完整的形式为sendall(string[,flag])，与send()的区别是它可以完整发送TCP数据。将string中的数据发送到连接的套接字，但在返回之前会尝试发送所有数据。成功返回None，失败则抛出异常。</p>
+</li>
+</ol>
+<pre><code class="language-python">s.sendall(bytes(&quot;Hello,My Friend!&quot;,encoding=&quot;utf-8&quot;))  #发送一段字符到连接的socket
+</code></pre>
+<ol start="3">
+<li>recv()：这个函数在使用TCP时用于接收数据，完整的形式为recv(bufsize[,flag])，接收Socket的数据。数据以字符串形式返回，bufsize指定最多可以接收的数量。一般不会使用参数flag。</li>
+</ol>
+<pre><code class="language-python">obj.recv(1024)   #接收一段长度为1024字符的Socket
+</code></pre>
+<ol start="4">
+<li>
+<p>sendto()：这个函数用于在使用UDP时发送数据，完整的形式为sendto(string [,flag],address)，返回值是发送的字节数。address是形式为（ipaddr，port）的元组，指定远程地址。</p>
+</li>
+<li>
+<p>recvfrom()：UDP专用，接收数据，返回数据远端的IP地址和端口，但返回值是（data，address）。其中，data是包含接收数据的字符串，address是发送数据的套接字地址。</p>
+</li>
+<li>
+<p>close()：关闭Socket。</p>
+</li>
+</ol>
+<h3 id="3socket简单通信服务器和客户端">3.Socket简单通信服务器和客户端</h3>
+<pre><code class="language-python">#Socket服务端
+import socket
+
+s1 = socket.socket()
+s1.bind(('127.0.0.1',2345))
+s1.listen(5)
+str = &quot;Hello World&quot;
+while 1:
+    conn,address = s1.accept()
+    print(&quot;a new connect from&quot;,address)
+    conn.send(str.encode())
+    conn.close
+</code></pre>
+<pre><code class="language-python">import socket
+
+s2 = socket.socket()
+s2.connect(('127.0.0.1',2345))
+#对传输数据使用encode()函数处理，Python3不再支持str类型传输，需要转换为bytes类型
+data = bytes.decode(s2.recv(1024))
+s2.close()
+print(data)
+</code></pre>
+
+			</div>
+
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/ansnp4eIE/">
+				<span class="flex-auto">
+					Python安全
+				</span>
+			</a>
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/uQJCDEn4z/">
+				<span class="flex-auto">
+					Python
+				</span>
+			</a>
+			
+
+			<div class="post-Copyright py-12">
+				<span class="flex-auto"> 本文来源于 一小步</span>
+				<div class="prev-post">
+					<a href="https://MaHule.github.io">
+						<h3 class="post-Copyright-link">
+							博客地址： https://MaHule.github.io
+						</h3>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex justify-between py-8">
+				
+				<div class="prev-post">
+					<a href="https://MaHule.github.io/lou-sao-gong-ju-docker-yi-jian-an-zhuang-awvs-he-nessus/">
+						<h3 class="post-title">
+							<i class="ri-arrow-left-line"></i>
+							漏扫工具：Docker 一键安装 AWVS 和 Nessus
+						</h3>
+					</a>
+				</div>
+				
+
+				
+				<div class="next-post">
+					<a href="https://MaHule.github.io/si-ke-hua-wei-h3c-chang-yong-ming-ling-dui-bi/">
+						<h3 class="post-title">
+							思科，华为，H3C常用命令对比
+							<i class="ri-arrow-right-line"></i>
+						</h3>
+					</a>
+				</div>
+				
+			</div>
+
+			
+			
+			
+
+		</div>
+	</div>
+
+	<script src="https://MaHule.github.io/media/prism.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/show_runtime.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/clipboard.js"></script>
+<script>
+	Prism.highlightAll()
+	let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+	// This should probably be throttled.
+	// Especially because it triggers during smooth scrolling.
+	// https://lodash.com/docs/4.17.10#throttle
+	// You could do like...
+	// window.addEventListener("scroll", () => {
+	//    _.throttle(doThatStuff, 100);
+	// });
+	// Only not doing it here to keep this Pen dependency-free.
+
+	window.addEventListener("scroll", event => {
+		let fromTop = window.scrollY;
+
+		mainNavLinks.forEach((link, index) => {
+			let section = document.getElementById(decodeURI(link.hash).substring(1));
+			let nextSection = null
+			if (mainNavLinks[index + 1]) {
+				nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(
+				1));
+			}
+			if (section.offsetTop <= fromTop) {
+				if (nextSection) {
+					if (nextSection.offsetTop > fromTop) {
+						link.classList.add("current");
+					} else {
+						link.classList.remove("current");
+					}
+				} else {
+					link.classList.add("current");
+				}
+			} else {
+				link.classList.remove("current");
+			}
+		});
+	});
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+		var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+		if ("IntersectionObserver" in window) {
+			let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						let lazyImage = entry.target
+						lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+						lazyImage.classList.remove("lazy")
+						lazyImageObserver.unobserve(lazyImage)
+					}
+				});
+			});
+
+			lazyImages.forEach(function (lazyImage) {
+				lazyImageObserver.observe(lazyImage)
+			})
+		} else {
+			// Possibly fall back to a more compatible method here
+		}
+	});
+
+	const menuContainer = document.querySelector('.menu-container')
+	const menus = document.querySelectorAll('.menu-container .menu')
+	const mask = document.querySelector('.mask')
+	const contentWrapper = document.querySelector('.content-wrapper')
+	const latestArticle = document.querySelector('.latest-article')
+	const readMore = document.querySelector('.read-more')
+	const indexPage = document.querySelector('.index-page')
+
+	const isHome = location.pathname === '/'
+	if (latestArticle) {
+		latestArticle.style.display = isHome ? 'block' : 'none'
+		readMore.style.display = isHome ? 'block' : 'none'
+		indexPage.style.display = isHome ? 'none' : 'block'
+	}
+
+	const openMenu = () => {
+		menuContainer.classList.add('open')
+		menus.forEach(menu => {
+			menu.classList.add('animated', 'fadeInLeft')
+		})
+		mask.classList.add('open')
+		contentWrapper.classList.add('is-second')
+	}
+
+	const closeMenu = () => {
+		menuContainer.classList.remove('open')
+		menus.forEach(menu => {
+			menu.classList.remove('animated', 'fadeInLeft')
+		})
+		mask.classList.remove('open')
+		contentWrapper.classList.remove('is-second')
+	}
+</script>
+</body>
+
+</html>

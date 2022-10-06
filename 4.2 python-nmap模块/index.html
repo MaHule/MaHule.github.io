@@ -1,0 +1,418 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python-nmap模块 | 一小步</title>
+<!-- description在post页面应有不同 -->
+
+	<meta name="description" content="每天进步一点点" />
+	
+<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1665048734325">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://MaHule.github.io/styles/main.css">
+
+
+</head>
+
+<body>
+	<div id="app" class="main px-4 flex flex-col lg:flex-row">
+		<div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+	<div class="lg:sticky top-0">
+		<div class="sidebar-content">
+			<div
+				class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+				<i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+				<a href="https://MaHule.github.io">
+					<img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12"
+						src="https://MaHule.github.io/images/avatar.png?v=1665048734325" alt="">
+				</a>
+				<h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl"
+					style="animation-delay: 0.2s">一小步</h1>
+			</div>
+			
+			<div class="animated fadeInLeft" style="animation-delay: 0.4s">
+				<p class="my-4 text-gray-600 font-light hidden lg:block">
+					文章目录
+				</p>
+				<div class="toc-container hidden lg:block">
+					<ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#python-nmap%E6%A8%A1%E5%9D%97">Python-nmap模块</a>
+<ul>
+<li><a href="#1%E5%AE%89%E8%A3%85python-nmap">1.安装python-nmap</a></li>
+<li><a href="#2-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95">2. 基本用法</a>
+<ul>
+<li><a href="#1-python-nmap%E6%A8%A1%E5%9D%97%E7%B1%BB%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96">(1) python-nmap模块类的实例化</a></li>
+<li><a href="#2portscanner%E7%B1%BB%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0">(2)PortScanner类中的函数</a></li>
+<li><a href="#3-portscannerasync%E7%B1%BB%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0">(3) PortScannerAsync()类中的函数</a></li>
+</ul>
+</li>
+<li><a href="#3-python-nmap%E6%A8%A1%E5%9D%97%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E6%89%AB%E6%8F%8F%E5%99%A8">3. python-nmap模块编写一个扫描器</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="menu-container">
+	<i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+	<div>
+		
+		
+		<a href="/" class="menu" style="animation-delay: 0s">
+			首页
+		</a>
+		
+		
+		
+		<a href="/archives" class="menu" style="animation-delay: 0.2s">
+			归档
+		</a>
+		
+		
+		
+		<a href="/tags" class="menu" style="animation-delay: 0.4s">
+			标签
+		</a>
+		
+		
+		
+		<a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+			关于
+		</a>
+		
+		
+	</div>
+	<!-- 萌备 https://icp.gov.moe -->
+	<div class="site-footer">
+		<p class="py-4 text-gray-700">
+			© 2022 hope140  <br>
+			<span id="runtime_span"></span> <br>
+			<a href="https://icp.gov.moe/?keyword=20221443" target="_blank">萌ICP备20221443号</a> <br>
+			Powered by MaHule
+		</p>
+		<a class="rss" href="https://MaHule.github.io/atom.xml" target="_blank">RSS</a>
+	</div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+		<div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+			<h1 class="text-3xl font-bold lg:mt-16">
+				Python-nmap模块
+			</h1>
+			<!-- 由于"/"字符只好做postPath的判断，不设定postPath时是一个长度为0的字符串 -->
+			
+			<div class="text-sm text-gray-700 lg:my-8">
+				2020-04-03 / 5 min read / <span id="/4.2 python-nmap模块/"
+					class="waline-pageview-count"> </span> 阅读 / <span id="/4.2 python-nmap模块/"
+					class="waline-comment-count"></span>评论
+			</div>
+			
+			<!-- 如果有更好办法再做修改 -->
+			
+			<div class="post-content yue">
+				<h2 id="python-nmap模块">Python-nmap模块</h2>
+<h3 id="1安装python-nmap">1.安装python-nmap</h3>
+<pre><code class="language-python">pip3 install python-nmap
+</code></pre>
+<h3 id="2-基本用法">2. 基本用法</h3>
+<p><strong>python-nmap模块中的核心类：</strong></p>
+<p><u>PortScanner()</u>    <u>PortScannerAsync()</u>   <u>PortScannerError()</u>  <u>PortScannerHostDict()</u>  <u>PortScannerYield()</u></p>
+<h4 id="1-python-nmap模块类的实例化">(1) python-nmap模块类的实例化</h4>
+<blockquote>
+<p>PortScanner类实现Nmap工具功能的封装。</p>
+</blockquote>
+<pre><code class="language-python">nmap.PortScanner()     #PortScanner()实例化
+</code></pre>
+<blockquote>
+<p>PortScannerAsync()与PortScanner()类的功能相同，但是这个类可以实现异步扫描</p>
+</blockquote>
+<pre><code class="language-python">nmap.PortScannerAsync()     #PortScannerAsync()实例化
+</code></pre>
+<h4 id="2portscanner类中的函数">(2)PortScanner类中的函数</h4>
+<ol>
+<li>scan()：scan(self,hosts='127.0.0.1', ports=None, arguments= '-sV', sudo=False)，用来对指定目标进行扫描，其中需要设置的3个参数包括hosts、ports和arguments。</li>
+</ol>
+<ul>
+<li>
+<ul>
+<li>参数hosts的值为字符串类型，表示要扫描的主机，形式可以是IP地址，例如“192.168.1.1”，也可以是一个域名，例如“www.nmap.org”。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>参数ports的值也是字符串类型，表示要扫描的端口。如果要扫描的是单一端口，形式可以为“80”。如果要扫描的是多个端口，可以用逗号分隔开，形式为“80,443,8080”。如果要扫描的是连续的端口范围，可以用横线，形式为“1-1000”。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>参数arguments的值也是字符串类型，这个参数实际上就是Nmap扫描时所使用的参数，例如“-sP”“-PR”“-sS”“-sT”“-O”“-sV”等。其中，“-sP”表示对目标进行Ping主机在线扫描；“-PR”表示对目标进行一个ARP的主机在线扫描；“-sS”表示对目标进行一个TCP半开（SYN）类型的端口扫描；“-sT”表示对目标进行一个TCP全开类型的端口扫描；“-O”表示扫描目标的操作系统类型；“-sV”表示扫描目标上所安装网络服务软件的版本。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">&gt;&gt;&gt; import nmap
+&gt;&gt;&gt; nm = nmap.PortScanner()
+&gt;&gt;&gt; print(nm.scan('127.0.0.1','5432-5434','-sS'))
+{'nmap': {'command_line': 'nmap -oX - -p 5432-5434 -sS 127.0.0.1', 'scaninfo': {'tcp': {'method': 'syn', 'services': '5432-5434'}}, 'scanstats': {'timestr': 'Thu Sep 22 23:12:03 2022', 'elapsed': '0.61', 'uphosts': '1', 'downhosts': '0', 'totalhosts': '1'}}, 'scan': {'127.0.0.1': {'hostnames': [{'name': 'kubernetes.docker.internal', 'type': 'PTR'}], 'addresses': {'ipv4': '127.0.0.1'}, 'vendor': {}, 'status': {'state': 'up', 'reason': 'localhost-response'}, 'tcp': {5432: {'state': 'closed', 'reason': 'reset', 'name': 'postgresql', 'product': '', 'version': '', 'extrainfo': '', 'conf': '3', 'cpe': ''}, 5433: {'state': 'closed', 'reason': 'reset', 'name': 'pyrrho', 'product': '', 'version': '', 'extrainfo': '', 'conf': '3', 'cpe': ''}, 5434: {'state': 'closed', 'reason': 'reset', 'name': 'sgi-arrayd', 'product': '', 'version': '', 'extrainfo': '', 'conf': '3', 'cpe': ''}}}}}
+</code></pre>
+<ol start="2">
+<li>all_hosts() 返回被扫描所有主机列表</li>
+</ol>
+<pre><code class="language-python">&gt;&gt;&gt; nm.all_hosts()
+['127.0.0.1']
+</code></pre>
+<ol start="3">
+<li>command_line()   返回当前扫描中使用的命令行</li>
+</ol>
+<pre><code class="language-python">&gt;&gt;&gt; nm.command_line()
+'nmap -oX - -p 5432-5434 -sS 127.0.0.1'
+</code></pre>
+<ol start="4">
+<li>csv()  返回被扫描的所有主机的CSV格式的文件</li>
+</ol>
+<pre><code class="language-python">&gt;&gt;&gt; print(nm.csv())
+host;hostname;hostname_type;protocol;port;name;state;product;extrainfo;reason;version;conf;cpe
+127.0.0.1;kubernetes.docker.internal;PTR;tcp;5432;postgresql;closed;;;reset;;3;
+127.0.0.1;kubernetes.docker.internal;PTR;tcp;5433;pyrrho;closed;;;reset;;3;
+127.0.0.1;kubernetes.docker.internal;PTR;tcp;5434;sgi-arrayd;closed;;;reset;;3;
+</code></pre>
+<ol start="5">
+<li>has_host(self,host)    检查是否有扫描结果</li>
+</ol>
+<pre><code class="language-python">&gt;&gt;&gt; nm.has_host('127.0.0.1')
+True
+</code></pre>
+<ol start="6">
+<li>scaninfo()   列出扫描信息的结构</li>
+</ol>
+<pre><code class="language-python">&gt;&gt;&gt; nm.scaninfo()
+{'tcp': {'method': 'syn', 'services': '5432-5434'}}
+</code></pre>
+<ol start="7">
+<li>支持的其他操作</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="D:%5CGridea%5Cpost-images%5Cimage-20220922232118381.png" alt="image-20220922232118381" loading="lazy"></figure>
+<h4 id="3-portscannerasync类中的函数">(3) PortScannerAsync()类中的函数</h4>
+<pre><code class="language-python">&gt;&gt;&gt; import nmap
+&gt;&gt;&gt; nma = nmap.PortScannerAsync()
+&gt;&gt;&gt; nma.scan('192.168.0.1/24',arguments='-sP')
+</code></pre>
+<ol>
+<li>scan()   函数与PortScanner中的scan()中方法一致</li>
+<li>still_scanning()  返回是否正在扫描</li>
+</ol>
+<pre><code>&gt;&gt;&gt; nma.still_scanning()
+True
+</code></pre>
+<ol start="3">
+<li>wait(self,timeout=None)  表示等待时间</li>
+</ol>
+<pre><code class="language-python">&gt;&gt;&gt; nma.wait(2)
+</code></pre>
+<ol start="4">
+<li>stop() 停止当前扫描</li>
+</ol>
+<pre><code class="language-python">&gt;&gt;&gt; nma.stop()
+</code></pre>
+<h3 id="3-python-nmap模块编写一个扫描器">3. python-nmap模块编写一个扫描器</h3>
+<pre><code class="language-python">import nmap
+target = '127.0.0.1'
+port = '80'
+nm = nmap.PortScanner()
+nm.scan(traget,port)
+for host in nm.all_hosts():
+    print('-----------------------------------------------------')
+    print('Host: {0}({1})'.format(host,nm[host].hostname()))
+    print('State:{0}'.format(nm[host].state()))
+    for proto in nm[host].all_protocols():
+        print('----------------------------')
+        print('Protocol:{0}'.format(proto))
+        Iport = list(nm[host][proto].keys())
+        Iport.sort()
+        for port in Iport:
+            print('port:{0}\tstate:{1}'.format(port,nm[host][proto][port]['state']))
+        
+</code></pre>
+<p><strong>只扫描活跃主机：</strong></p>
+<pre><code class="language-python">import nmap 
+nm = nmap.PortScanner()
+nm.scan(hosts='192.168.0.0/24',arguements='-sP')
+hosts_list = [(x,nm[x]['status']['state']) for x in nm.all_hosts()]
+for host,status in hosts_list:
+    print(host + &quot;is&quot; + status)
+</code></pre>
+
+			</div>
+
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/ansnp4eIE/">
+				<span class="flex-auto">
+					Python安全
+				</span>
+			</a>
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/uQJCDEn4z/">
+				<span class="flex-auto">
+					Python
+				</span>
+			</a>
+			
+
+			<div class="post-Copyright py-12">
+				<span class="flex-auto"> 本文来源于 一小步</span>
+				<div class="prev-post">
+					<a href="https://MaHule.github.io">
+						<h3 class="post-Copyright-link">
+							博客地址： https://MaHule.github.io
+						</h3>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex justify-between py-8">
+				
+				<div class="prev-post">
+					<a href="https://MaHule.github.io/python-lie-biao-sheng-cheng-shi-gao-xiao-shi-yong/">
+						<h3 class="post-title">
+							<i class="ri-arrow-left-line"></i>
+							Python列表生成式高效使用
+						</h3>
+					</a>
+				</div>
+				
+
+				
+				<div class="next-post">
+					<a href="https://MaHule.github.io/4.3 scapy/">
+						<h3 class="post-title">
+							Scapy
+							<i class="ri-arrow-right-line"></i>
+						</h3>
+					</a>
+				</div>
+				
+			</div>
+
+			
+			
+			
+
+		</div>
+	</div>
+
+	<script src="https://MaHule.github.io/media/prism.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/show_runtime.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/clipboard.js"></script>
+<script>
+	Prism.highlightAll()
+	let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+	// This should probably be throttled.
+	// Especially because it triggers during smooth scrolling.
+	// https://lodash.com/docs/4.17.10#throttle
+	// You could do like...
+	// window.addEventListener("scroll", () => {
+	//    _.throttle(doThatStuff, 100);
+	// });
+	// Only not doing it here to keep this Pen dependency-free.
+
+	window.addEventListener("scroll", event => {
+		let fromTop = window.scrollY;
+
+		mainNavLinks.forEach((link, index) => {
+			let section = document.getElementById(decodeURI(link.hash).substring(1));
+			let nextSection = null
+			if (mainNavLinks[index + 1]) {
+				nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(
+				1));
+			}
+			if (section.offsetTop <= fromTop) {
+				if (nextSection) {
+					if (nextSection.offsetTop > fromTop) {
+						link.classList.add("current");
+					} else {
+						link.classList.remove("current");
+					}
+				} else {
+					link.classList.add("current");
+				}
+			} else {
+				link.classList.remove("current");
+			}
+		});
+	});
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+		var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+		if ("IntersectionObserver" in window) {
+			let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						let lazyImage = entry.target
+						lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+						lazyImage.classList.remove("lazy")
+						lazyImageObserver.unobserve(lazyImage)
+					}
+				});
+			});
+
+			lazyImages.forEach(function (lazyImage) {
+				lazyImageObserver.observe(lazyImage)
+			})
+		} else {
+			// Possibly fall back to a more compatible method here
+		}
+	});
+
+	const menuContainer = document.querySelector('.menu-container')
+	const menus = document.querySelectorAll('.menu-container .menu')
+	const mask = document.querySelector('.mask')
+	const contentWrapper = document.querySelector('.content-wrapper')
+	const latestArticle = document.querySelector('.latest-article')
+	const readMore = document.querySelector('.read-more')
+	const indexPage = document.querySelector('.index-page')
+
+	const isHome = location.pathname === '/'
+	if (latestArticle) {
+		latestArticle.style.display = isHome ? 'block' : 'none'
+		readMore.style.display = isHome ? 'block' : 'none'
+		indexPage.style.display = isHome ? 'none' : 'block'
+	}
+
+	const openMenu = () => {
+		menuContainer.classList.add('open')
+		menus.forEach(menu => {
+			menu.classList.add('animated', 'fadeInLeft')
+		})
+		mask.classList.add('open')
+		contentWrapper.classList.add('is-second')
+	}
+
+	const closeMenu = () => {
+		menuContainer.classList.remove('open')
+		menus.forEach(menu => {
+			menu.classList.remove('animated', 'fadeInLeft')
+		})
+		mask.classList.remove('open')
+		contentWrapper.classList.remove('is-second')
+	}
+</script>
+</body>
+
+</html>

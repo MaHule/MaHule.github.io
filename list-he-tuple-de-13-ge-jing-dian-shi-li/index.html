@@ -1,0 +1,547 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>List和tuple的13个经典实例 | 一小步</title>
+<!-- description在post页面应有不同 -->
+
+	<meta name="description" content="每天进步一点点" />
+	
+<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1665048734325">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://MaHule.github.io/styles/main.css">
+
+
+</head>
+
+<body>
+	<div id="app" class="main px-4 flex flex-col lg:flex-row">
+		<div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+	<div class="lg:sticky top-0">
+		<div class="sidebar-content">
+			<div
+				class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+				<i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+				<a href="https://MaHule.github.io">
+					<img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12"
+						src="https://MaHule.github.io/images/avatar.png?v=1665048734325" alt="">
+				</a>
+				<h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl"
+					style="animation-delay: 0.2s">一小步</h1>
+			</div>
+			
+			<div class="animated fadeInLeft" style="animation-delay: 0.4s">
+				<p class="my-4 text-gray-600 font-light hidden lg:block">
+					文章目录
+				</p>
+				<div class="toc-container hidden lg:block">
+					<ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#1%E5%88%A4%E6%96%ADlist%E5%86%85%E6%9C%89%E6%97%A0%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0">1.判断list内有无重复元素</a></li>
+<li><a href="#2%E5%88%97%E8%A1%A8%E5%8F%8D%E8%BD%AC">2.列表反转</a></li>
+<li><a href="#3%E6%89%BE%E5%87%BA%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0">3.找出列表中的所有重复元素</a></li>
+<li><a href="#4%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97">4.斐波那契数列</a></li>
+<li><a href="#5%E5%87%BA%E7%8E%B0%E6%9C%80%E5%A4%9A">5.出现最多</a></li>
+<li><a href="#6%E6%9B%B4%E9%95%BF%E5%88%97%E8%A1%A8">6.更长列表</a></li>
+<li><a href="#7%E6%B1%82%E8%A1%A8%E5%A4%B4">7.求表头</a></li>
+<li><a href="#8%E6%B1%82%E8%A1%A8%E5%B0%BE">8.求表尾</a></li>
+<li><a href="#9%E6%89%93%E5%8D%B0%E4%B9%98%E6%B3%95%E8%A1%A8">9.打印乘法表</a></li>
+<li><a href="#10%E5%85%83%E7%B4%A0%E5%AF%B9">10.元素对</a></li>
+<li><a href="#11%E6%A0%B7%E6%9C%AC%E6%8A%BD%E6%A0%B7">11.样本抽样</a></li>
+<li><a href="#12%E9%87%8D%E6%B4%97%E6%95%B0%E6%8D%AE%E9%9B%86">12.重洗数据集</a></li>
+<li><a href="#13%E7%94%9F%E6%88%90%E6%BB%A1%E8%B6%B3%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83%E7%9A%84%E5%9D%90%E6%A0%87%E7%82%B9">13.生成满足均匀分布的坐标点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="menu-container">
+	<i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+	<div>
+		
+		
+		<a href="/" class="menu" style="animation-delay: 0s">
+			首页
+		</a>
+		
+		
+		
+		<a href="/archives" class="menu" style="animation-delay: 0.2s">
+			归档
+		</a>
+		
+		
+		
+		<a href="/tags" class="menu" style="animation-delay: 0.4s">
+			标签
+		</a>
+		
+		
+		
+		<a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+			关于
+		</a>
+		
+		
+	</div>
+	<!-- 萌备 https://icp.gov.moe -->
+	<div class="site-footer">
+		<p class="py-4 text-gray-700">
+			© 2022 hope140  <br>
+			<span id="runtime_span"></span> <br>
+			<a href="https://icp.gov.moe/?keyword=20221443" target="_blank">萌ICP备20221443号</a> <br>
+			Powered by MaHule
+		</p>
+		<a class="rss" href="https://MaHule.github.io/atom.xml" target="_blank">RSS</a>
+	</div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+		<div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+			<h1 class="text-3xl font-bold lg:mt-16">
+				List和tuple的13个经典实例
+			</h1>
+			<!-- 由于"/"字符只好做postPath的判断，不设定postPath时是一个长度为0的字符串 -->
+			
+			<div class="text-sm text-gray-700 lg:my-8">
+				2020-04-03 / 10 min read / <span id="/list-he-tuple-de-13-ge-jing-dian-shi-li/"
+					class="waline-pageview-count"> </span> 阅读 / <span id="/list-he-tuple-de-13-ge-jing-dian-shi-li/"
+					class="waline-comment-count"></span>评论
+			</div>
+			
+			<!-- 如果有更好办法再做修改 -->
+			
+			<div class="post-content yue">
+				<p>学习了python中的列表和元组，使用13个例子巩固基础</p>
+<!-- more -->
+<h3 id="1判断list内有无重复元素">1.判断list内有无重复元素</h3>
+<ul>
+<li>方法一：使用list封装的count方法，以此判断每个元素的x在list内的出现次数。如果大于1，则立刻返回True，表示有重复值。如果完成遍历后函数没有返回，表明list内没有重复元素返回False。</li>
+</ul>
+<pre><code class="language-python">def is_duplicated(lst):
+    for x in lst:
+        if lst.count(x) &gt; 1:
+            return True
+    return False
+</code></pre>
+<blockquote>
+<p>调用is_duplicated方法：</p>
+</blockquote>
+<pre><code class="language-python">a = [1,-2,3,4,1,2]
+print(is_duplicated(a))
+</code></pre>
+<pre><code>True
+</code></pre>
+<ul>
+<li>方法二：借助set判断：</li>
+</ul>
+<pre><code class="language-python">def is_duplicated(lst):
+    return len(lst) != len(set(lst))
+</code></pre>
+<h3 id="2列表反转">2.列表反转</h3>
+<ul>
+<li>方法一：使用切片的方法</li>
+</ul>
+<pre><code class="language-python">def reverse(lst):
+    return lst[::-1]
+</code></pre>
+<blockquote>
+<p>调用reverse：</p>
+</blockquote>
+<pre><code class="language-python">r = reverse([1,-2,3,4,1,2])
+print(r)
+</code></pre>
+<pre><code>[2, 1, 4, 3, -2, 1]
+</code></pre>
+<h3 id="3找出列表中的所有重复元素">3.找出列表中的所有重复元素</h3>
+<ul>
+<li>遍历列表，如果出现次数大于1且不在返回的列表中，则添加到ret中。满足x not in ret ，表明x不在列表中。</li>
+</ul>
+<pre><code class="language-python">def find_duplicate(lst):
+    ret = []
+    for x in lst:
+        if lst.count(x) &gt; 1 and x not in ret:
+            ret.append(x)
+    return ret
+</code></pre>
+<blockquote>
+<p>调用find_duplicate:</p>
+</blockquote>
+<pre><code class="language-python">a = [1,2,3,4,3,2]
+r = find_duplicate(a)
+print(a)
+</code></pre>
+<pre><code>[1, 2, 3, 4, 3, 2]
+</code></pre>
+<h3 id="4斐波那契数列">4.斐波那契数列</h3>
+<ul>
+<li>斐波那契数列第一、二个元素都为 1，第三个元素等于前两个元素和，依次类推。</li>
+</ul>
+<pre><code class="language-python">def fibonacci(n):
+    if n &lt;= 1:
+        return [1]
+    fib = [1,1]
+    while len(fib) &lt; n:
+        fib.append(fib[len(fib)-1]+fib[len(fib)-2])
+    return fib
+</code></pre>
+<blockquote>
+<p>调用fibonacci:</p>
+</blockquote>
+<pre><code class="language-python">r = fibonacci(5)
+print(r)
+</code></pre>
+<pre><code>[1, 1, 2, 3, 5]
+</code></pre>
+<ul>
+<li>生成器版本：</li>
+</ul>
+<p>使用python生成器，保证代码简洁的同时，还能节省内存：</p>
+<pre><code class="language-python">def fibonacci(n):
+    a,b = 1,1
+    for _ in range(n):
+        yield a
+        a,b = b, a+b
+</code></pre>
+<p>遇到yield返回，下次在进入函数体，从yield的下一句开始执行。</p>
+<pre><code class="language-python">list(fibonacci(5))
+</code></pre>
+<pre><code>[1, 1, 2, 3, 5]
+</code></pre>
+<h3 id="5出现最多">5.出现最多</h3>
+<p>max函数python的内置函数，所以无需import<br>
+max有一个key参数，指定如何进行比较</p>
+<ul>
+<li>求出现频次最多的元素</li>
+</ul>
+<pre><code class="language-python">def mode(lst):
+    if lst is None or len(lst) == 0:
+        return None
+    return max(lst,key = lambda v:lst.count(v))
+</code></pre>
+<p>调用mode</p>
+<pre><code class="language-python">lst = [1,3,3,2,1,1,2]
+r = mode(lst)
+print(f'{lst}中出现次数最多的元素为：{r}')
+</code></pre>
+<pre><code>[1, 3, 3, 2, 1, 1, 2]中出现次数最多的元素为：[1]
+</code></pre>
+<p>上面的算法出现最多的元素有多个是时，默认只返回一个。下面算法支持返回多个：</p>
+<pre><code class="language-python">def mode(lst):
+    if lst is None or len(lst) == 0:
+        return None
+    max_freq_elem = max(lst,key = lambda v: lst.count(v))
+    max_freq = lst.count(max_freq_elem)
+    ret = []
+    for i in lst:
+        if i not in ret and lst.count(i) == max_freq:
+            ret.append(i)
+    return ret
+</code></pre>
+<pre><code class="language-python">lst = [1,3,3,2,1,1,2]
+key = lambda v:lst.count(1)
+print(key(lst))
+</code></pre>
+<pre><code>3
+</code></pre>
+<h3 id="6更长列表">6.更长列表</h3>
+<h3 id="7求表头">7.求表头</h3>
+<ul>
+<li>返回列表的第一个元素，列表为空时，返回None（通过这个例子，学习使用if和else的简洁表达）</li>
+</ul>
+<pre><code class="language-python">def head(lst):
+    return lst[0] if len(lst) &gt; 0 else None
+</code></pre>
+<pre><code class="language-python">print(head([]))
+print(head([3,4,1]))
+</code></pre>
+<pre><code>None
+3
+</code></pre>
+<h3 id="8求表尾">8.求表尾</h3>
+<ul>
+<li>求列表的最后一个元素，同样列表为空时，返回None</li>
+</ul>
+<pre><code class="language-python">def tail(lst):
+    return lst[-1] if len(lst) &gt; 0 else None
+</code></pre>
+<pre><code class="language-python">print(tail([]))
+print(tail([3,4,1]))
+</code></pre>
+<pre><code>None
+1
+</code></pre>
+<h3 id="9打印乘法表">9.打印乘法表</h3>
+<ul>
+<li>外层循环一次，print()打印一个换行；内层循环一次，打印一个等式</li>
+</ul>
+<pre><code class="language-python">def mul_table():
+    for i in range(1,10):
+        for j in range(1,i+1):
+            print(str(j) + str(&quot;*&quot;) + str(i) + &quot;=&quot; + str(i*j), end=&quot;\t&quot;)
+        print()
+mul_table()
+</code></pre>
+<pre><code>1*1=1	
+1*2=2	2*2=4	
+1*3=3	2*3=6	3*3=9	
+1*4=4	2*4=8	3*4=12	4*4=16	
+1*5=5	2*5=10	3*5=15	4*5=20	5*5=25	
+1*6=6	2*6=12	3*6=18	4*6=24	5*6=30	6*6=36	
+1*7=7	2*7=14	3*7=21	4*7=28	5*7=35	6*7=42	7*7=49	
+1*8=8	2*8=16	3*8=24	4*8=32	5*8=40	6*8=48	7*8=56	8*8=64	
+1*9=9	2*9=18	3*9=27	4*9=36	5*9=45	6*9=54	7*9=63	8*9=72	9*9=81	
+</code></pre>
+<h3 id="10元素对">10.元素对</h3>
+<ul>
+<li>t[:-1]:原列表切掉最后一个元素；</li>
+<li>t[1:]:原列表切掉第一个元素；</li>
+<li>zip(iter1,iter2):实现iter1和iter2的对应索引处的元素拼接</li>
+</ul>
+<pre><code class="language-python">list(zip([1,2],[2,3]))
+</code></pre>
+<pre><code>[(1, 2), (2, 3)]
+</code></pre>
+<pre><code class="language-python">def pair(t):
+    return list(zip(t[:-1],t[1:]))
+</code></pre>
+<pre><code class="language-python">pair([1,2,3])
+</code></pre>
+<pre><code>[(1, 2), (2, 3)]
+</code></pre>
+<pre><code class="language-python">pair(range(10))
+</code></pre>
+<pre><code>[(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9)]
+</code></pre>
+<h3 id="11样本抽样">11.样本抽样</h3>
+<ul>
+<li>内置模块中，有一个sample函数，实现“抽样”功能</li>
+</ul>
+<p>下面从100个例子中，随机抽取10个</p>
+<ol>
+<li>首先，使用列表生成式，创建长度为100的列表lst;</li>
+<li>然后，sample抽取10个样本</li>
+</ol>
+<pre><code class="language-python">from random import randint,sample
+
+lst = [randint(0,50) for _ in range(100)]
+print(lst[:5])
+lst_sample = sample(lst,10)
+print(lst_sample)
+</code></pre>
+<pre><code>[3, 24, 44, 2, 13]
+[40, 40, 21, 46, 1, 4, 29, 39, 41, 13]
+</code></pre>
+<h3 id="12重洗数据集">12.重洗数据集</h3>
+<p>内置 random 中的 shuffle 函数，能重洗数据。</p>
+<p>值得注意，shuffle 是对输入列表就地（in place）洗牌，节省存储空间。</p>
+<pre><code class="language-python">from random import shuffle
+lst = [randint(0,50) for _ in range(100)]
+shuffle(lst)
+print(lst[:5])
+</code></pre>
+<pre><code>[13, 7, 40, 35, 29]
+</code></pre>
+<h3 id="13生成满足均匀分布的坐标点">13.生成满足均匀分布的坐标点</h3>
+<p>random模块，uniform(a,b)生成[a,b]内的一个随机数。<br>
+借助列表生成式，生成100个均匀分布的坐标点。</p>
+<pre><code class="language-python">from random import uniform
+x, y = [i for i in range(100)],[round(uniform(0, 10), 2) for _ in range(100)]
+print(y)
+</code></pre>
+<pre><code>[6.97, 7.96, 9.35, 3.76, 5.92, 1.74, 0.78, 2.02, 1.72, 4.63, 2.53, 1.46, 4.87, 1.24, 6.01, 1.14, 8.04, 0.17, 3.46, 8.95, 4.63, 3.28, 5.25, 5.37, 1.47, 9.47, 5.19, 6.21, 4.62, 9.54, 8.45, 7.24, 4.65, 9.54, 8.76, 1.0, 8.09, 1.61, 6.11, 7.21, 1.55, 3.52, 5.71, 5.02, 8.8, 5.38, 7.98, 4.54, 0.95, 4.32, 6.79, 6.42, 0.73, 1.17, 3.78, 7.62, 5.32, 0.3, 4.32, 4.72, 7.21, 2.33, 7.21, 7.07, 3.16, 3.14, 4.34, 7.61, 4.81, 3.28, 3.94, 9.42, 0.78, 6.38, 4.61, 4.88, 2.5, 4.57, 7.4, 5.85, 4.62, 7.07, 9.66, 1.64, 1.88, 5.48, 4.55, 7.46, 6.52, 7.03, 9.49, 4.64, 0.63, 0.04, 8.08, 3.63, 1.16, 7.45, 9.46, 4.2]
+</code></pre>
+<pre><code class="language-python">from pyecharts.charts import Scatter
+import pyecharts.options as opts
+from random import uniform
+
+def draw_uniform_points():
+    x, y = [i for i in range(100)], [
+        round(uniform(0, 10), 2) for _ in range(100)]
+    print(y)
+    c = (
+        Scatter()
+        .add_xaxis(x)
+        .add_yaxis('y', y)
+    )
+    c.render()
+
+
+draw_uniform_points()
+</code></pre>
+<pre><code>[3.61, 8.16, 3.4, 9.49, 0.78, 4.37, 7.16, 8.53, 6.79, 2.24, 1.57, 2.44, 5.93, 8.6, 5.88, 0.42, 4.07, 6.26, 0.17, 9.65, 5.9, 5.85, 7.57, 8.78, 1.29, 3.46, 8.62, 0.39, 2.48, 6.41, 5.96, 8.86, 6.18, 1.81, 1.17, 7.59, 1.54, 5.56, 7.27, 7.75, 3.81, 3.9, 4.81, 9.09, 8.34, 0.57, 1.77, 6.03, 9.09, 2.54, 4.23, 0.97, 1.66, 5.55, 1.5, 5.3, 9.21, 1.59, 7.13, 4.49, 4.6, 0.6, 2.66, 7.6, 2.1, 8.78, 0.8, 7.85, 2.39, 1.75, 6.47, 2.03, 6.84, 3.42, 1.47, 8.68, 2.32, 5.79, 7.73, 5.41, 4.37, 7.03, 0.93, 1.28, 3.18, 7.75, 8.18, 4.08, 4.81, 3.18, 6.83, 5.52, 8.14, 1.66, 8.49, 1.54, 9.54, 2.75, 7.81, 6.66]
+</code></pre>
+<pre><code class="language-python">
+</code></pre>
+<!-- more -->
+
+			</div>
+
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/uQJCDEn4z/">
+				<span class="flex-auto">
+					Python
+				</span>
+			</a>
+			
+
+			<div class="post-Copyright py-12">
+				<span class="flex-auto"> 本文来源于 一小步</span>
+				<div class="prev-post">
+					<a href="https://MaHule.github.io">
+						<h3 class="post-Copyright-link">
+							博客地址： https://MaHule.github.io
+						</h3>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex justify-between py-8">
+				
+				<div class="prev-post">
+					<a href="https://MaHule.github.io/解决使用代理时无法访问 Microsoft Store/">
+						<h3 class="post-title">
+							<i class="ri-arrow-left-line"></i>
+							Windows代理后问题
+						</h3>
+					</a>
+				</div>
+				
+
+				
+				<div class="next-post">
+					<a href="https://MaHule.github.io/python-ban-shi-da-jing-dian-pai-xu-suan-fa/">
+						<h3 class="post-title">
+							Python版十大经典排序算法
+							<i class="ri-arrow-right-line"></i>
+						</h3>
+					</a>
+				</div>
+				
+			</div>
+
+			
+			
+			
+
+		</div>
+	</div>
+
+	<script src="https://MaHule.github.io/media/prism.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/show_runtime.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/clipboard.js"></script>
+<script>
+	Prism.highlightAll()
+	let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+	// This should probably be throttled.
+	// Especially because it triggers during smooth scrolling.
+	// https://lodash.com/docs/4.17.10#throttle
+	// You could do like...
+	// window.addEventListener("scroll", () => {
+	//    _.throttle(doThatStuff, 100);
+	// });
+	// Only not doing it here to keep this Pen dependency-free.
+
+	window.addEventListener("scroll", event => {
+		let fromTop = window.scrollY;
+
+		mainNavLinks.forEach((link, index) => {
+			let section = document.getElementById(decodeURI(link.hash).substring(1));
+			let nextSection = null
+			if (mainNavLinks[index + 1]) {
+				nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(
+				1));
+			}
+			if (section.offsetTop <= fromTop) {
+				if (nextSection) {
+					if (nextSection.offsetTop > fromTop) {
+						link.classList.add("current");
+					} else {
+						link.classList.remove("current");
+					}
+				} else {
+					link.classList.add("current");
+				}
+			} else {
+				link.classList.remove("current");
+			}
+		});
+	});
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+		var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+		if ("IntersectionObserver" in window) {
+			let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						let lazyImage = entry.target
+						lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+						lazyImage.classList.remove("lazy")
+						lazyImageObserver.unobserve(lazyImage)
+					}
+				});
+			});
+
+			lazyImages.forEach(function (lazyImage) {
+				lazyImageObserver.observe(lazyImage)
+			})
+		} else {
+			// Possibly fall back to a more compatible method here
+		}
+	});
+
+	const menuContainer = document.querySelector('.menu-container')
+	const menus = document.querySelectorAll('.menu-container .menu')
+	const mask = document.querySelector('.mask')
+	const contentWrapper = document.querySelector('.content-wrapper')
+	const latestArticle = document.querySelector('.latest-article')
+	const readMore = document.querySelector('.read-more')
+	const indexPage = document.querySelector('.index-page')
+
+	const isHome = location.pathname === '/'
+	if (latestArticle) {
+		latestArticle.style.display = isHome ? 'block' : 'none'
+		readMore.style.display = isHome ? 'block' : 'none'
+		indexPage.style.display = isHome ? 'none' : 'block'
+	}
+
+	const openMenu = () => {
+		menuContainer.classList.add('open')
+		menus.forEach(menu => {
+			menu.classList.add('animated', 'fadeInLeft')
+		})
+		mask.classList.add('open')
+		contentWrapper.classList.add('is-second')
+	}
+
+	const closeMenu = () => {
+		menuContainer.classList.remove('open')
+		menus.forEach(menu => {
+			menu.classList.remove('animated', 'fadeInLeft')
+		})
+		mask.classList.remove('open')
+		contentWrapper.classList.remove('is-second')
+	}
+</script>
+</body>
+
+</html>

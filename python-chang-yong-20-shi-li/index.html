@@ -1,0 +1,608 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python常用20实例 | 一小步</title>
+<!-- description在post页面应有不同 -->
+
+	<meta name="description" content="每天进步一点点" />
+	
+<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1665048734325">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://MaHule.github.io/styles/main.css">
+
+
+</head>
+
+<body>
+	<div id="app" class="main px-4 flex flex-col lg:flex-row">
+		<div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+	<div class="lg:sticky top-0">
+		<div class="sidebar-content">
+			<div
+				class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+				<i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+				<a href="https://MaHule.github.io">
+					<img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12"
+						src="https://MaHule.github.io/images/avatar.png?v=1665048734325" alt="">
+				</a>
+				<h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl"
+					style="animation-delay: 0.2s">一小步</h1>
+			</div>
+			
+			<div class="animated fadeInLeft" style="animation-delay: 0.4s">
+				<p class="my-4 text-gray-600 font-light hidden lg:block">
+					文章目录
+				</p>
+				<div class="toc-container hidden lg:block">
+					<ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#1%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BF%BB%E8%BD%AC">1.字符串翻转</a></li>
+<li><a href="#2%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E6%95%B0%E6%98%AF%E5%90%A6%E6%98%AF%E5%9B%9E%E6%96%87">2.判断字符数是否是回文</a></li>
+<li><a href="#3%E5%8D%95%E8%AF%8D%E5%A4%A7%E5%B0%8F%E5%86%99">3.单词大小写</a></li>
+<li><a href="#4%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%86%E5%88%86">4.字符串拆分</a></li>
+<li><a href="#5%E5%B0%86%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%90%88%E5%B9%B6">5.将列表中的字符串合并</a></li>
+<li><a href="#6-%E5%AF%BB%E6%89%BE%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%94%AF%E4%B8%80%E7%9A%84%E5%85%83%E7%B4%A0">6. 寻找字符串中唯一的元素</a></li>
+<li><a href="#7%E5%B0%86%E5%85%83%E7%B4%A0%E8%BF%9B%E8%A1%8C%E9%87%8D%E5%A4%8D">7.将元素进行重复</a></li>
+<li><a href="#8%E5%9F%BA%E4%BA%8E%E5%88%97%E8%A1%A8%E7%9A%84%E6%89%A9%E5%B1%95">8.基于列表的扩展</a></li>
+<li><a href="#9%E5%B0%86%E5%88%97%E8%A1%A8%E5%B1%95%E5%BC%80">9.将列表展开</a></li>
+<li><a href="#10%E4%BA%8C%E5%80%BC%E4%BA%A4%E6%8D%A2">10.二值交换</a></li>
+<li><a href="#11-%E7%BB%9F%E8%AE%A1%E5%88%97%E8%A1%A8%E4%B8%AD%E5%85%83%E7%B4%A0%E7%9A%84%E9%A2%91%E7%8E%87">11. 统计列表中元素的频率</a></li>
+<li><a href="#12-%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%89%80%E5%8C%85%E5%90%AB%E5%85%83%E7%B4%A0%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C">12. 判断字符串所包含元素是否相同</a></li>
+<li><a href="#13-%E5%B0%86%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E5%AD%97%E5%88%97%E8%A1%A8">13. 将数字字符串转换为数字列表</a></li>
+<li><a href="#14-%E4%BD%BF%E7%94%A8try-except-finally%E6%A8%A1%E5%9D%97">14. 使用try-except-finally模块</a></li>
+<li><a href="#15-%E4%BD%BF%E7%94%A8enumerate%E5%87%BD%E6%95%B0%E6%9D%A5%E8%8E%B7%E5%8F%96%E7%B4%A2%E5%BC%95-%E6%95%B0%E5%80%BC%E5%AF%B9">15. 使用enumerate()函数来获取索引-数值对</a></li>
+<li><a href="#16-%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%B6%88%E8%80%97%E6%97%B6%E9%97%B4">16. 代码执行消耗时间</a></li>
+<li><a href="#17-%E6%A3%80%E6%9F%A5%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E6%83%85%E5%86%B5">17. 检查对象内存占用情况</a></li>
+<li><a href="#18-%E5%AD%97%E5%85%B8%E7%9A%84%E5%90%88%E5%B9%B6">18. 字典的合并</a></li>
+<li><a href="#19%E9%9A%8F%E6%9C%BA%E9%87%87%E6%A0%B7">19.随机采样</a></li>
+<li><a href="#20%E6%A3%80%E6%9F%A5%E5%94%AF%E4%B8%80%E6%80%A7">20.检查唯一性</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="menu-container">
+	<i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+	<div>
+		
+		
+		<a href="/" class="menu" style="animation-delay: 0s">
+			首页
+		</a>
+		
+		
+		
+		<a href="/archives" class="menu" style="animation-delay: 0.2s">
+			归档
+		</a>
+		
+		
+		
+		<a href="/tags" class="menu" style="animation-delay: 0.4s">
+			标签
+		</a>
+		
+		
+		
+		<a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+			关于
+		</a>
+		
+		
+	</div>
+	<!-- 萌备 https://icp.gov.moe -->
+	<div class="site-footer">
+		<p class="py-4 text-gray-700">
+			© 2022 hope140  <br>
+			<span id="runtime_span"></span> <br>
+			<a href="https://icp.gov.moe/?keyword=20221443" target="_blank">萌ICP备20221443号</a> <br>
+			Powered by MaHule
+		</p>
+		<a class="rss" href="https://MaHule.github.io/atom.xml" target="_blank">RSS</a>
+	</div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+		<div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+			<h1 class="text-3xl font-bold lg:mt-16">
+				Python常用20实例
+			</h1>
+			<!-- 由于"/"字符只好做postPath的判断，不设定postPath时是一个长度为0的字符串 -->
+			
+			<div class="text-sm text-gray-700 lg:my-8">
+				2020-03-29 / 7 min read / <span id="/python-chang-yong-20-shi-li/"
+					class="waline-pageview-count"> </span> 阅读 / <span id="/python-chang-yong-20-shi-li/"
+					class="waline-comment-count"></span>评论
+			</div>
+			
+			<!-- 如果有更好办法再做修改 -->
+			
+			<div class="post-content yue">
+				<h3 id="1字符串翻转">1.字符串翻转</h3>
+<pre><code class="language-python">#方法一
+str1 = &quot;hello world&quot;
+print(str1[::-1])
+
+#方法二
+from functools import reduce
+print(reduce(lambda x,y:y+x,str1))
+</code></pre>
+<pre><code>dlrow olleh
+dlrow olleh
+</code></pre>
+<h3 id="2判断字符数是否是回文">2.判断字符数是否是回文</h3>
+<pre><code class="language-python">'''
+利用回文字符串翻转仍然是该字符串可以判断是否是回文字符串
+'''
+
+str9 = &quot;abccba&quot;
+str9_1 = &quot;abcde&quot;
+
+def fun(string):
+    if string == string[::-1]:
+        print(&quot;该字符串是回文字符串&quot;)
+    else:
+        print(&quot;该字符串不是回文字符串&quot;)
+
+fun(str9)
+fun(str9_1)
+</code></pre>
+<pre><code>该字符串是回文字符串
+该字符串不是回文字符串
+</code></pre>
+<h3 id="3单词大小写">3.单词大小写</h3>
+<pre><code class="language-python">str2 = &quot;i love python&quot;
+
+print(str2.title())   #多次首字母大写
+print(str2.upper())   #单词所有字母大写
+print(str2.capitalize())   #字符串首字母大写
+</code></pre>
+<pre><code>I Love Python
+I LOVE PYTHON
+I love python
+</code></pre>
+<h3 id="4字符串拆分">4.字符串拆分</h3>
+<pre><code class="language-python">str4 = &quot;i love python&quot;
+str4_1 = &quot;I/Love/Python&quot;
+str4_2 = &quot;   I Love Python&quot;
+print(str4.split())   #默认按照空格进行拆分
+print(str4_1.split('/'))
+print(str4_2.strip())   #默认去除字符串两边空格，返回的是字符串
+print(type(str4_2.strip()))
+</code></pre>
+<pre><code>['i', 'love', 'python']
+['I', 'Love', 'Python']
+I Love Python
+&lt;class 'str'&gt;
+</code></pre>
+<h3 id="5将列表中的字符串合并">5.将列表中的字符串合并</h3>
+<pre><code class="language-python">list8 = ['I','Love','Python']
+print(' '.join(list8))
+
+#去除字符串中的不需要的字符
+import re
+str8 = &quot;I/ love Python&quot;
+print(' '.join(re.split('\W+',str8)))
+</code></pre>
+<pre><code>I Love Python
+I love Python
+</code></pre>
+<h3 id="6-寻找字符串中唯一的元素">6. 寻找字符串中唯一的元素</h3>
+<pre><code class="language-python">str3 = &quot;wwweeerftttg&quot;
+print(''.join(set(str3)))
+
+#对于列表的筛选
+list1 = [2,4,5,6,7,1,2]
+print(list(set(list1)))
+</code></pre>
+<pre><code>trgfew
+[1, 2, 4, 5, 6, 7]
+</code></pre>
+<h3 id="7将元素进行重复">7.将元素进行重复</h3>
+<pre><code class="language-python">str3 = &quot;python&quot;
+list2 = [1,2,3]
+#乘法表述
+print(str3 * 2)
+print(list2 * 2)
+
+str3_1 = &quot;&quot;
+list2_1 = []
+for i in range(2):
+    str3_1 += str3
+    list2_1.extend(list2)
+print(str3_1)
+print(list2_1)
+</code></pre>
+<pre><code>pythonpython
+[1, 2, 3, 1, 2, 3]
+pythonpython
+[1, 2, 3, 1, 2, 3]
+</code></pre>
+<h3 id="8基于列表的扩展">8.基于列表的扩展</h3>
+<pre><code class="language-python">list3 = [2,2,2,2]
+print([2*x for x in list3])
+
+#列表的展开
+list4 = [[1,2,3],[4,5,6],[4,3],[1]]
+print([i for k in list4 for i in k])
+</code></pre>
+<pre><code>[4, 4, 4, 4]
+[1, 2, 3, 4, 5, 6, 4, 3, 1]
+</code></pre>
+<h3 id="9将列表展开">9.将列表展开</h3>
+<pre><code class="language-python">#from iteration_utilities import deepflatten
+
+#方法1
+list17 = [[12,5,3],[2,4,[5],[6,9,7]],[5,8,[9,[10,12]]]]
+
+#方法2
+def flatten(lst):
+    res = []
+    for i in lst:
+        if isinstance(i,list):
+            res.extend(flatten(i))
+        else:
+            res.append(i)
+    return res
+
+print(flatten(list17))
+</code></pre>
+<pre><code>[12, 5, 3, 2, 4, 5, 6, 9, 7, 5, 8, 9, 10, 12]
+</code></pre>
+<h3 id="10二值交换">10.二值交换</h3>
+<pre><code class="language-python">a = 1
+b = 2
+
+# 方法1
+a,b = b,a
+print(a,b)
+
+#方法2
+c = a+b
+a = c-a
+b = c-b
+print(a,b)
+</code></pre>
+<pre><code>2 1
+1 2
+</code></pre>
+<h3 id="11-统计列表中元素的频率">11. 统计列表中元素的频率</h3>
+<pre><code class="language-python">from collections import Counter
+
+list10 = ['p','p','Y','y','t','t','h','o','o','o','n']
+count = Counter(list10)
+print(count)
+print(count['p'])
+print(count.most_common(1))
+
+
+#手动实现
+dict1 = {}
+for i in list10:
+    if i in dict1:
+        dict1[i] +=1
+    else:
+        dict1[i] = 1
+print(max(dict1,key=lambda x:dict1[x]))
+</code></pre>
+<pre><code>Counter({'o': 3, 'p': 2, 't': 2, 'Y': 1, 'y': 1, 'h': 1, 'n': 1})
+2
+[('o', 3)]
+o
+</code></pre>
+<h3 id="12-判断字符串所包含元素是否相同">12. 判断字符串所包含元素是否相同</h3>
+<pre><code class="language-python">str11_1, str11_2, str11_3 = &quot;qwert&quot;,&quot;qertw&quot;,&quot;reqtw&quot;
+cn_str11_1,cn_str11_2,cn_str11_3 = Counter(str11_1),Counter(str11_2),Counter(str11_3)
+
+if(cn_str11_1 == cn_str11_2 and cn_str11_2 ==cn_str11_3):
+    print(&quot;三个字符串所包含的元素相同&quot;)
+</code></pre>
+<pre><code>三个字符串所包含的元素相同
+</code></pre>
+<h3 id="13-将数字字符串转换为数字列表">13. 将数字字符串转换为数字列表</h3>
+<pre><code class="language-python">str19 = &quot;2345343&quot;
+
+#方法1
+list19_1 = list(map(int,str19))
+print(list19_1)
+print(&quot;===================&quot;)
+
+#方法2
+list19_2 = [int(i) for i in str19]
+print(list19_2)
+</code></pre>
+<pre><code class="language-python">[2, 3, 4, 5, 3, 4, 3]
+===================
+[2, 3, 4, 5, 3, 4, 3]
+</code></pre>
+<h3 id="14-使用try-except-finally模块">14. 使用try-except-finally模块</h3>
+<pre><code class="language-python">a = 1
+b = 4
+
+try:
+    a.append(b)
+except AttributeError as e:
+    print(&quot;'a'不是一个列表&quot;)
+else:
+    print(a)
+finally:
+    print(&quot;程序结束&quot;)
+    
+print(&quot;==========================&quot;)
+a = []
+b = 4
+try:
+    a.append(b)
+except AttributeError as e:
+    print(&quot;'a'不是一个列表！&quot;)
+else:
+    print(a)
+finally:
+    print(&quot;程序结束&quot;)
+</code></pre>
+<pre><code>'a'不是一个列表
+程序结束
+==========================
+[4]
+程序结束
+</code></pre>
+<h3 id="15-使用enumerate函数来获取索引-数值对">15. 使用enumerate()函数来获取索引-数值对</h3>
+<pre><code class="language-python">str13 = &quot;Python&quot;
+list13 = [1,2,3,4,5]
+for i,j in enumerate(str13):
+    print(i,j)
+print(&quot;========================&quot;)
+for i,j in enumerate(list13):
+    print(i,j)
+</code></pre>
+<pre><code>0 P
+1 y
+2 t
+3 h
+4 o
+5 n
+========================
+0 1
+1 2
+2 3
+3 4
+4 5
+</code></pre>
+<h3 id="16-代码执行消耗时间">16. 代码执行消耗时间</h3>
+<pre><code class="language-python">import time
+
+start = time.time()
+
+#代码块
+num = 0
+for i in range(1000000):
+    num = i
+#打印消耗时间
+print(&quot;共消耗时间：&quot;,time.time()-start,&quot;s&quot;)
+</code></pre>
+<pre><code>共消耗时间： 0.09278535842895508 s
+</code></pre>
+<h3 id="17-检查对象内存占用情况">17. 检查对象内存占用情况</h3>
+<pre><code class="language-python">
+import sys
+
+str14 = &quot;a&quot;
+str14_1 = &quot;aaddf&quot;
+num14 = 32
+print(sys.getsizeof(str14))
+print(sys.getsizeof(num14))
+print(sys.getsizeof(str14_1))
+</code></pre>
+<pre><code>54
+28
+54
+</code></pre>
+<h3 id="18-字典的合并">18. 字典的合并</h3>
+<pre><code class="language-python">dict1 = {'a':1, 'b':2}
+dict2 = {'c':3, 'd':4}
+
+#方法1
+combined_dict = {**dict1,**dict2}
+print(combined_dict)
+print(&quot;=====================&quot;)
+
+#方法二
+dict1.update(dict2)
+print(dict1)
+</code></pre>
+<pre><code>{'a': 1, 'b': 2, 'c': 3, 'd': 4}
+=====================
+{'a': 1, 'b': 2, 'c': 3, 'd': 4}
+</code></pre>
+<h3 id="19随机采样">19.随机采样</h3>
+<pre><code class="language-python">import random
+str18 = &quot;wewewe&quot;
+list18 = [1,2,4,5,6]
+
+n_samples = 3
+print(random.sample(list18,n_samples))
+print(random.sample(str18,n_samples))
+</code></pre>
+<pre><code>[5, 2, 1]
+['e', 'e', 'e']
+</code></pre>
+<h3 id="20检查唯一性">20.检查唯一性</h3>
+<pre><code class="language-python">str20 = [1,2,3,4,5,6]
+str20_1 = [1,2,2,4,5,6]
+
+def ifUnque(seq):
+    if (len(seq) == len(set(seq))):
+        print(&quot;该列表中元素都是唯一的&quot;)
+    else:
+        print(&quot;该列表中元素不都是唯一的&quot;)
+ifUnque(str20)
+ifUnque(str20_1)
+</code></pre>
+<pre><code>该列表中元素都是唯一的
+该列表中元素不都是唯一的
+</code></pre>
+<pre><code class="language-python">
+</code></pre>
+
+			</div>
+
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/uQJCDEn4z/">
+				<span class="flex-auto">
+					Python
+				</span>
+			</a>
+			
+
+			<div class="post-Copyright py-12">
+				<span class="flex-auto"> 本文来源于 一小步</span>
+				<div class="prev-post">
+					<a href="https://MaHule.github.io">
+						<h3 class="post-Copyright-link">
+							博客地址： https://MaHule.github.io
+						</h3>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex justify-between py-8">
+				
+				<div class="prev-post">
+					<a href="https://MaHule.github.io/python-ban-shi-da-jing-dian-pai-xu-suan-fa/">
+						<h3 class="post-title">
+							<i class="ri-arrow-left-line"></i>
+							Python版十大经典排序算法
+						</h3>
+					</a>
+				</div>
+				
+
+				
+			</div>
+
+			
+			
+			
+
+		</div>
+	</div>
+
+	<script src="https://MaHule.github.io/media/prism.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/show_runtime.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/clipboard.js"></script>
+<script>
+	Prism.highlightAll()
+	let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+	// This should probably be throttled.
+	// Especially because it triggers during smooth scrolling.
+	// https://lodash.com/docs/4.17.10#throttle
+	// You could do like...
+	// window.addEventListener("scroll", () => {
+	//    _.throttle(doThatStuff, 100);
+	// });
+	// Only not doing it here to keep this Pen dependency-free.
+
+	window.addEventListener("scroll", event => {
+		let fromTop = window.scrollY;
+
+		mainNavLinks.forEach((link, index) => {
+			let section = document.getElementById(decodeURI(link.hash).substring(1));
+			let nextSection = null
+			if (mainNavLinks[index + 1]) {
+				nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(
+				1));
+			}
+			if (section.offsetTop <= fromTop) {
+				if (nextSection) {
+					if (nextSection.offsetTop > fromTop) {
+						link.classList.add("current");
+					} else {
+						link.classList.remove("current");
+					}
+				} else {
+					link.classList.add("current");
+				}
+			} else {
+				link.classList.remove("current");
+			}
+		});
+	});
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+		var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+		if ("IntersectionObserver" in window) {
+			let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						let lazyImage = entry.target
+						lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+						lazyImage.classList.remove("lazy")
+						lazyImageObserver.unobserve(lazyImage)
+					}
+				});
+			});
+
+			lazyImages.forEach(function (lazyImage) {
+				lazyImageObserver.observe(lazyImage)
+			})
+		} else {
+			// Possibly fall back to a more compatible method here
+		}
+	});
+
+	const menuContainer = document.querySelector('.menu-container')
+	const menus = document.querySelectorAll('.menu-container .menu')
+	const mask = document.querySelector('.mask')
+	const contentWrapper = document.querySelector('.content-wrapper')
+	const latestArticle = document.querySelector('.latest-article')
+	const readMore = document.querySelector('.read-more')
+	const indexPage = document.querySelector('.index-page')
+
+	const isHome = location.pathname === '/'
+	if (latestArticle) {
+		latestArticle.style.display = isHome ? 'block' : 'none'
+		readMore.style.display = isHome ? 'block' : 'none'
+		indexPage.style.display = isHome ? 'none' : 'block'
+	}
+
+	const openMenu = () => {
+		menuContainer.classList.add('open')
+		menus.forEach(menu => {
+			menu.classList.add('animated', 'fadeInLeft')
+		})
+		mask.classList.add('open')
+		contentWrapper.classList.add('is-second')
+	}
+
+	const closeMenu = () => {
+		menuContainer.classList.remove('open')
+		menus.forEach(menu => {
+			menu.classList.remove('animated', 'fadeInLeft')
+		})
+		mask.classList.remove('open')
+		contentWrapper.classList.remove('is-second')
+	}
+</script>
+</body>
+
+</html>

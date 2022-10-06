@@ -1,0 +1,373 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python字符串 | 一小步</title>
+<!-- description在post页面应有不同 -->
+
+	<meta name="description" content="每天进步一点点" />
+	
+<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1665048734325">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://MaHule.github.io/styles/main.css">
+
+
+</head>
+
+<body>
+	<div id="app" class="main px-4 flex flex-col lg:flex-row">
+		<div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+	<div class="lg:sticky top-0">
+		<div class="sidebar-content">
+			<div
+				class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+				<i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+				<a href="https://MaHule.github.io">
+					<img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12"
+						src="https://MaHule.github.io/images/avatar.png?v=1665048734325" alt="">
+				</a>
+				<h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl"
+					style="animation-delay: 0.2s">一小步</h1>
+			</div>
+			
+			<div class="animated fadeInLeft" style="animation-delay: 0.4s">
+				<p class="my-4 text-gray-600 font-light hidden lg:block">
+					文章目录
+				</p>
+				<div class="toc-container hidden lg:block">
+					<ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#01%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2">01.反转字符串</a></li>
+<li><a href="#02%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C">02.字符串切片操作</a></li>
+<li><a href="#03join%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2">03.join连接字符串</a></li>
+<li><a href="#04%E5%88%86%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2">04.分割字符串</a></li>
+<li><a href="#05%E6%9B%BF%E6%8D%A2">05.替换</a></li>
+<li><a href="#06%E5%AD%90%E4%B8%B2%E5%88%A4%E6%96%AD">06.子串判断</a></li>
+<li><a href="#07%E5%8E%BB%E7%A9%BA%E6%A0%BC">07.去空格</a></li>
+<li><a href="#08%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%AD%97%E8%8A%82%E9%95%BF%E5%BA%A6">08.字符串的字节长度</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="menu-container">
+	<i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+	<div>
+		
+		
+		<a href="/" class="menu" style="animation-delay: 0s">
+			首页
+		</a>
+		
+		
+		
+		<a href="/archives" class="menu" style="animation-delay: 0.2s">
+			归档
+		</a>
+		
+		
+		
+		<a href="/tags" class="menu" style="animation-delay: 0.4s">
+			标签
+		</a>
+		
+		
+		
+		<a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+			关于
+		</a>
+		
+		
+	</div>
+	<!-- 萌备 https://icp.gov.moe -->
+	<div class="site-footer">
+		<p class="py-4 text-gray-700">
+			© 2022 hope140  <br>
+			<span id="runtime_span"></span> <br>
+			<a href="https://icp.gov.moe/?keyword=20221443" target="_blank">萌ICP备20221443号</a> <br>
+			Powered by MaHule
+		</p>
+		<a class="rss" href="https://MaHule.github.io/atom.xml" target="_blank">RSS</a>
+	</div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+		<div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+			<h1 class="text-3xl font-bold lg:mt-16">
+				Python字符串
+			</h1>
+			<!-- 由于"/"字符只好做postPath的判断，不设定postPath时是一个长度为0的字符串 -->
+			
+			<div class="text-sm text-gray-700 lg:my-8">
+				2020-04-03 / 2 min read / <span id="/python-zi-fu-chuan/"
+					class="waline-pageview-count"> </span> 阅读 / <span id="/python-zi-fu-chuan/"
+					class="waline-comment-count"></span>评论
+			</div>
+			
+			<!-- 如果有更好办法再做修改 -->
+			
+			<div class="post-content yue">
+				<p>Python字符串处理的一些基本操作</p>
+<!-- more -->
+<h3 id="01反转字符串">01.反转字符串</h3>
+<pre><code class="language-python">s = &quot;Python&quot;
+
+#方法1
+rs1 = ''.join(reversed(s))
+print(rs)
+
+#方法2
+rs2 = s[::-1]
+print(rs2)
+</code></pre>
+<pre><code>nohtyP
+nohtyP
+</code></pre>
+<h3 id="02字符串切片操作">02.字符串切片操作</h3>
+<pre><code class="language-python">java,python = &quot;java&quot;,&quot;python&quot;
+jl,pl = len(java),len(python)
+
+[str(java[i%3*jl:] + python[i%5*pl:] or i) for i in range(1,10)]
+</code></pre>
+<pre><code>['1', '2', 'java', '4', 'python', 'java', '7', '8', 'java']
+</code></pre>
+<h3 id="03join连接字符串">03.join连接字符串</h3>
+<pre><code class="language-python">mystr = ['I','love','Python']
+
+res = '_'.join(mystr)
+print(res)
+</code></pre>
+<pre><code>I_love_Python
+</code></pre>
+<h3 id="04分割字符串">04.分割字符串</h3>
+<blockquote>
+<p>根据指定字符或字符串，分割一个字符串时，使用方法split（join和split可以看作做一对互逆操作）</p>
+</blockquote>
+<pre><code class="language-python">res.split('_')
+</code></pre>
+<pre><code>['I', 'love', 'Python']
+</code></pre>
+<h3 id="05替换">05.替换</h3>
+<blockquote>
+<p>字符串替换使用replace方法</p>
+</blockquote>
+<pre><code class="language-python">s = 'i love python'.replace('o','O')
+s
+</code></pre>
+<pre><code>'i lOve pythOn'
+</code></pre>
+<h3 id="06子串判断">06.子串判断</h3>
+<blockquote>
+<p>判断a字符串是否为b字符串的字串</p>
+</blockquote>
+<ul>
+<li>方法1：使用in</li>
+</ul>
+<pre><code class="language-python">a = 'our'
+b = 'flourish'
+
+r = True if a in b else False
+r
+</code></pre>
+<pre><code>True
+</code></pre>
+<ul>
+<li>方法2：使用方法find，返回字符串b中匹配字串a的最小索引：</li>
+</ul>
+<pre><code class="language-python">a = 'our'
+b = 'flourish'
+
+b.find(a)
+</code></pre>
+<pre><code>2
+</code></pre>
+<h3 id="07去空格">07.去空格</h3>
+<p>清洗字符串时，位于字符串开始和结尾的空格，有时需要去掉，strip方法能实现</p>
+<pre><code class="language-python">a = '  \tI love python  \b\n'
+print(a)
+print(a.strip())
+</code></pre>
+<pre><code>  	I love python  
+
+I love python  
+</code></pre>
+<h3 id="08字符串的字节长度">08.字符串的字节长度</h3>
+<p>encode方法对字符串编码后：</p>
+<pre><code class="language-python">def str_byte_len(mystr):
+    mystr_bytes = mystr.encode('utf-8')
+    return (len(mystr_bytes))
+
+
+str_byte_len('i love python')
+</code></pre>
+
+			</div>
+
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/uQJCDEn4z/">
+				<span class="flex-auto">
+					Python
+				</span>
+			</a>
+			
+
+			<div class="post-Copyright py-12">
+				<span class="flex-auto"> 本文来源于 一小步</span>
+				<div class="prev-post">
+					<a href="https://MaHule.github.io">
+						<h3 class="post-Copyright-link">
+							博客地址： https://MaHule.github.io
+						</h3>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex justify-between py-8">
+				
+				<div class="prev-post">
+					<a href="https://MaHule.github.io/4.3 scapy/">
+						<h3 class="post-title">
+							<i class="ri-arrow-left-line"></i>
+							Scapy
+						</h3>
+					</a>
+				</div>
+				
+
+				
+				<div class="next-post">
+					<a href="https://MaHule.github.io/初始域基础/">
+						<h3 class="post-title">
+							初始域基础
+							<i class="ri-arrow-right-line"></i>
+						</h3>
+					</a>
+				</div>
+				
+			</div>
+
+			
+			
+			
+
+		</div>
+	</div>
+
+	<script src="https://MaHule.github.io/media/prism.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/show_runtime.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/clipboard.js"></script>
+<script>
+	Prism.highlightAll()
+	let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+	// This should probably be throttled.
+	// Especially because it triggers during smooth scrolling.
+	// https://lodash.com/docs/4.17.10#throttle
+	// You could do like...
+	// window.addEventListener("scroll", () => {
+	//    _.throttle(doThatStuff, 100);
+	// });
+	// Only not doing it here to keep this Pen dependency-free.
+
+	window.addEventListener("scroll", event => {
+		let fromTop = window.scrollY;
+
+		mainNavLinks.forEach((link, index) => {
+			let section = document.getElementById(decodeURI(link.hash).substring(1));
+			let nextSection = null
+			if (mainNavLinks[index + 1]) {
+				nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(
+				1));
+			}
+			if (section.offsetTop <= fromTop) {
+				if (nextSection) {
+					if (nextSection.offsetTop > fromTop) {
+						link.classList.add("current");
+					} else {
+						link.classList.remove("current");
+					}
+				} else {
+					link.classList.add("current");
+				}
+			} else {
+				link.classList.remove("current");
+			}
+		});
+	});
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+		var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+		if ("IntersectionObserver" in window) {
+			let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						let lazyImage = entry.target
+						lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+						lazyImage.classList.remove("lazy")
+						lazyImageObserver.unobserve(lazyImage)
+					}
+				});
+			});
+
+			lazyImages.forEach(function (lazyImage) {
+				lazyImageObserver.observe(lazyImage)
+			})
+		} else {
+			// Possibly fall back to a more compatible method here
+		}
+	});
+
+	const menuContainer = document.querySelector('.menu-container')
+	const menus = document.querySelectorAll('.menu-container .menu')
+	const mask = document.querySelector('.mask')
+	const contentWrapper = document.querySelector('.content-wrapper')
+	const latestArticle = document.querySelector('.latest-article')
+	const readMore = document.querySelector('.read-more')
+	const indexPage = document.querySelector('.index-page')
+
+	const isHome = location.pathname === '/'
+	if (latestArticle) {
+		latestArticle.style.display = isHome ? 'block' : 'none'
+		readMore.style.display = isHome ? 'block' : 'none'
+		indexPage.style.display = isHome ? 'none' : 'block'
+	}
+
+	const openMenu = () => {
+		menuContainer.classList.add('open')
+		menus.forEach(menu => {
+			menu.classList.add('animated', 'fadeInLeft')
+		})
+		mask.classList.add('open')
+		contentWrapper.classList.add('is-second')
+	}
+
+	const closeMenu = () => {
+		menuContainer.classList.remove('open')
+		menus.forEach(menu => {
+			menu.classList.remove('animated', 'fadeInLeft')
+		})
+		mask.classList.remove('open')
+		contentWrapper.classList.remove('is-second')
+	}
+</script>
+</body>
+
+</html>

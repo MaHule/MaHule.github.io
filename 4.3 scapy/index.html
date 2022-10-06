@@ -1,0 +1,424 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Scapy | 一小步</title>
+<!-- description在post页面应有不同 -->
+
+	<meta name="description" content="每天进步一点点" />
+	
+<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1665048734325">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://MaHule.github.io/styles/main.css">
+
+
+</head>
+
+<body>
+	<div id="app" class="main px-4 flex flex-col lg:flex-row">
+		<div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+	<div class="lg:sticky top-0">
+		<div class="sidebar-content">
+			<div
+				class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+				<i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+				<a href="https://MaHule.github.io">
+					<img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12"
+						src="https://MaHule.github.io/images/avatar.png?v=1665048734325" alt="">
+				</a>
+				<h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl"
+					style="animation-delay: 0.2s">一小步</h1>
+			</div>
+			
+			<div class="animated fadeInLeft" style="animation-delay: 0.4s">
+				<p class="my-4 text-gray-600 font-light hidden lg:block">
+					文章目录
+				</p>
+				<div class="toc-container hidden lg:block">
+					<ul class="markdownIt-TOC">
+<li><a href="#scapy">Scapy</a>
+<ul>
+<li><a href="#1-%E4%BB%8B%E7%BB%8D">1. 介绍</a></li>
+<li><a href="#2-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95">2. 基本用法</a>
+<ul>
+<li><a href="#1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95">(1).基本用法</a></li>
+<li><a href="#2-scapy%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0">(2). Scapy中的函数</a></li>
+</ul>
+</li>
+<li><a href="#3scapy%E6%A8%A1%E5%9D%97%E7%9A%84%E5%B8%B8%E7%94%A8%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B">3.Scapy模块的常用简单实例</a></li>
+</ul>
+</li>
+</ul>
+
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="menu-container">
+	<i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+	<div>
+		
+		
+		<a href="/" class="menu" style="animation-delay: 0s">
+			首页
+		</a>
+		
+		
+		
+		<a href="/archives" class="menu" style="animation-delay: 0.2s">
+			归档
+		</a>
+		
+		
+		
+		<a href="/tags" class="menu" style="animation-delay: 0.4s">
+			标签
+		</a>
+		
+		
+		
+		<a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+			关于
+		</a>
+		
+		
+	</div>
+	<!-- 萌备 https://icp.gov.moe -->
+	<div class="site-footer">
+		<p class="py-4 text-gray-700">
+			© 2022 hope140  <br>
+			<span id="runtime_span"></span> <br>
+			<a href="https://icp.gov.moe/?keyword=20221443" target="_blank">萌ICP备20221443号</a> <br>
+			Powered by MaHule
+		</p>
+		<a class="rss" href="https://MaHule.github.io/atom.xml" target="_blank">RSS</a>
+	</div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+		<div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+			<h1 class="text-3xl font-bold lg:mt-16">
+				Scapy
+			</h1>
+			<!-- 由于"/"字符只好做postPath的判断，不设定postPath时是一个长度为0的字符串 -->
+			
+			<div class="text-sm text-gray-700 lg:my-8">
+				2020-04-03 / 11 min read / <span id="/4.3 scapy/"
+					class="waline-pageview-count"> </span> 阅读 / <span id="/4.3 scapy/"
+					class="waline-comment-count"></span>评论
+			</div>
+			
+			<!-- 如果有更好办法再做修改 -->
+			
+			<div class="post-content yue">
+				<h1 id="scapy">Scapy</h1>
+<h2 id="1-介绍">1. 介绍</h2>
+<p>​        目前很多优秀的网络扫描和攻击工具都使用了这个模块。也可以在自己的程序中使用这个模块来实现对网络数据包的发送、监听和解析。相比起Nmap，这个模块更底层。你可以更直观地了解网络中的各种扫描和攻击行为，例如检测某个端口是否开放，你只须给Nmap提供一个端口号，而Nmap就会反馈一个开放或者关闭的结果，但是并不知道Nmap是怎么做到的。如果你想深入研究网络中的各种问题，Scapy无疑是一个更好的选择，你可以利用它来产生各种类型的数据包并发送出去，Scapy也只会把收到的数据包展示给你，并不会告诉你这意味着什么，一切都将由你来判断。</p>
+<h2 id="2-基本用法">2. 基本用法</h2>
+<p><strong>安装：</strong> Kali默认安装，既可以在python中调用它，也可以直接使用它。</p>
+<pre><code class="language-python">pip install scapy                #安装scapy
+from scapy.all import *          #在python中调用scapy模块
+</code></pre>
+<h3 id="1基本用法">(1).基本用法</h3>
+<blockquote>
+<p>在scapy中每一个协议就是一个类，需要实例化一个类后，才可以创建一个该协议的数据包</p>
+</blockquote>
+<p><strong>例：</strong> 创建一个发往“192.168.1.101”的IP类型数据包</p>
+<pre><code class="language-python">&gt;&gt;&gt; ip=IP(dst=&quot;192.168.1.101&quot;)    
+&gt;&gt;&gt; ip
+&lt;IP  dst=192.168.1.101 |&gt;
+
+#dst既可以是一个IP也可以是一个范围
+&gt;&gt;&gt; ip=IP(dst=&quot;192.168.1.0/24&quot;)
+&gt;&gt;&gt; ip
+&lt;IP  dst=Net(&quot;192.168.1.0/24&quot;) |&gt;
+&gt;&gt;&gt; [p for p in ip]                  #查看每一个数据包
+[&lt;IP  dst=192.168.1.0 |&gt;, &lt;IP  dst=192.168.1.1 |&gt;, &lt;IP  dst=192.168.1.2 |&gt;, &lt;IP  dst=192.168.1.3 |&gt;, &lt;IP  dst=192.168.1.4 |&gt;, &lt;IP  dst=192.168.1.5 |&gt;, ...]
+</code></pre>
+<p>​          Scapy采用分层形式构造数据包，通常最下面的协议是Ether，然后是IP，再之后是TCP或者UDP。</p>
+<pre><code class="language-python">#构造一个ARP请求和应答包，使用Ether();下面产生了一个广播包
+&gt;&gt;&gt; Ether(dst=&quot;ff:ff:ff:ff:ff:ff&quot;)    
+&lt;Ether  dst=ff:ff:ff:ff:ff:ff |&gt;
+</code></pre>
+<p>​          Scapy中的分层通过符号“/”实现，一个数据包是由多层协议组合而成的。这些协议之间可以使用“/”分开，按照协议由底而上的顺序从左向右排列。</p>
+<pre><code class="language-python">#构造一个TCp数据包
+&gt;&gt;&gt; Ether()/IP()/TCP()
+&lt;Ether  type=IPv4 |&lt;IP  frag=0 proto=tcp |&lt;TCP  |&gt;&gt;&gt;
+
+#构造一个HTTP数据包
+&gt;&gt;&gt; IP()/TCP()/&quot;GET / HTTP/1.0\r\n\r\n&quot;
+&lt;IP  frag=0 proto=tcp |&lt;TCP  |&lt;Raw  load='GET / HTTP/1.0\r\n\r\n' |&gt;&gt;&gt;
+</code></pre>
+<p>​            Scapy中使用频率最高的类要数Ether、IP、TCP和UDP了。使用ls()函数可以查看一个类拥有的属性。</p>
+<pre><code class="language-python">&gt;&gt;&gt; ls(IP())
+version    : BitField  (4 bits)                  = 4               ('4')
+ihl        : BitField  (4 bits)                  = None            ('None')
+tos        : XByteField                          = 0               ('0')
+len        : ShortField                          = None            ('None')
+id         : ShortField                          = 1               ('1')
+flags      : FlagsField                          = &lt;Flag 0 ()&gt;     ('&lt;Flag 0 ()&gt;')
+frag       : BitField  (13 bits)                 = 0               ('0')
+ttl        : ByteField                           = 64              ('64')
+proto      : ByteEnumField                       = 0               ('0')
+chksum     : XShortField                         = None            ('None')
+src        : SourceIPField                       = '127.0.0.1'     ('None')
+dst        : DestIPField                         = '127.0.0.1'     ('None')
+options    : PacketListField                     = []              ('[]')
+</code></pre>
+<p><strong>使用实例：</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; IP(src=&quot;192.168.1.1&quot;,dst=&quot;192.168.1.2&quot;,ttl=32)
+&lt;IP  ttl=32 src=192.168.1.1 dst=192.168.1.2 |&gt;
+</code></pre>
+<h3 id="2-scapy中的函数">(2). Scapy中的函数</h3>
+<p>​      1. send()和sendp()</p>
+<p>​		除了这些对应着协议的类及其属性外，还需要一些可以完成各种功能的函数。需要注意的是，刚才使用IP()的作用是产生一个IP数据包，但是并没有将其发送出去。现在看看如何将产生的报文发送出去。Scapy中提供了多个用来完成发送数据包的函数，首先看一下send()和sendp()。这两个函数的区别是：send()工作在第三层，而sendp()工作在第二层。简单地说，send()是用来发送IP数据包的，而sendp()是用来发送Ether数据包的。</p>
+<pre><code class="language-python">&gt;&gt;&gt; send(IP(dst=&quot;192.168.1.1&quot;)/ICMP())     #发送一个ICMP包
+.
+Sent 1 packets.
+
+&gt;&gt;&gt; sendp(Ether(dst=&quot;ff:ff:ff:ff:ff:ff&quot;))   #发送一个Ether包
+.
+Sent 1 packets.
+</code></pre>
+<p>​		如果希望发送一个内容是随机填充的数据包，而且要保证这个数据包的正确性，那么可以使用fuzz()函数。例如可以使用如下命令创建一个发往192.168.1.101的TCP数据包：</p>
+<pre><code class="language-python">&gt;&gt;&gt; IP(dst=&quot;192.168.1.1&quot;)/fuzz(TCP())
+&lt;IP  frag=0 proto=tcp dst=192.168.1.1 |&lt;TCP  |&gt;&gt;
+</code></pre>
+<p>​		send()和sendp()特点是只发不收，也就是说，只会将数据包发送出去，但是没有能力处理该数据包的响应包。</p>
+<p>​		2. sr(), sr1()和srp()</p>
+<p>​		Scapy提供了3个用来发送和接收应答数据包的函数，分别是sr()、sr1()和srp()，其中，sr()和sr1()主要用于第三层，例如IP和ARP等；而srp用于第二层。</p>
+<pre><code class="language-python">&gt;&gt;&gt; sr(IP(dst=&quot;110.242.68.66&quot;)/ICMP())
+Begin emission:
+Finished sending 1 packets.
+.*
+Received 2 packets, got 1 answers, remaining 0 packets
+(&lt;Results: TCP:0 UDP:0 ICMP:1 Other:0&gt;, &lt;Unanswered: TCP:0 UDP:0 ICMP:0 Other:0&gt;)
+</code></pre>
+<p>​		sr()函数是Scapy的核心，它的返回值是两个列表：第一个列表是收到应答的包和对应的应答；第二个列表是未收到应答的包。所以可以使用两个列表来保存sr()的返回值.</p>
+<pre><code>&gt;&gt;&gt; ans,unans=sr(IP(dst=&quot;110.242.68.66&quot;)/ICMP())
+Begin emission:
+Finished sending 1 packets.
+.*
+Received 2 packets, got 1 answers, remaining 0 packets
+&gt;&gt;&gt; ans.summary()
+IP / ICMP 192.168.0.105 &gt; 110.242.68.66 echo-request 0 ==&gt; IP / ICMP 110.242.68.66 &gt; 192.168.0.105 echo-reply 0
+</code></pre>
+<p>​		这里面使用ans和unans来保存sr()的返回值，因为发出去的是一个ICMP的请求数据包，而且也收到了一个应答包，所以这个发送的数据包和收到的应答包都被保存到ans列表中，使用ans.summary()可以查看两个数据包的内容，而unans列表为空。</p>
+<p>​		sr1()函数跟sr()函数作用基本一样，但是只返回一个应答的包。只需要使用一个列表就可以保存这个函数的返回值。例如使用p来保存sr1(IP(dst=&quot;192.168.1.102&quot;)/ICMP())的返回值.</p>
+<pre><code class="language-python">&gt;&gt;&gt; p=sr1(IP(dst=&quot;110.242.68.66&quot;)/ICMP())
+Begin emission:
+Finished sending 1 packets.
+....*
+Received 5 packets, got 1 answers, remaining 0 packets
+&gt;&gt;&gt; p
+&lt;IP  version=4 ihl=5 tos=0x0 len=28 id=1 flags= frag=0 ttl=50 proto=icmp chksum=0x149b src=110.242.68.66 dst=192.168.0.105 |&lt;ICMP  type=echo-reply code=0 chksum=0x0 id=0x0 seq=0x0 |&gt;&gt;
+</code></pre>
+<p>​		利用sr1()函数测试目标的某个端口是否开放，采用半开扫描（SYN）</p>
+<pre><code class="language-python">&gt;&gt;&gt; sr1(IP(dst=&quot;110.242.68.66&quot;)/TCP(dport=80,flags=&quot;S&quot;))
+Begin emission:
+Finished sending 1 packets.
+...*
+Received 4 packets, got 1 answers, remaining 0 packets
+&lt;IP  version=4 ihl=5 tos=0x0 len=44 id=1 flags= frag=0 ttl=50 proto=tcp chksum=0x1486 src=110.242.68.66 dst=192.168.0.105 |&lt;TCP  sport=http dport=ftp_data seq=1474046892 ack=1 dataofs=6 reserved=0 flags=SA window=8192 chksum=0x837f urgptr=0 options=[('MSS', 536)] |&gt;&gt;
+</code></pre>
+<p>​		3.sniff()</p>
+<p>​		另外一个十分重要的函数是sniff()，如果你使用过Tcpdump，那么对这个函数不会感到陌生。通过这个函数就可以在程序中捕获经过本机网卡的数据包。</p>
+<pre><code class="language-python">&gt;&gt;&gt; sniff()
+&lt;Sniffed: TCP:273 UDP:57 ICMP:0 Other:0&gt;
+</code></pre>
+<p>​		使用sniff()开始监听，但是捕获的数据包不会即时显示出来，只有使用Ctrl+C组合键停止监听时，才会显示捕获到的数据包。</p>
+<p>这个函数最强大的地方在于可以使用参数filter过滤数据包：</p>
+<pre><code class="language-python">&gt;&gt;&gt; sniff(filter=&quot;host 110.242.68.66&quot;)   #只捕获与110.242.68.66有关的数据包
+&lt;Sniffed: TCP:0 UDP:0 ICMP:8 Other:0&gt;
+
+&gt;&gt;&gt; sniff(filter=&quot;icmp&quot;)                 #filter来过滤指定协议
+&lt;Sniffed: TCP:0 UDP:0 ICMP:8 Other:0&gt;               
+
+#同时满足多个条件可以使用“and”“or”等关系运算符来表达                    
+&gt;&gt;&gt; sniff(filter=&quot;host 110.242.68.66 and icmp&quot;)
+&lt;Sniffed: TCP:0 UDP:0 ICMP:8 Other:0&gt; 
+                   
+</code></pre>
+<p>​		另外两个很重要的参数是iface和count。iface可以用来指定所要进行监听的网卡；而count则用来指定监听到数据包的数量，达到指定的数量就会停止监听。</p>
+<pre><code class="language-python">&gt;&gt;&gt;sniff(iface=&quot;em1&quot;)
+
+&gt;&gt;&gt;sniff(sount=3)
+
+​```
+设计一个综合性的监听器，它会在网卡eth0上监听源地址或者目的地址为192.168.1.102的ICMP数据包，当收到3个这样的数据包之后，就会停止监听。
+​```
+&gt;&gt;&gt; sniff(filter=&quot;host 192.168.1.102 and icmp&quot;,count=3,iface=&quot;eth0&quot;)
+
+</code></pre>
+<h2 id="3scapy模块的常用简单实例">3.Scapy模块的常用简单实例</h2>
+<p>​		使用Scapy实现一次ACK类型的端口扫描。例如，针对192.168.1.102的21、23、135、443、445这5个端口是否被屏蔽。</p>
+
+			</div>
+
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/ansnp4eIE/">
+				<span class="flex-auto">
+					Python安全
+				</span>
+			</a>
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/uQJCDEn4z/">
+				<span class="flex-auto">
+					Python
+				</span>
+			</a>
+			
+
+			<div class="post-Copyright py-12">
+				<span class="flex-auto"> 本文来源于 一小步</span>
+				<div class="prev-post">
+					<a href="https://MaHule.github.io">
+						<h3 class="post-Copyright-link">
+							博客地址： https://MaHule.github.io
+						</h3>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex justify-between py-8">
+				
+				<div class="prev-post">
+					<a href="https://MaHule.github.io/4.2 python-nmap模块/">
+						<h3 class="post-title">
+							<i class="ri-arrow-left-line"></i>
+							Python-nmap模块
+						</h3>
+					</a>
+				</div>
+				
+
+				
+				<div class="next-post">
+					<a href="https://MaHule.github.io/python-zi-fu-chuan/">
+						<h3 class="post-title">
+							Python字符串
+							<i class="ri-arrow-right-line"></i>
+						</h3>
+					</a>
+				</div>
+				
+			</div>
+
+			
+			
+			
+
+		</div>
+	</div>
+
+	<script src="https://MaHule.github.io/media/prism.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/show_runtime.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/clipboard.js"></script>
+<script>
+	Prism.highlightAll()
+	let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+	// This should probably be throttled.
+	// Especially because it triggers during smooth scrolling.
+	// https://lodash.com/docs/4.17.10#throttle
+	// You could do like...
+	// window.addEventListener("scroll", () => {
+	//    _.throttle(doThatStuff, 100);
+	// });
+	// Only not doing it here to keep this Pen dependency-free.
+
+	window.addEventListener("scroll", event => {
+		let fromTop = window.scrollY;
+
+		mainNavLinks.forEach((link, index) => {
+			let section = document.getElementById(decodeURI(link.hash).substring(1));
+			let nextSection = null
+			if (mainNavLinks[index + 1]) {
+				nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(
+				1));
+			}
+			if (section.offsetTop <= fromTop) {
+				if (nextSection) {
+					if (nextSection.offsetTop > fromTop) {
+						link.classList.add("current");
+					} else {
+						link.classList.remove("current");
+					}
+				} else {
+					link.classList.add("current");
+				}
+			} else {
+				link.classList.remove("current");
+			}
+		});
+	});
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+		var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+		if ("IntersectionObserver" in window) {
+			let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						let lazyImage = entry.target
+						lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+						lazyImage.classList.remove("lazy")
+						lazyImageObserver.unobserve(lazyImage)
+					}
+				});
+			});
+
+			lazyImages.forEach(function (lazyImage) {
+				lazyImageObserver.observe(lazyImage)
+			})
+		} else {
+			// Possibly fall back to a more compatible method here
+		}
+	});
+
+	const menuContainer = document.querySelector('.menu-container')
+	const menus = document.querySelectorAll('.menu-container .menu')
+	const mask = document.querySelector('.mask')
+	const contentWrapper = document.querySelector('.content-wrapper')
+	const latestArticle = document.querySelector('.latest-article')
+	const readMore = document.querySelector('.read-more')
+	const indexPage = document.querySelector('.index-page')
+
+	const isHome = location.pathname === '/'
+	if (latestArticle) {
+		latestArticle.style.display = isHome ? 'block' : 'none'
+		readMore.style.display = isHome ? 'block' : 'none'
+		indexPage.style.display = isHome ? 'none' : 'block'
+	}
+
+	const openMenu = () => {
+		menuContainer.classList.add('open')
+		menus.forEach(menu => {
+			menu.classList.add('animated', 'fadeInLeft')
+		})
+		mask.classList.add('open')
+		contentWrapper.classList.add('is-second')
+	}
+
+	const closeMenu = () => {
+		menuContainer.classList.remove('open')
+		menus.forEach(menu => {
+			menu.classList.remove('animated', 'fadeInLeft')
+		})
+		mask.classList.remove('open')
+		contentWrapper.classList.remove('is-second')
+	}
+</script>
+</body>
+
+</html>

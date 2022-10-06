@@ -1,0 +1,492 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python列表生成式高效使用 | 一小步</title>
+<!-- description在post页面应有不同 -->
+
+	<meta name="description" content="每天进步一点点" />
+	
+<link rel="shortcut icon" href="https://MaHule.github.io/favicon.ico?v=1665048734325">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://MaHule.github.io/styles/main.css">
+
+
+</head>
+
+<body>
+	<div id="app" class="main px-4 flex flex-col lg:flex-row">
+		<div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+	<div class="lg:sticky top-0">
+		<div class="sidebar-content">
+			<div
+				class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+				<i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+				<a href="https://MaHule.github.io">
+					<img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12"
+						src="https://MaHule.github.io/images/avatar.png?v=1665048734325" alt="">
+				</a>
+				<h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl"
+					style="animation-delay: 0.2s">一小步</h1>
+			</div>
+			
+			<div class="animated fadeInLeft" style="animation-delay: 0.4s">
+				<p class="my-4 text-gray-600 font-light hidden lg:block">
+					文章目录
+				</p>
+				<div class="toc-container hidden lg:block">
+					<ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#01%E6%95%B0%E6%8D%AE%E5%86%8D%E8%BF%90%E7%AE%97">01.数据再运算</a></li>
+<li><a href="#02%E4%B8%80%E4%B8%B2%E9%9A%8F%E6%9C%BA%E6%95%B0">02.一串随机数</a></li>
+<li><a href="#03if%E5%92%8C%E5%B5%8C%E5%A5%97for">03.if和嵌套for</a>
+<ul>
+<li><a href="#%E5%88%97%E8%A1%A8%E7%94%9F%E6%88%90%E5%BC%8F%E4%B8%AD%E5%B5%8C%E5%85%A5for">列表生成式中嵌入for</a></li>
+</ul>
+</li>
+<li><a href="#04zip%E5%92%8C%E5%88%97%E8%A1%A8">04.zip和列表</a></li>
+<li><a href="#05%E6%89%93%E5%8D%B0%E9%94%AE%E5%80%BC%E5%AF%B9">05.打印键值对</a></li>
+<li><a href="#06%E6%96%87%E4%BB%B6%E5%88%97%E8%A1%A8">06.文件列表</a></li>
+<li><a href="#07%E8%BD%AC%E4%B8%BA%E5%B0%8F%E5%86%99">07.转为小写</a></li>
+<li><a href="#08%E4%BF%9D%E7%95%99%E5%94%AF%E4%B8%80%E5%80%BC">08.保留唯一值</a></li>
+<li><a href="#09%E7%AD%9B%E9%80%89%E5%88%86%E7%BB%84">09.筛选分组</a></li>
+<li><a href="#10%E5%87%BD%E6%95%B0%E5%88%86%E7%BB%84">10.函数分组</a></li>
+<li><a href="#11%E5%B7%AE%E9%9B%86">11.差集</a></li>
+<li><a href="#12%E5%87%BD%E6%95%B0%E5%B7%AE%E9%9B%86">12.函数差集</a></li>
+</ul>
+</li>
+</ul>
+
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="menu-container">
+	<i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+	<div>
+		
+		
+		<a href="/" class="menu" style="animation-delay: 0s">
+			首页
+		</a>
+		
+		
+		
+		<a href="/archives" class="menu" style="animation-delay: 0.2s">
+			归档
+		</a>
+		
+		
+		
+		<a href="/tags" class="menu" style="animation-delay: 0.4s">
+			标签
+		</a>
+		
+		
+		
+		<a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+			关于
+		</a>
+		
+		
+	</div>
+	<!-- 萌备 https://icp.gov.moe -->
+	<div class="site-footer">
+		<p class="py-4 text-gray-700">
+			© 2022 hope140  <br>
+			<span id="runtime_span"></span> <br>
+			<a href="https://icp.gov.moe/?keyword=20221443" target="_blank">萌ICP备20221443号</a> <br>
+			Powered by MaHule
+		</p>
+		<a class="rss" href="https://MaHule.github.io/atom.xml" target="_blank">RSS</a>
+	</div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+		<div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+			<h1 class="text-3xl font-bold lg:mt-16">
+				Python列表生成式高效使用
+			</h1>
+			<!-- 由于"/"字符只好做postPath的判断，不设定postPath时是一个长度为0的字符串 -->
+			
+			<div class="text-sm text-gray-700 lg:my-8">
+				2020-04-10 / 6 min read / <span id="/python-lie-biao-sheng-cheng-shi-gao-xiao-shi-yong/"
+					class="waline-pageview-count"> </span> 阅读 / <span id="/python-lie-biao-sheng-cheng-shi-gao-xiao-shi-yong/"
+					class="waline-comment-count"></span>评论
+			</div>
+			
+			<!-- 如果有更好办法再做修改 -->
+			
+			<div class="post-content yue">
+				<p>Python中使用 [ ] 创建一个列表。容器类型的数据进行运算和操作，生成新的列表最高效的办法——列表生成式。</p>
+<!-- more -->
+<h2 id="01数据再运算">01.数据再运算</h2>
+<blockquote>
+<p>实现对每个元素的乘方操作后，利用列表生成式返回一个新的列表</p>
+</blockquote>
+<pre><code class="language-python">a = range(0,11)
+
+b = [i ** 2 for i in a]
+print(b)
+</code></pre>
+<pre><code>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+</code></pre>
+<blockquote>
+<p>数值型的元素列表，转换未字符串类型的列表</p>
+</blockquote>
+<pre><code class="language-python">a = range(0,11)
+print(a)
+
+b = [str(i) for i in a]
+print(b)
+</code></pre>
+<pre><code>range(0, 11)
+['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+</code></pre>
+<h2 id="02一串随机数">02.一串随机数</h2>
+<blockquote>
+<p>生成10个0到1的随机浮点数，保留小数点后两位</p>
+</blockquote>
+<pre><code class="language-python">from random import random
+
+a = [round(random(),2) for _ in range(10)]
+print(a)
+</code></pre>
+<pre><code>[0.09, 0.43, 0.77, 0.45, 0.16, 0.38, 0.71, 0.4, 0.02, 0.61]
+</code></pre>
+<blockquote>
+<p>生成10个0到10的满足均匀分布的浮点数，保留小数点后两位</p>
+</blockquote>
+<pre><code class="language-python">from random import uniform
+
+a = [round(uniform(0,10),2) for _ in range(10)]
+print(a)
+</code></pre>
+<pre><code>[5.26, 2.59, 9.9, 8.47, 6.17, 8.49, 5.28, 6.6, 4.81, 7.78]
+</code></pre>
+<h2 id="03if和嵌套for">03.if和嵌套for</h2>
+<blockquote>
+<p>对一个列表里面的数据进行筛选，只计算[0,11)中偶数的平方</p>
+</blockquote>
+<pre><code class="language-python">a = range(11)
+
+b = [i ** 2 for i in a if i%2 == 0]
+print(b)
+</code></pre>
+<pre><code>[0, 4, 16, 36, 64, 100]
+</code></pre>
+<h3 id="列表生成式中嵌入for">列表生成式中嵌入for</h3>
+<blockquote>
+<p>使用嵌套的列表，一行代码生成99乘法表中的所有45个元素</p>
+</blockquote>
+<pre><code class="language-python">a = [i * j for i in range(10) for j in range(1,i+1)]
+print(a)
+</code></pre>
+<pre><code>[1, 2, 4, 3, 6, 9, 4, 8, 12, 16, 5, 10, 15, 20, 25, 6, 12, 18, 24, 30, 36, 7, 14, 21, 28, 35, 42, 49, 8, 16, 24, 32, 40, 48, 56, 64, 9, 18, 27, 36, 45, 54, 63, 72, 81]
+</code></pre>
+<h2 id="04zip和列表">04.zip和列表</h2>
+<pre><code class="language-python">a = range(5)
+b = ['a','b','c','d','e']
+
+c = [str(i)+str(j) for i,j in zip(a,b)]
+print(c)
+</code></pre>
+<pre><code>['0a', '1b', '2c', '3d', '4e']
+</code></pre>
+<h2 id="05打印键值对">05.打印键值对</h2>
+<pre><code class="language-python">a = {'a':1,'b':2,'c':3}
+#b = [k + '=' + v for k,v in a.items()]
+b = [k + '=' + str(v) for k,v in a.items()]
+b
+</code></pre>
+<pre><code>['a=1', 'b=2', 'c=3']
+</code></pre>
+<h2 id="06文件列表">06.文件列表</h2>
+<pre><code class="language-python">import os
+a = [d for d in os.listdir('D:\Code\jupyter notebook\Python之路')]
+a
+</code></pre>
+<pre><code>['.ipynb_checkpoints',
+ '20个Python代码.ipynb',
+ 'Day02  8个数据分析，机器学习和深读学习包和框架案例总结.ipynb',
+ 'Day1 list和tuple的13个经典使用案例.ipynb',
+ 'img',
+ 'Matplotlib',
+ 'Numpy',
+ 'numpy.ipynb',
+ 'OpenCV - python学习.ipynb',
+ 'Pandas',
+ 'Python列表生成式高效使用.ipynb',
+ 'Python十大经典排序.ipynb',
+ 'Python基础.ipynb',
+ 'Python字符串.ipynb',
+ 'render.html',
+ 'Untitled.ipynb',
+ '八大排序.ipynb',
+ '机器学习',
+ '正则表达式.ipynb']
+</code></pre>
+<blockquote>
+<p>结合if，只查找文件夹</p>
+</blockquote>
+<pre><code class="language-python">import os
+dirs = [d for d in os.listdir('D:\Code\jupyter notebook\Python之路') if os.path.isdir(d)]
+
+dirs
+</code></pre>
+<pre><code>['.ipynb_checkpoints', 'img', 'Matplotlib', 'Numpy', 'Pandas', '机器学习']
+</code></pre>
+<blockquote>
+<p>结合if，只查找文件</p>
+</blockquote>
+<pre><code class="language-python">import os
+files = [d for d in os.listdir('D:\Code\jupyter notebook\Python之路') if os.path.isfile(d)]
+
+files
+</code></pre>
+<pre><code>['20个Python代码.ipynb',
+ 'Day02  8个数据分析，机器学习和深读学习包和框架案例总结.ipynb',
+ 'Day1 list和tuple的13个经典使用案例.ipynb',
+ 'numpy.ipynb',
+ 'OpenCV - python学习.ipynb',
+ 'Python列表生成式高效使用.ipynb',
+ 'Python十大经典排序.ipynb',
+ 'Python基础.ipynb',
+ 'Python字符串.ipynb',
+ 'render.html',
+ 'Untitled.ipynb',
+ '八大排序.ipynb',
+ '正则表达式.ipynb']
+</code></pre>
+<h2 id="07转为小写">07.转为小写</h2>
+<pre><code class="language-python">a = ['Hello','World','2019Python']
+
+[w.lower() for w in a]
+</code></pre>
+<pre><code>['hello', 'world', '2019python']
+</code></pre>
+<blockquote>
+<p>列表中数据类型可以不同，上面的做法可能会出错。可以使用str将数据类型转化为字符型，然后在转为小写。或者使用isinstance，判断元素是否为tr类型，如果是，再调用lower做转换</p>
+</blockquote>
+<pre><code class="language-python">[w.lower() for w in a if isinstance(w,str)]
+</code></pre>
+<pre><code>['hello', 'world', '2019python']
+</code></pre>
+<h2 id="08保留唯一值">08.保留唯一值</h2>
+<pre><code class="language-python">def filter_non_unique(lst):
+    return [item for item in lst if lst.count(item) == 1]
+
+filter_non_unique([1,2,2,3,4,4,5])
+</code></pre>
+<pre><code>[1, 3, 5]
+</code></pre>
+<h2 id="09筛选分组">09.筛选分组</h2>
+<pre><code class="language-python">def bifurcate(lst,filter):
+    return [[x for i,x in enumerate(lst) if filter[i] == True],
+           [x for i,x in enumerate(lst) if filter[i] == False]]
+
+bifurcate(['beep','boop','foo','bar'],[True,True,False,True])
+</code></pre>
+<pre><code>[['beep', 'boop', 'bar'], ['foo']]
+</code></pre>
+<h2 id="10函数分组">10.函数分组</h2>
+<pre><code class="language-python">def bifurcate_by(lst,fn):
+    return [[x for x in lst if fn(x)],
+           [x for x in lst if not fn(x)]]
+
+bifurcate_by(['Python3','up','users','people'],lambda x: x[0] == 'u')
+</code></pre>
+<pre><code>[['up', 'users'], ['Python3', 'people']]
+</code></pre>
+<h2 id="11差集">11.差集</h2>
+<pre><code class="language-python">def difference(a,b):
+    _a,_b = set(a),set(b)
+    return [item for item in _a if item not in _b]
+
+difference([1,1,2,3,3],[1,2,4])
+</code></pre>
+<pre><code>[3]
+</code></pre>
+<h2 id="12函数差集">12.函数差集</h2>
+<blockquote>
+<p>列表a，b中元素结果fn映射后，返回在a不在b中的元素</p>
+</blockquote>
+<pre><code class="language-python">def difference_by(a,b,fn):
+    _b = set(map(fn,b))
+    return [item for item in a if fn(item) not in _b]
+</code></pre>
+<blockquote>
+<p>列表元素为单个元素</p>
+</blockquote>
+<pre><code class="language-python">from math import floor
+
+difference_by([2.1,1.2],[2.3,3.4],floor)
+</code></pre>
+<pre><code>[1.2]
+</code></pre>
+<pre><code class="language-python">
+</code></pre>
+
+			</div>
+
+			
+			<a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 "
+				href="https://MaHule.github.io/uQJCDEn4z/">
+				<span class="flex-auto">
+					Python
+				</span>
+			</a>
+			
+
+			<div class="post-Copyright py-12">
+				<span class="flex-auto"> 本文来源于 一小步</span>
+				<div class="prev-post">
+					<a href="https://MaHule.github.io">
+						<h3 class="post-Copyright-link">
+							博客地址： https://MaHule.github.io
+						</h3>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex justify-between py-8">
+				
+				<div class="prev-post">
+					<a href="https://MaHule.github.io/wang-luo-an-quan-ce-ping/">
+						<h3 class="post-title">
+							<i class="ri-arrow-left-line"></i>
+							网络安全测评
+						</h3>
+					</a>
+				</div>
+				
+
+				
+				<div class="next-post">
+					<a href="https://MaHule.github.io/4.2 python-nmap模块/">
+						<h3 class="post-title">
+							Python-nmap模块
+							<i class="ri-arrow-right-line"></i>
+						</h3>
+					</a>
+				</div>
+				
+			</div>
+
+			
+			
+			
+
+		</div>
+	</div>
+
+	<script src="https://MaHule.github.io/media/prism.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/show_runtime.js"></script>
+<script type="text/javascript" src="https://MaHule.github.io/media/clipboard.js"></script>
+<script>
+	Prism.highlightAll()
+	let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+	// This should probably be throttled.
+	// Especially because it triggers during smooth scrolling.
+	// https://lodash.com/docs/4.17.10#throttle
+	// You could do like...
+	// window.addEventListener("scroll", () => {
+	//    _.throttle(doThatStuff, 100);
+	// });
+	// Only not doing it here to keep this Pen dependency-free.
+
+	window.addEventListener("scroll", event => {
+		let fromTop = window.scrollY;
+
+		mainNavLinks.forEach((link, index) => {
+			let section = document.getElementById(decodeURI(link.hash).substring(1));
+			let nextSection = null
+			if (mainNavLinks[index + 1]) {
+				nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(
+				1));
+			}
+			if (section.offsetTop <= fromTop) {
+				if (nextSection) {
+					if (nextSection.offsetTop > fromTop) {
+						link.classList.add("current");
+					} else {
+						link.classList.remove("current");
+					}
+				} else {
+					link.classList.add("current");
+				}
+			} else {
+				link.classList.remove("current");
+			}
+		});
+	});
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+		var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+		if ("IntersectionObserver" in window) {
+			let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						let lazyImage = entry.target
+						lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+						lazyImage.classList.remove("lazy")
+						lazyImageObserver.unobserve(lazyImage)
+					}
+				});
+			});
+
+			lazyImages.forEach(function (lazyImage) {
+				lazyImageObserver.observe(lazyImage)
+			})
+		} else {
+			// Possibly fall back to a more compatible method here
+		}
+	});
+
+	const menuContainer = document.querySelector('.menu-container')
+	const menus = document.querySelectorAll('.menu-container .menu')
+	const mask = document.querySelector('.mask')
+	const contentWrapper = document.querySelector('.content-wrapper')
+	const latestArticle = document.querySelector('.latest-article')
+	const readMore = document.querySelector('.read-more')
+	const indexPage = document.querySelector('.index-page')
+
+	const isHome = location.pathname === '/'
+	if (latestArticle) {
+		latestArticle.style.display = isHome ? 'block' : 'none'
+		readMore.style.display = isHome ? 'block' : 'none'
+		indexPage.style.display = isHome ? 'none' : 'block'
+	}
+
+	const openMenu = () => {
+		menuContainer.classList.add('open')
+		menus.forEach(menu => {
+			menu.classList.add('animated', 'fadeInLeft')
+		})
+		mask.classList.add('open')
+		contentWrapper.classList.add('is-second')
+	}
+
+	const closeMenu = () => {
+		menuContainer.classList.remove('open')
+		menus.forEach(menu => {
+			menu.classList.remove('animated', 'fadeInLeft')
+		})
+		mask.classList.remove('open')
+		contentWrapper.classList.remove('is-second')
+	}
+</script>
+</body>
+
+</html>
